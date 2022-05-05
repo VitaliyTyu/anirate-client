@@ -13,7 +13,7 @@ const AnimeList: FC<{}> = (): ReactElement => {
     }
 
     useEffect(() => {
-        //setTimeout(getTitles, 500);
+        //setTimeout(getTitles, 500); check git
         getTitles()
     }, []);
 
