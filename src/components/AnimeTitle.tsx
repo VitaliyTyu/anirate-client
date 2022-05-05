@@ -15,7 +15,7 @@ const AnimeTitle: FC = (): ReactElement => {
 
     async function getTitleDetails() {
         const titleDetails = await apiClient.animeTitleDetails("24617079-72ee-4f6e-8390-02cc2e97afb7");
-        console.log(titleDetails)
+        //console.log(titleDetails)
         setTitleDetails(titleDetails);
         setDescriptionHtml(titleDetails?.descriptionHtml)
     }
