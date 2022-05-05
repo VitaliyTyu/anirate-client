@@ -364,50 +364,6 @@ export class Client extends ClientBase {
      * @param pageSize (optional)
      * @return Success
      */
-    // animeTitles(pageNumber: number | undefined, pageSize: number | undefined): Promise<BriefTitleVMPaginatedList> {
-    //     let url_ = this.baseUrl + "/api/AnimeTitles?";
-    //     if (pageNumber === null)
-    //         throw new Error("The parameter 'pageNumber' cannot be null.");
-    //     else if (pageNumber !== undefined)
-    //         url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
-    //     if (pageSize === null)
-    //         throw new Error("The parameter 'pageSize' cannot be null.");
-    //     else if (pageSize !== undefined)
-    //         url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
-    //     url_ = url_.replace(/[?&]$/, "");
-    //
-    //     let options_: RequestInit = {
-    //         method: "GET",
-    //         headers: {
-    //             "Accept": "application/json"
-    //         }
-    //     };
-    //
-    //     return this.transformOptions(options_).then(transformedOptions_ => {
-    //         return this.http.fetch(url_, transformedOptions_);
-    //     }).then((_response: Response) => {
-    //         return this.processAnimeTitles(_response);
-    //     });
-    //
-    // }
-    //
-    // protected processAnimeTitles(response: Response): Promise<BriefTitleVMPaginatedList> {
-    //     const status = response.status;
-    //     let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-    //     if (status === 200) {
-    //         return response.text().then((_responseText) => {
-    //             let result200: any = null;
-    //             result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as BriefTitleVMPaginatedList;
-    //             return result200;
-    //         });
-    //     } else if (status !== 200 && status !== 204) {
-    //         return response.text().then((_responseText) => {
-    //             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-    //         });
-    //     }
-    //     return Promise.resolve<BriefTitleVMPaginatedList>(null as any);
-    // }
-
     animeTitles(pageNumber: number | undefined, pageSize: number | undefined): Promise<BriefTitleVMPaginatedList> {
         let url_ = this.baseUrl + "/api/AnimeTitles?";
         if (pageNumber === null)
@@ -452,7 +408,45 @@ export class Client extends ClientBase {
      * Получение деталей определенного аниме
      * @return Success
      */
-    animeTitles2(id: string): Promise<TitleDetailsVM> {
+    // animeTitles2(id: string): Promise<TitleDetailsVM> {
+    //     let url_ = this.baseUrl + "/api/AnimeTitles/{id}";
+    //     if (id === undefined || id === null)
+    //         throw new Error("The parameter 'id' must be defined.");
+    //     url_ = url_.replace("{id}", encodeURIComponent("" + id));
+    //     url_ = url_.replace(/[?&]$/, "");
+    //
+    //     let options_: RequestInit = {
+    //         method: "GET",
+    //         headers: {
+    //             "Accept": "application/json"
+    //         }
+    //     };
+    //
+    //     return this.transformOptions(options_).then(transformedOptions_ => {
+    //         return this.http.fetch(url_, transformedOptions_);
+    //     }).then((_response: Response) => {
+    //         return this.processAnimeTitles2(_response);
+    //     });
+    // }
+    //
+    // protected processAnimeTitles2(response: Response): Promise<TitleDetailsVM> {
+    //     const status = response.status;
+    //     let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+    //     if (status === 200) {
+    //         return response.text().then((_responseText) => {
+    //             let result200: any = null;
+    //             result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as TitleDetailsVM;
+    //             return result200;
+    //         });
+    //     } else if (status !== 200 && status !== 204) {
+    //         return response.text().then((_responseText) => {
+    //             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+    //         });
+    //     }
+    //     return Promise.resolve<TitleDetailsVM>(null as any);
+    // }
+
+    animeTitleDetails(id: string): Promise<TitleDetailsVM> {
         let url_ = this.baseUrl + "/api/AnimeTitles/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -466,14 +460,12 @@ export class Client extends ClientBase {
             }
         };
 
-        return this.transformOptions(options_).then(transformedOptions_ => {
-            return this.http.fetch(url_, transformedOptions_);
-        }).then((_response: Response) => {
-            return this.processAnimeTitles2(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processanimeTitleDetails(_response);
         });
     }
 
-    protected processAnimeTitles2(response: Response): Promise<TitleDetailsVM> {
+    protected processanimeTitleDetails(response: Response): Promise<TitleDetailsVM> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
