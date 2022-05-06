@@ -4,7 +4,7 @@ import {Dispatch} from "redux";
 
 const apiClient = new Client('https://localhost:5001');
 
-export const fetchTitles = (page: number, size: number) => {
+export const getTitles = (page: number, size: number) => {
     return async (dispatch: Dispatch<TitlesAction>) => {
         try {
             dispatch({type: TitlesActionTypes.FETCH_TITLES})

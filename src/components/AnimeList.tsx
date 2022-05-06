@@ -2,17 +2,17 @@ import React, {FC, ReactElement, useEffect, useState} from 'react';
 import {BriefTitleVM, BriefTitleVMPaginatedList, Client} from "../api/api";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useDispatch} from "react-redux";
-import {fetchTitles} from "../store/actions-creators/titles";
+import {getTitles} from "../store/actions-creators/titles";
 import {useActions} from "../hooks/useActions";
 
 const apiClient = new Client('https://localhost:5001');
 
 const AnimeList: FC = (): ReactElement => {
     const {titles, loading, error} = useTypedSelector(state => state.titles)
-    const {fetchTitles} = useActions()
+    const {getTitles} = useActions()
 
     useEffect(() => {
-        fetchTitles(2, 10)
+        getTitles(1, 10)
     }, []);
 
     if (loading) {
