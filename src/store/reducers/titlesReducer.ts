@@ -2,7 +2,7 @@ import {TitleDetailsVM} from "../../api/api";
 import {TitlesAction, TitlesActionTypes, TitlesState,} from "../../types/titles";
 
 const initialState: TitlesState = {
-    paginatedList: null,
+    paginatedList: undefined,
     loading: false,
     error: null,
     page: 1,

@@ -13,7 +13,6 @@ export const titleDetailsReducer = (state= initialState, action: TitleDetailsAct
         case TitleDetailsActionTypes.FETCH_TITLE_DETAILS:
             return {...state, loading: true, error: null}
         case TitleDetailsActionTypes.FETCH_TITLE_DETAILS_SUCCESS:
-            console.log(action.payload)
             return {...state, loading: false, titleDetails: action.payload, error: null}
         case TitleDetailsActionTypes.FETCH_TITLE_DETAILS_ERROR:
             return {...state, loading: false, error: action.payload}

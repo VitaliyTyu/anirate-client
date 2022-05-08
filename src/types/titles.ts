@@ -1,7 +1,7 @@
 import {BriefTitleVM, BriefTitleVMPaginatedList} from "../api/api";
 
 export interface  TitlesState {
-    paginatedList: BriefTitleVMPaginatedList | null;
+    paginatedList: BriefTitleVMPaginatedList | undefined;
     loading: boolean;
     error: null | string;
     page: number;
@@ -21,12 +21,12 @@ export interface FetchTitlesAction {
 
 export interface FetchTitlesSuccessAction {
     type: TitlesActionTypes.FETCH_TITLES_SUCCESS;
-    payload: BriefTitleVMPaginatedList | null;
+    payload: BriefTitleVMPaginatedList | undefined;
 }
 
 export interface FetchTitlesErrorAction {
     type: TitlesActionTypes.FETCH_TITLES_ERROR;
-    payload: string;
+    payload: string | null;
 }
 
 export interface SetTitlesPage {

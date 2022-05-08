@@ -1,10 +1,9 @@
-import React, {FC, ReactElement, useEffect, useState} from 'react';
+import React, {FC, ReactElement, useContext, useEffect, useState} from 'react';
 import {BriefTitleVM, BriefTitleVMPaginatedList, Client} from "../api/api";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useDispatch} from "react-redux";
 import {getTitles} from "../store/actions-creators/titles";
 import {useActions} from "../hooks/useActions";
-import {fork} from "child_process";
 
 const apiClient = new Client('https://localhost:5001');
 
@@ -27,10 +26,11 @@ const AnimeList: FC = (): ReactElement => {
         return <h1>{error}</h1>
     }
 
-    // @ts-ignore
+    //@ts-ignore
     for (let i = 0; i < paginatedList?.totalPages; i++) {
         pages.push(i + 1)
     }
+
 
     return (
         <div>
@@ -48,17 +48,18 @@ const AnimeList: FC = (): ReactElement => {
                     </div>
                 )}
             </div>
-
-            {paginatedList?.items?.map((title) => (
-                <div
-                    key={title.id}
-                    onClick={() => setCurrentTitleDetails(title.id)}
-                >
-                    <div style={{marginTop: 10}}>{title.russian}</div>
-                    <img src={"https://shikimori.one/" + title.image?.preview}/>
-                    <div>{title.score}</div>
-                </div>
-            ))}
+            <div style={{display: "flex"}}>
+                {paginatedList?.items?.map((title) => (
+                    <div
+                        key={title.id}
+                        onClick={() => setCurrentTitleDetails(title.id)}
+                    >
+                        <div style={{marginTop: 10}}>{title.russian}</div>
+                        <img src={"https://shikimori.one/" + title.image?.preview}/>
+                        <div>{title.score}</div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

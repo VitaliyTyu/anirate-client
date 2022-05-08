@@ -1,18 +1,18 @@
-import React, {FC, ReactElement, useEffect, useState} from 'react';
-import {BriefTitleVM, Client, TitleDetailsVM} from "../api/api";
-import {useTypedSelector} from "../hooks/useTypedSelector";
-import {getTitleDetails} from "../store/actions-creators/titleDetails";
-import {useActions} from "../hooks/useActions";
+import React, { FC, ReactElement, useEffect, useState } from 'react';
+import { BriefTitleVM, Client, TitleDetailsVM } from "../api/api";
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import { getTitleDetails } from "../store/actions-creators/titleDetails";
+import { useActions } from "../hooks/useActions";
 
 const apiClient = new Client('https://localhost:5001');
 
 const AnimeTitle: FC = (): ReactElement => {
     const [descriptionHtml, setDescriptionHtml] = useState<string | undefined>("")
-    const {titleDetails, loading, error, currentId} = useTypedSelector(state => state.titleDetails)
-    const {getTitleDetails} = useActions()
+    const { titleDetails, loading, error, currentId } = useTypedSelector(state => state.titleDetails)
+    const { getTitleDetails } = useActions()
 
     function createMarkup() {
-        return {__html: `${descriptionHtml}`};
+        return { __html: `${descriptionHtml}` };
     }
 
     useEffect(() => {
@@ -38,7 +38,7 @@ const AnimeTitle: FC = (): ReactElement => {
     return (
         <div>
             <div>{titleDetails?.russian}</div>
-            <img src={"https://shikimori.one/" + titleDetails?.image?.preview}/>
+            <img src={"https://shikimori.one/" + titleDetails?.image?.preview} />
             <div>{titleDetails?.score}</div>
             <div dangerouslySetInnerHTML={createMarkup()} />
         </div>

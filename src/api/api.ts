@@ -1,4 +1,5 @@
 import { ClientBase } from './client-base';
+import {setAuthHeader} from "../auth/auth-headers";
 
 export class Client extends ClientBase {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
@@ -528,12 +529,13 @@ export class Client extends ClientBase {
         });
     }
 
-    protected processLogin(response: Response): Promise<void> {
+    protected processLogin(response: Response): Promise<void>{
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
-                return;
+                localStorage.setItem('token', _responseText ? _responseText : '');
+                return ;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
