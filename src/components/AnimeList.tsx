@@ -4,16 +4,20 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useDispatch} from "react-redux";
 import {getTitles} from "../store/actions-creators/titles";
 import {useActions} from "../hooks/useActions";
+import {fork} from "child_process";
 
 const apiClient = new Client('https://localhost:5001');
 
 const AnimeList: FC = (): ReactElement => {
-    const {titles, loading, error} = useTypedSelector(state => state.titles)
-    const {getTitles} = useActions()
+    const {paginatedList, loading, error, page} = useTypedSelector(state => state.titles)
+    const {getTitles, setTitlesPage, setCurrentTitleDetails} = useActions()
+    const pages: number[] = [];
 
     useEffect(() => {
-        getTitles(1, 10)
-    }, []);
+        getTitles(page, 5)
+    }, [page]);
+
+
 
     if (loading) {
         return <h1>Идет загрузка...</h1>
@@ -23,15 +27,38 @@ const AnimeList: FC = (): ReactElement => {
         return <h1>{error}</h1>
     }
 
+    // @ts-ignore
+    for (let i = 0; i < paginatedList?.totalPages; i++) {
+        pages.push(i + 1)
+    }
+
     return (
         <div>
-            {titles?.map((title) => (
-                <div key={title.id}>
+            <div style={{display: "flex"}}>
+                {pages.map(p =>
+                    <div
+                        onClick={() => setTitlesPage(p)}
+                        style={{
+                            border: p === page ? "2px solid green" : "1px solid gray",
+                            padding: 10,
+                            margin: 10,
+                        }}
+                    >
+                        {p}
+                    </div>
+                )}
+            </div>
+
+            {paginatedList?.items?.map((title) => (
+                <div
+                    key={title.id}
+                    onClick={() => setCurrentTitleDetails(title.id)}
+                >
                     <div style={{marginTop: 10}}>{title.russian}</div>
                     <img src={"https://shikimori.one/" + title.image?.preview}/>
                     <div>{title.score}</div>
                 </div>
-                ))}
+            ))}
         </div>
     );
 };

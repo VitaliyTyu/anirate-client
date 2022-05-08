@@ -6,6 +6,7 @@ const App = () => {
   return (
       <div>
           <AnimeTitle/>
+          <hr/>
           <AnimeList/>
       </div>
   );

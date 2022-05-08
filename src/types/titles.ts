@@ -1,19 +1,19 @@
-import {BriefTitleVM} from "../api/api";
+import {BriefTitleVM, BriefTitleVMPaginatedList} from "../api/api";
 
 export interface  TitlesState {
-    titles: BriefTitleVM[] | undefined;
+    paginatedList: BriefTitleVMPaginatedList | null;
     loading: boolean;
     error: null | string;
-    // page: number;
-    // limit: number;
+    page: number;
 }
 
 export enum TitlesActionTypes {
     FETCH_TITLES = "FETCH_TITLE",
     FETCH_TITLES_SUCCESS = "FETCH_TITLE_SUCCESS",
     FETCH_TITLES_ERROR = "FETCH_TITLE_ERROR",
-    // FETCH_TITLES_PAGE = "FETCH_TITLE_ERROR",
+    SET_TITLES_PAGE = "SET_TITLES_PAGE",
 }
+
 
 export interface FetchTitlesAction {
     type: TitlesActionTypes.FETCH_TITLES;
@@ -21,7 +21,7 @@ export interface FetchTitlesAction {
 
 export interface FetchTitlesSuccessAction {
     type: TitlesActionTypes.FETCH_TITLES_SUCCESS;
-    payload: BriefTitleVM[] | undefined;
+    payload: BriefTitleVMPaginatedList | null;
 }
 
 export interface FetchTitlesErrorAction {
@@ -29,4 +29,9 @@ export interface FetchTitlesErrorAction {
     payload: string;
 }
 
-export type TitlesAction = FetchTitlesAction | FetchTitlesSuccessAction | FetchTitlesErrorAction;
+export interface SetTitlesPage {
+    type: TitlesActionTypes.SET_TITLES_PAGE;
+    payload: number;
+}
+
+export type TitlesAction = FetchTitlesAction | FetchTitlesSuccessAction | FetchTitlesErrorAction | SetTitlesPage;

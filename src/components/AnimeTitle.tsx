@@ -8,7 +8,7 @@ const apiClient = new Client('https://localhost:5001');
 
 const AnimeTitle: FC = (): ReactElement => {
     const [descriptionHtml, setDescriptionHtml] = useState<string | undefined>("")
-    const {titleDetails, loading, error} = useTypedSelector(state => state.titleDetails)
+    const {titleDetails, loading, error, currentId} = useTypedSelector(state => state.titleDetails)
     const {getTitleDetails} = useActions()
 
     function createMarkup() {
@@ -16,9 +16,9 @@ const AnimeTitle: FC = (): ReactElement => {
     }
 
     useEffect(() => {
-        getTitleDetails()
-
-    }, []);
+        //getTitleDetails("24617079-72ee-4f6e-8390-02cc2e97afb7")
+        getTitleDetails(currentId)
+    }, [currentId]);
 
     useEffect(() => {
         if (!error) {

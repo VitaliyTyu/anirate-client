@@ -11,7 +11,7 @@ export const getTitles = (page: number, size: number) => {
             const paginatedList = await apiClient.animeTitles(page, size);
             dispatch({
                 type: TitlesActionTypes.FETCH_TITLES_SUCCESS,
-                payload: paginatedList.items
+                payload: paginatedList
             })
         } catch (e) {
             dispatch({
@@ -20,4 +20,8 @@ export const getTitles = (page: number, size: number) => {
             })
         }
     }
+}
+
+export function setTitlesPage(page: number): TitlesAction {
+    return {type: TitlesActionTypes.SET_TITLES_PAGE, payload: page}
 }
