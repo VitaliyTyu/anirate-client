@@ -11,13 +11,14 @@ const initialState: TitleDetailsState = {
 export const titleDetailsReducer = (state= initialState, action: TitleDetailsAction): TitleDetailsState => {
     switch (action.type) {
         case TitleDetailsActionTypes.FETCH_TITLE_DETAILS:
-            return {...state, loading: true}
+            return {...state, loading: true, error: null}
         case TitleDetailsActionTypes.FETCH_TITLE_DETAILS_SUCCESS:
-            return {...state, loading: false, titleDetails: action.payload}
+            console.log(action.payload)
+            return {...state, loading: false, titleDetails: action.payload, error: null}
         case TitleDetailsActionTypes.FETCH_TITLE_DETAILS_ERROR:
             return {...state, loading: false, error: action.payload}
         case TitleDetailsActionTypes.SET_CURRENT_TITLE_DETAILS:
-            return {...state, loading: false, currentId: action.payload}
+            return {...state, loading: false, currentId: action.payload, error: null}
         default:
             return state
     }

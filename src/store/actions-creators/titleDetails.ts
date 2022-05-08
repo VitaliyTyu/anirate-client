@@ -22,6 +22,7 @@ export const getTitleDetails = (id: string | undefined) => {
                 type: TitleDetailsActionTypes.FETCH_TITLE_DETAILS_SUCCESS,
                 payload: titleDetails
             })
+            console.log(id)
         } catch (e) {
             console.log(e)
             dispatch({

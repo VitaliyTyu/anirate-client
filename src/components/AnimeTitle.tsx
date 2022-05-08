@@ -18,6 +18,7 @@ const AnimeTitle: FC = (): ReactElement => {
     useEffect(() => {
         //getTitleDetails("24617079-72ee-4f6e-8390-02cc2e97afb7")
         getTitleDetails(currentId)
+        console.log("get")
     }, [currentId]);
 
     useEffect(() => {
@@ -33,8 +34,6 @@ const AnimeTitle: FC = (): ReactElement => {
     if (error) {
         return <h1>{error}</h1>
     }
-
-
 
     return (
         <div>

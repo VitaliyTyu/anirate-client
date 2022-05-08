@@ -5,7 +5,7 @@ const initialState: TitlesState = {
     paginatedList: null,
     loading: false,
     error: null,
-    page: 2,
+    page: 1,
 }
 
 export const titlesReducer = (state = initialState, action: TitlesAction): TitlesState => {
