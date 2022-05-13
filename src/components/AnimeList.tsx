@@ -1,19 +1,19 @@
-import React, {FC, ReactElement, useContext, useEffect, useState} from 'react';
-import {BriefTitleVM, BriefTitleVMPaginatedList, Client} from "../api/api";
-import {useTypedSelector} from "../hooks/useTypedSelector";
-import {useDispatch} from "react-redux";
-import {getTitles} from "../store/actions-creators/titles";
-import {useActions} from "../hooks/useActions";
+import React, { FC, ReactElement, useContext, useEffect, useState } from 'react';
+import { BriefTitleVM, BriefTitleVMPaginatedList, Client } from "../api/api";
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useDispatch } from "react-redux";
+import { getTitles } from "../store/actions-creators/titles";
+import { useActions } from "../hooks/useActions";
 
 const apiClient = new Client('https://localhost:5001');
 
 const AnimeList: FC = (): ReactElement => {
-    const {paginatedList, loading, error, page} = useTypedSelector(state => state.titles)
-    const {getTitles, setTitlesPage, setCurrentTitleDetails} = useActions()
+    const { paginatedList, loading, error, page } = useTypedSelector(state => state.titles)
+    const { getTitles, setTitlesPage, setCurrentTitleDetails } = useActions()
     const pages: number[] = [];
 
     useEffect(() => {
-        getTitles(page, 5)
+        getTitles(page, 10)
     }, [page]);
 
 
@@ -34,7 +34,7 @@ const AnimeList: FC = (): ReactElement => {
 
     return (
         <div>
-            <div style={{display: "flex"}}>
+            <div style={{ display: "flex" }}>
                 {pages.map(p =>
                     <div
                         onClick={() => setTitlesPage(p)}
@@ -48,14 +48,14 @@ const AnimeList: FC = (): ReactElement => {
                     </div>
                 )}
             </div>
-            <div style={{display: "flex"}}>
+            <div style={{ display: "flex" }}>
                 {paginatedList?.items?.map((title) => (
                     <div
                         key={title.id}
                         onClick={() => setCurrentTitleDetails(title.id)}
                     >
-                        <div style={{marginTop: 10}}>{title.russian}</div>
-                        <img src={"https://shikimori.one/" + title.image?.preview}/>
+                        <div style={{ marginTop: 10 }}>{title.russian}</div>
+                        <img src={"https://shikimori.one/" + title.image?.preview} />
                         <div>{title.score}</div>
                     </div>
                 ))}
