@@ -3,12 +3,13 @@
     max-width: 1230px;
     padding: 0 15px;
     margin: 0 auto; /*расположение по центру*/
+    
   }
 
 .footer {
     padding-top: 65px;
   
-    background-color: #f8f8f8;
+    background-color: #fcc0f2;
   }
 
   .copyright {
