@@ -7,16 +7,13 @@
   }
 
 .footer {
-    padding-top: 65px;
-  
+    padding-top: 65px;  
     background-color: #fcc0f2;
   }
 
   .copyright {
-    padding: 20px 0;
-  
-    border-top: 1px solid #e5e5e5;
-  
+    padding: 20px 0;  
+    border-top: 1px solid #e5e5e5; 
     font-size: 14px;
     color: #333;
     text-align: center;

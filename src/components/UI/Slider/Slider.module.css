@@ -1,19 +1,10 @@
-.intro{
-    
-  width: 100%;
-  
-  
-  /*background: url("../../images/intro.jpg") center no-repeat; */
+.intro{   
+  width: 100%;    
   -moz-background-size: 100%; /* Firefox 3.6+ */
   -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
   -o-background-size: 100%; /* Opera 9.6+ */
-  background-size: 100%; /* Современные браузеры */
-  
-  
+  background-size: 100%; /* Современные браузеры */   
 }
-
-
-
 
 /* Card */
 .card {
@@ -97,12 +88,12 @@
     color: #999;
   }
 
+
   .sliderButton {
     margin: 50px;
     display: flex;
     height: 100px;
     
     justify-content: space-evenly;
-    position: relative;
-    
-  }
+    position: relative;  
+}

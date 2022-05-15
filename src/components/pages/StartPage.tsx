@@ -1,7 +1,7 @@
 import React from 'react';
-import Footer from '../Footer/Footer';
-import HeaderNotAuthorize from '../HeaderNotAuthorize/HeaderNotAuthorize';
-import MainPage from '../MainPage/MainPage';
+import Footer from '../UI/Footer/Footer';
+import HeaderNotAuthorize from '../UI/Header/Header';
+import MainPage from '../UI/MainPage/MainPage';
 
 const StartPage = () => {
     return (

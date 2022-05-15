@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
-import { useActions } from '../../hooks/useActions';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useActions } from '../../../hooks/useActions';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import React, { FC, ReactElement, useEffect, useState } from 'react';
 import css from './Slider.module.css'
 import SlideNextButton from './SlideNextButton';
@@ -58,13 +58,13 @@ const Slider: FC = (): ReactElement => {
                             </div>
                         </SwiperSlide>
                     ))}
-
                 </div>
 
                 <div className={css.sliderButton}>
                     <SlidePrevButton />
-                    <SlideNextButton />
+                    <SlideNextButton />                
                 </div>
+            
             </Swiper >
         </div >
     );
