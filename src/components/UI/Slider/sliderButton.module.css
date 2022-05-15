@@ -1,6 +1,5 @@
   
-  .gradient_button {
-    
+  .gradient_button {   
     text-decoration: none;
     display: inline-block;
     color: white;
@@ -15,11 +14,12 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, .1);
     transition: .5s;
     -webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+	  -khtml-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
   }
+  
   .gradient_button:hover {
-    background-position: right center;
+    background-position: center;
   }

@@ -17,8 +17,6 @@
     padding: 0 15px;
     margin: 0 auto; /*расположение по центру*/
   }
- 
-  
   
   .intro_inner{
     width: 100%;
@@ -28,6 +26,7 @@
     
   
   }
+
   .intro_title{
     font-size: 100px;
     font-weight: 700;
