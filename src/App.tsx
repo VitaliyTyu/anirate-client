@@ -9,7 +9,7 @@ import Footer from './components/UI/Footer/Footer';
 import CollectionsList from './components/CollectionsList';
 import StartPage from './components/pages/StartPage';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import ExactAnimePage from './components/pages/ExactAnimePage';
+import ExactAnimePage from './components/pages/ExactAnimePage/ExactAnimePage';
 
 const App = () => {
 
@@ -28,11 +28,11 @@ const App = () => {
         //     <CollectionsList />
         // </div>
         <BrowserRouter>
+            
             <Header /> {/*заменить на <Navbar /> */}
-
             <Routes>
                 <Route path="/" element={<StartPage />} />
-               <Route path="/title" element={<ExactAnimePage />} />
+                <Route path="/title" element={<ExactAnimePage />} />
                 <Route path="/animes" element={<AnimeList />} />
                 <Route path="/animes/:id" element={<ExactAnimePage />} />
             </Routes>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import ExactAnimePage from './pages/ExactAnimePage';
+import ExactAnimePage from './pages/ExactAnimePage/ExactAnimePage';
 import StartPage from './pages/StartPage';
 
 const AppRouter = () => {

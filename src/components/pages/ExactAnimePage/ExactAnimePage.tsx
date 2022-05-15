@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useActions } from '../../hooks/useActions';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import AnimeTitle from '../AnimeTitle';
+import { useActions } from '../../../hooks/useActions';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import AnimeTitle from '../../AnimeTitle';
 
 const ExactAnimePage = () => {
     const [descriptionHtml, setDescriptionHtml] = useState<string | undefined>("")
