@@ -4,18 +4,26 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useDispatch } from "react-redux";
 import { getTitles } from "../store/actions-creators/titles";
 import { useActions } from "../hooks/useActions";
+import AnimeTitle from './AnimeTitle';
+import { useMemo } from 'react';
 
-const apiClient = new Client('https://localhost:5001');
 
 const AnimeList: FC = (): ReactElement => {
     const { paginatedList, loading, error, page } = useTypedSelector(state => state.titles)
     const { getTitles, setTitlesPage, setCurrentTitleDetails } = useActions()
     const pages: number[] = [];
+    const makePages = useMemo(() => makePagesArr(), [paginatedList])
+
+    function makePagesArr() {
+        //@ts-ignore
+        for (let i = 0; i < paginatedList?.totalPages; i++) {
+            pages.push(i + 1)
+        }
+    }
 
     useEffect(() => {
-        getTitles(page, 10)
+        getTitles(page, 25)
     }, [page]);
-
 
 
     if (loading) {
@@ -24,11 +32,6 @@ const AnimeList: FC = (): ReactElement => {
 
     if (error) {
         return <h1>{error}</h1>
-    }
-
-    //@ts-ignore
-    for (let i = 0; i < paginatedList?.totalPages; i++) {
-        pages.push(i + 1)
     }
 
 
@@ -48,16 +51,15 @@ const AnimeList: FC = (): ReactElement => {
                     </div>
                 )}
             </div>
-            <div style={{ display: "flex" }}>
+            <div style={
+                {
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignContent: "space-between",
+                    justifyContent: "space-between",
+                }}>
                 {paginatedList?.items?.map((title) => (
-                    <div
-                        key={title.id}
-                        onClick={() => setCurrentTitleDetails(title.id)}
-                    >
-                        <div style={{ marginTop: 10 }}>{title.russian}</div>
-                        <img src={"https://shikimori.one/" + title.image?.preview} />
-                        <div>{title.score}</div>
-                    </div>
+                    <AnimeTitle title={title} />
                 ))}
             </div>
         </div>

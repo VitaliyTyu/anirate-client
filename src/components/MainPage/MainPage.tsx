@@ -6,9 +6,9 @@ import Slider from '../Slider/Slider';
 
 const MainPage = () => {
     return (
-        <div  className={css.mainPage}>
-            <Intro/>
-            <Slider/>
+        <div className={css.mainPage}>
+            <Intro />
+            <Slider />
         </div>
     );
 };
