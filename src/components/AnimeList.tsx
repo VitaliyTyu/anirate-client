@@ -6,6 +6,7 @@ import { getTitles } from "../store/actions-creators/titles";
 import { useActions } from "../hooks/useActions";
 import AnimeTitle from './AnimeTitle';
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const AnimeList: FC = (): ReactElement => {
@@ -13,6 +14,7 @@ const AnimeList: FC = (): ReactElement => {
     const { getTitles, setTitlesPage, setCurrentTitleDetails } = useActions()
     const pages: number[] = [];
     const makePages = useMemo(() => makePagesArr(), [paginatedList])
+    const navigate = useNavigate()
 
     function makePagesArr() {
         //@ts-ignore
@@ -59,7 +61,7 @@ const AnimeList: FC = (): ReactElement => {
                     justifyContent: "space-between",
                 }}>
                 {paginatedList?.items?.map((title) => (
-                    <AnimeTitle title={title} />
+                    <AnimeTitle title={title} clickFunction={() => navigate(`/animes/${title?.id}`)} />
                 ))}
             </div>
         </div>

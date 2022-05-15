@@ -3,10 +3,12 @@ import { BriefTitleVM, Client, TitleDetailsVM } from "../api/api";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { getTitleDetails } from "../store/actions-creators/titleDetails";
 import { useActions } from "../hooks/useActions";
+import { useNavigate } from 'react-router-dom';
 
 const apiClient = new Client('https://localhost:5001');
 
 interface AnimeTitleProps {
+    clickFunction: () => void;
     title?: BriefTitleVM;
     children?: React.ReactChild | React.ReactNode;
 }
@@ -21,7 +23,6 @@ const AnimeTitle: FC<AnimeTitleProps> = (props): ReactElement => {
     }
 
     useEffect(() => {
-        // getTitleDetails(currentId)
         getTitleDetails(props.title?.id)
     }, [currentId]);
 
@@ -42,13 +43,9 @@ const AnimeTitle: FC<AnimeTitleProps> = (props): ReactElement => {
 
     return (
         <div>
-            {/* <div>{titleDetails?.russian}</div>
-            <img src={"https://shikimori.one/" + titleDetails?.image?.original} />
-            <div>{titleDetails?.score}</div>
-            <div dangerouslySetInnerHTML={createMarkup()} /> */}
+
             <div
-                // key={props.title.id}
-                onClick={() => setCurrentTitleDetails(props.title?.id)}
+                onClick={() => props.clickFunction()}
             >
                 <div style={{ marginTop: 10 }}>{props.title?.russian}</div>
                 <img src={"https://shikimori.one/" + props.title?.image?.preview} />

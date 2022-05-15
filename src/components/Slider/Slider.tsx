@@ -28,12 +28,12 @@ const Slider: FC = (): ReactElement => {
         return <h1>{error}</h1>
     }
 
-
     return (
         <div className={css.intro}>
             <Swiper
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                 spaceBetween={40}
+
                 slidesPerView={3}
                 loop={true}
             >
