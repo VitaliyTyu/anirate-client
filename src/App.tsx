@@ -31,13 +31,12 @@ const App = () => {
         // </div>
         <BrowserRouter>
             <HeaderNotAuthorize /> {/*заменить на <Navbar /> */}
-
             <Routes>
                 <Route path="/" element={<StartPage />} />
                 <Route path="/title" element={<ExactAnimePage />} />
                 <Route path="/animes" element={<AnimeList />} />
+                <Route path="/animes/:id" element={<ExactAnimePage />} />
             </Routes>
-
             <Footer />
         </BrowserRouter>
     );
