@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
@@ -21,15 +22,12 @@ const ExactCollectionPage = () => {
     }
 
     return (
-        <div style={
-            {
-                display: "flex",
-                flexWrap: "wrap",
-                alignContent: "space-between",
-                justifyContent: "space-between",
-            }}>
+        <div>
             <div>{collectionDetails?.name}</div>
             <img src={"https://shikimori.one/" + collectionDetails?.image?.original} />
+            <Button>
+                Добавить аниме
+            </Button>
         </div>
     );
 };
