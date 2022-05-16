@@ -1,16 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/context';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import ExactAnimePage from './pages/ExactAnimePage/ExactAnimePage';
 import StartPage from './pages/StartPage';
-import { privateRoutes, publicRoutes } from './router/routes';
+import { privateRoutes, publicRoutes } from '../router/routes';
 
 const AppRouter = () => {
     //const { isAuth, isLoading } = useContext(AuthContext);
     const { isAuth, } = useTypedSelector(state => state.auth)
 
-    // console.log(isAuth)
+    useEffect(() => {
+        console.log(isAuth);
+    }, [isAuth])
 
     return (
         isAuth
@@ -39,7 +41,7 @@ const AppRouter = () => {
                 )}
                 <Route
                     path="*"
-                    element={<Navigate to="/" replace />}
+                    element={<Navigate to="/login" replace />}
                 />
             </Routes>
     );

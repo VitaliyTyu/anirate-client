@@ -29,7 +29,6 @@ export interface LoginAction {
 
 export interface LoginActionSuccess {
     type: AuthActionTypes.LOGIN_SUCCESS;
-    payload: boolean;
 }
 
 export interface LoginActionError {
@@ -44,7 +43,6 @@ export interface RegisterAction {
 
 export interface RegisterActionSuccess {
     type: AuthActionTypes.REGISTER_SUCCESS;
-    payload: boolean;
 }
 
 export interface RegisterActionError {
@@ -59,7 +57,6 @@ export interface LogoutAction {
 
 export interface LogoutActionSuccess {
     type: AuthActionTypes.LOGOUT_SUCCESS;
-    payload: boolean;
 }
 
 export interface LogoutActionError {

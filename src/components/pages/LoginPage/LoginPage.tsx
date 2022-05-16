@@ -1,12 +1,9 @@
 import React, { FC, ReactElement, useContext, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Client } from "../../../api/api";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
-import { AuthContext } from "../../../context/context";
 
-const LoginForm: FC = (): ReactElement => {
-    // const { setIsAuth } = useContext(AuthContext)
+const LoginPage: FC = (): ReactElement => {
     const { error, loading } = useTypedSelector(state => state.auth)
     const { login } = useActions()
     const [password, setPassword] = useState("");
@@ -44,14 +41,7 @@ const LoginForm: FC = (): ReactElement => {
         e.preventDefault();
         handleValidation();
         login(email, password)
-        //localStorage.setItem('auth', 'true')
-        // console.log(localStorage.getItem('token'))
-        // setIsAuth(true);
     };
-
-    if (loading) {
-        return <h1>Идет загрузка...</h1>
-    }
 
     return (
         <div className="App">
@@ -101,4 +91,4 @@ const LoginForm: FC = (): ReactElement => {
         </div>
     );
 }
-export default LoginForm;
+export default LoginPage;

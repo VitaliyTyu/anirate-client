@@ -1,6 +1,6 @@
-import {BriefTitleVM, BriefTitleVMPaginatedList} from "../api/api";
+import { BriefTitleVM, BriefTitleVMPaginatedList } from "../api/api";
 
-export interface  TitlesState {
+export interface TitlesState {
     paginatedList: BriefTitleVMPaginatedList | undefined;
     loading: boolean;
     error: null | string;

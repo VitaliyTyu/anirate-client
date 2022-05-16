@@ -1,5 +1,5 @@
 import { ClientBase } from './client-base';
-import {setAuthHeader} from "../auth/auth-headers";
+import { setAuthHeader } from "../auth/auth-headers";
 
 export class Client extends ClientBase {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
@@ -14,10 +14,20 @@ export class Client extends ClientBase {
 
     /**
      * получить все коллекции с пагинацией
+     * @param page (optional) 
+     * @param size (optional) 
      * @return Success
      */
-    animeCollections(): Promise<BriefCollectionVMPaginatedList> {
-        let url_ = this.baseUrl + "/api/AnimeCollections";
+    animeCollections(page: number | undefined, size: number | undefined): Promise<BriefCollectionVMPaginatedList> {
+        let url_ = this.baseUrl + "/api/AnimeCollections?";
+        if (page === null)
+            throw new Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        if (size === null)
+            throw new Error("The parameter 'size' cannot be null.");
+        else if (size !== undefined)
+            url_ += "size=" + encodeURIComponent("" + size) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -52,31 +62,26 @@ export class Client extends ClientBase {
     }
 
     /**
-     * получить детали коллекции с пагинацией тайтлов
-     * @param userId (optional)
-     * @param id (optional)
-     * @param animeTitlesPageNumber (optional)
-     * @param animeTitlesPageSize (optional)
-     * @return Success
-     */
-    collectionDetails(userId: string | undefined, id: string | undefined, animeTitlesPageNumber: number | undefined, animeTitlesPageSize: number | undefined): Promise<CollectionDetailsVM> {
+    * получить детали коллекции с пагинацией тайтлов
+    * @param id (optional) 
+    * @param animePage (optional) 
+    * @param animeSize (optional) 
+    * @return Success
+    */
+    collectionDetails(id: string | undefined, animePage: number | undefined, animeSize: number | undefined): Promise<CollectionDetailsVM> {
         let url_ = this.baseUrl + "/api/AnimeCollections/CollectionDetails?";
-        if (userId === null)
-            throw new Error("The parameter 'userId' cannot be null.");
-        else if (userId !== undefined)
-            url_ += "UserId=" + encodeURIComponent("" + userId) + "&";
         if (id === null)
             throw new Error("The parameter 'id' cannot be null.");
         else if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&";
-        if (animeTitlesPageNumber === null)
-            throw new Error("The parameter 'animeTitlesPageNumber' cannot be null.");
-        else if (animeTitlesPageNumber !== undefined)
-            url_ += "AnimeTitlesPageNumber=" + encodeURIComponent("" + animeTitlesPageNumber) + "&";
-        if (animeTitlesPageSize === null)
-            throw new Error("The parameter 'animeTitlesPageSize' cannot be null.");
-        else if (animeTitlesPageSize !== undefined)
-            url_ += "AnimeTitlesPageSize=" + encodeURIComponent("" + animeTitlesPageSize) + "&";
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        if (animePage === null)
+            throw new Error("The parameter 'animePage' cannot be null.");
+        else if (animePage !== undefined)
+            url_ += "animePage=" + encodeURIComponent("" + animePage) + "&";
+        if (animeSize === null)
+            throw new Error("The parameter 'animeSize' cannot be null.");
+        else if (animeSize !== undefined)
+            url_ += "animeSize=" + encodeURIComponent("" + animeSize) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -529,13 +534,13 @@ export class Client extends ClientBase {
         });
     }
 
-    protected processLogin(response: Response): Promise<void>{
+    protected processLogin(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
                 localStorage.setItem('token', _responseText ? _responseText : '');
-                return ;
+                return;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
