@@ -4,7 +4,8 @@ import { AuthAction, AuthActionTypes, AuthState } from "../../types/auth";
 const initialState: AuthState = {
     error: null,
     loading: false,
-    isAuth: false,
+    isAuth: localStorage.getItem("auth") == "true",
+
 }
 
 export const authReducer = (state = initialState, action: AuthAction): AuthState => {

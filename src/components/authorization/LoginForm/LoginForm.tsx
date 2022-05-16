@@ -1,12 +1,14 @@
-import React, {FC, ReactElement, useState} from "react";
+import React, { FC, ReactElement, useContext, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Client} from "../../../api/api";
-import {useTypedSelector} from "../../../hooks/useTypedSelector";
-import {useActions} from "../../../hooks/useActions";
+import { Client } from "../../../api/api";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useActions } from "../../../hooks/useActions";
+import { AuthContext } from "../../../context/context";
 
 const LoginForm: FC = (): ReactElement => {
-    const {error, loading, isAuth} = useTypedSelector(state => state.auth)
-    const {login} = useActions()
+    // const { setIsAuth } = useContext(AuthContext)
+    const { error, loading } = useTypedSelector(state => state.auth)
+    const { login } = useActions()
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [passwordError, setPasswordError] = useState("");
@@ -42,7 +44,9 @@ const LoginForm: FC = (): ReactElement => {
         e.preventDefault();
         handleValidation();
         login(email, password)
-        console.log(localStorage.getItem('token'))
+        //localStorage.setItem('auth', 'true')
+        // console.log(localStorage.getItem('token'))
+        // setIsAuth(true);
     };
 
     if (loading) {
@@ -85,7 +89,7 @@ const LoginForm: FC = (): ReactElement => {
                             </div>
 
                             <button
-                                style={{marginTop: 10}}
+                                style={{ marginTop: 10 }}
                                 type="submit"
                                 className="btn btn-primary">
                                 Submit

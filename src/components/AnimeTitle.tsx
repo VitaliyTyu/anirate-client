@@ -43,7 +43,6 @@ const AnimeTitle: FC<AnimeTitleProps> = (props): ReactElement => {
 
     return (
         <div>
-
             <div
                 onClick={() => props.clickFunction()}
             >

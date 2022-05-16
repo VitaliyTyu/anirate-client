@@ -62,9 +62,9 @@ const Slider: FC = (): ReactElement => {
 
                 <div className={css.sliderButton}>
                     <SlidePrevButton />
-                    <SlideNextButton />                
+                    <SlideNextButton />
                 </div>
-            
+
             </Swiper >
         </div >
     );

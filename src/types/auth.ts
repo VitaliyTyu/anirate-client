@@ -1,5 +1,5 @@
-import {TitleDetailsVM} from "../api/api";
-import {TitleDetailsActionTypes} from "./titleDetails";
+import { TitleDetailsVM } from "../api/api";
+import { TitleDetailsActionTypes } from "./titleDetails";
 
 export interface AuthState {
     isAuth: boolean;
@@ -14,8 +14,8 @@ export enum AuthActionTypes {
     LOGIN_ERROR = "LOGIN_ERROR",
 
     REGISTER = "REGISTER",
-    REGISTER_SUCCESS  = "REGISTER_SUCCESS",
-    REGISTER_ERROR  = "REGISTER_ERROR",
+    REGISTER_SUCCESS = "REGISTER_SUCCESS",
+    REGISTER_ERROR = "REGISTER_ERROR",
 
     LOGOUT = "LOGOUT",
     LOGOUT_SUCCESS = "LOGOUT_SUCCESS",
