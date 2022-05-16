@@ -9,12 +9,13 @@ import SlidePrevButton from './SlidePrevButton';
 
 // Import Swiper styles
 import 'swiper/css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import AnimeItem from '../../AnimeItem';
 
 const Slider: FC = (): ReactElement => {
     const { paginatedList, loading, error } = useTypedSelector(state => state.titles)
     const { getTitles, setTitlesPage, setCurrentTitleDetails } = useActions()
-
+    const navigate = useNavigate()
 
     useEffect(() => {
         getTitles(1, 20)
@@ -45,7 +46,8 @@ const Slider: FC = (): ReactElement => {
                                 className={css.card__item}
                                 onClick={() => setCurrentTitleDetails(title.id)}
                             >
-                                <Link to="/title">
+                                <AnimeItem title={title} clickFunction={() => navigate(`/animes/${title?.id}`)} />
+                                {/* <Link to="/title">
 
                                     <div className={css.card__inner}>
                                         <div className={css.card__img}>
@@ -54,7 +56,8 @@ const Slider: FC = (): ReactElement => {
                                             <div className={css.card__text}>{title.russian} и его счет {title.score} а его номер {index + 1}</div>
                                         </div>
                                     </div>
-                                </Link>
+                                </Link> */}
+
                             </div>
                         </SwiperSlide>
                     ))}
@@ -62,9 +65,9 @@ const Slider: FC = (): ReactElement => {
 
                 <div className={css.sliderButton}>
                     <SlidePrevButton />
-                    <SlideNextButton />                
+                    <SlideNextButton />
                 </div>
-            
+
             </Swiper >
         </div >
     );

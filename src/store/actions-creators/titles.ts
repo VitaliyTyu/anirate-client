@@ -1,13 +1,13 @@
-import {Client} from "../../api/api";
-import {TitlesAction, TitlesActionTypes} from "../../types/titles";
-import {Dispatch} from "redux";
+import { Client } from "../../api/api";
+import { TitlesAction, TitlesActionTypes } from "../../types/titles";
+import { Dispatch } from "redux";
 
 const apiClient = new Client('https://localhost:5001');
 
-export const getTitles = (page: number, size: number) => {
+export const getTitles = (page: number = 1, size: number = 10) => {
     return async (dispatch: Dispatch<TitlesAction>) => {
         try {
-            dispatch({type: TitlesActionTypes.FETCH_TITLES})
+            dispatch({ type: TitlesActionTypes.FETCH_TITLES })
             const paginatedList = await apiClient.animeTitles(page, size);
             dispatch({
                 type: TitlesActionTypes.FETCH_TITLES_SUCCESS,
@@ -23,5 +23,5 @@ export const getTitles = (page: number, size: number) => {
 }
 
 export function setTitlesPage(page: number): TitlesAction {
-    return {type: TitlesActionTypes.SET_TITLES_PAGE, payload: page}
+    return { type: TitlesActionTypes.SET_TITLES_PAGE, payload: page }
 }

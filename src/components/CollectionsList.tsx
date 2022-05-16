@@ -1,30 +1,32 @@
-import React, { FC, ReactElement, useEffect, useState } from 'react';
-import { BriefCollectionVM, Client } from '../api/api';
+import React, { FC, ReactElement, useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { BriefCollectionVM, BriefCollectionVMPaginatedList, Client } from '../api/api';
 import { useActions } from '../hooks/useActions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
+import CollectionItem from './CollectionItem';
 
-const apiClient = new Client('https://localhost:5001');
+interface CollectionsListProps {
+    paginatedList: BriefCollectionVMPaginatedList | undefined
+    children?: React.ReactChild | React.ReactNode;
+}
 
-const CollectionsList: FC = (): ReactElement => {
-    const [collections, setCollections] = useState<BriefCollectionVM[] | undefined>()
-
-    async function getCollections() {
-        const paginatedList = await apiClient.animeCollections();
-        console.log(paginatedList.items);
-        setCollections(paginatedList.items);
-    }
-
-    useEffect(() => {
-        getCollections();
-    }, [])
+const CollectionsList: FC<CollectionsListProps> = (props): ReactElement => {
+    const navigate = useNavigate()
 
     return (
-        <div>
-            {collections?.map(collection =>
-                <div key={collection.id}>
-                    {collection.name}
-                </div>
-            )}
+        <div style={
+            {
+                display: "flex",
+                flexWrap: "wrap",
+                alignContent: "space-between",
+                justifyContent: "space-between",
+            }}>
+            {props.paginatedList?.items?.map((collection => (
+                <CollectionItem
+                    clickFunction={() => navigate(`/collections/${collection?.id}`)}
+                    collection={collection}
+                />
+            )))}
         </div>
     );
 };

@@ -1,12 +1,11 @@
-import React, {FC, ReactElement, useState} from "react";
+import React, { FC, ReactElement, useContext, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Client} from "../../../api/api";
-import {useTypedSelector} from "../../../hooks/useTypedSelector";
-import {useActions} from "../../../hooks/useActions";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useActions } from "../../../hooks/useActions";
 
-const LoginForm: FC = (): ReactElement => {
-    const {error, loading, isAuth} = useTypedSelector(state => state.auth)
-    const {login} = useActions()
+const LoginPage: FC = (): ReactElement => {
+    const { error, loading } = useTypedSelector(state => state.auth)
+    const { login } = useActions()
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [passwordError, setPasswordError] = useState("");
@@ -42,12 +41,7 @@ const LoginForm: FC = (): ReactElement => {
         e.preventDefault();
         handleValidation();
         login(email, password)
-        console.log(localStorage.getItem('token'))
     };
-
-    if (loading) {
-        return <h1>Идет загрузка...</h1>
-    }
 
     return (
         <div className="App">
@@ -85,7 +79,7 @@ const LoginForm: FC = (): ReactElement => {
                             </div>
 
                             <button
-                                style={{marginTop: 10}}
+                                style={{ marginTop: 10 }}
                                 type="submit"
                                 className="btn btn-primary">
                                 Submit
@@ -97,4 +91,4 @@ const LoginForm: FC = (): ReactElement => {
         </div>
     );
 }
-export default LoginForm;
+export default LoginPage;
