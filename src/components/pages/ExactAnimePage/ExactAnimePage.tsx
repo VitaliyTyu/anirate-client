@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import AnimeTitle from '../../AnimeTitle';
+import AnimeTitle from '../../UserMenu/AnimeTitle/AnimeTitle';
+import css from './ExactAnimePage.module.css'
 
 const ExactAnimePage = () => {
     const [descriptionHtml, setDescriptionHtml] = useState<string | undefined>("")
@@ -34,13 +35,36 @@ const ExactAnimePage = () => {
     if (error) {
         return <h1>{error}</h1>
     }
-
+    
+    let genresToString: string = "";    
+    titleDetails?.genres?.map((genre) =>(genresToString += genre.russian + " "))
+    
     return (
-        <div>
-            <div>{titleDetails?.russian}</div>
-            <img src={"https://shikimori.one/" + titleDetails?.image?.original} />
-            <div>{titleDetails?.score}</div>
-            <div dangerouslySetInnerHTML={createMarkup()} />
+        <div className={css.animepages}>
+            <div className={css.box1}>  
+                <div className={css.animeInfo}>
+                    <div className={css.info}>                                         
+                        <div className={css.leftside} >
+                            <div className={css.title}>{titleDetails?.russian}</div>
+                            <div className={css.title}>
+                                <img src={"https://shikimori.one/" + titleDetails?.image?.original} />  
+                            </div>                    
+                        </div>
+                        
+                        <div className={css.rightside}>    
+                            <div className={css.details}>Рейтинг: {titleDetails?.score}</div> 
+                            <div className={css.details}>Эпизоды: {titleDetails?.episodes}</div> 
+                            <div className={css.details}>Жанры: {genresToString}</div> 
+                            <div>Описание:</div>
+                            <div className={css.descript} dangerouslySetInnerHTML={createMarkup()} />              
+                        </div>                   
+                    </div>
+                    
+                    <div className={css.buttonsElems}>                        
+                        <a href='/#' className={css.buttonStart}>Добавить в коллекцию</a>                                        
+                    </div>         
+                </div>
+            </div> 
         </div>
     );
 };

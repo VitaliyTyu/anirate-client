@@ -1,13 +1,14 @@
 .container{
     width: 100%;
     max-width: 1230px;
-    padding: 0 15px;
+    padding: 0 ;
     margin: 0 auto; /*расположение по центру*/
-    
+    height: 70px;
+	  bottom:0; /* добавили */
   }
 
 .footer {
-    padding-top: 65px;  
+    padding-top: 50px;  
     background-color: #fcc0f2;
   }
 
@@ -17,6 +18,7 @@
     font-size: 14px;
     color: #333;
     text-align: center;
+    
   }
   
   .copyright span {

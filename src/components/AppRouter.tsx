@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import ExactAnimePage from './pages/ExactAnimePage/ExactAnimePage';
-import StartPage from './pages/StartPage';
+import MainPage from './pages/MainPage/MainPage';
 
 const AppRouter = () => {
     return (
@@ -14,7 +14,7 @@ const AppRouter = () => {
                     key={route.path}
                 />
             )} */}
-            <Route path="/" element={<StartPage />} />
+            <Route path="/" element={<MainPage />} />
             <Route path="/title" element={<ExactAnimePage />} />
             <Route
                 path="*"

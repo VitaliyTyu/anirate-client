@@ -10,8 +10,11 @@ const Intro = () => {
                 <div className={css.container}>  
                     <div className={css.intro_inner}>
                         <h1 className={css.intro_title}>Добро пожаловать в AniRate</h1>  
-                        <a className={css.buttonStart} href="#">Перейти к коллекциям</a> 
-                        <a className={css.buttonStart} href="#">Перейти к аниме</a>                       
+                        <div className={css.buttons}>
+                            <a className={css.buttonStart} href="/author">Перейти к коллекциям</a> 
+                            <a className={css.buttonStart} href="/animes">Перейти к аниме</a>  
+                        </div>
+                                              
                     </div>                    
                 </div>    
             </div>  

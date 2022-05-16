@@ -11,11 +11,7 @@ const Header = () => {
             <Navbar expand="lg">
                 <Container>
                     
-                    <Link to="/">
-                        <Navbar.Brand >
-                            AniRate
-                        </Navbar.Brand>
-                    </Link>
+                <a className="navbar-brand" href="/">AniRate</a>
 
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     

@@ -30,6 +30,7 @@ const Slider: FC = (): ReactElement => {
 
     return (
         <div className={css.intro}>
+            <h1>ПОПУЛЯРНЫЕ АНИМЕ</h1>
             <Swiper
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                 spaceBetween={40}

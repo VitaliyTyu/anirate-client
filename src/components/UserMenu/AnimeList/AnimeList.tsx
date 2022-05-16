@@ -1,12 +1,13 @@
 import React, { FC, ReactElement, useContext, useEffect, useState } from 'react';
-import { BriefTitleVM, BriefTitleVMPaginatedList, Client } from "../api/api";
-import { useTypedSelector } from "../hooks/useTypedSelector";
+import { BriefTitleVM, BriefTitleVMPaginatedList, Client } from "../../../api/api";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useDispatch } from "react-redux";
-import { getTitles } from "../store/actions-creators/titles";
-import { useActions } from "../hooks/useActions";
-import AnimeTitle from './AnimeTitle';
+import { getTitles } from "../../../store/actions-creators/titles";
+import { useActions } from "../../../hooks/useActions";
+import AnimeTitle from '../AnimeTitle/AnimeTitle';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 
 
 const AnimeList: FC = (): ReactElement => {
@@ -24,7 +25,7 @@ const AnimeList: FC = (): ReactElement => {
     }
 
     useEffect(() => {
-        getTitles(page, 25)
+        getTitles(page, 10)
     }, [page]);
 
 
@@ -38,7 +39,18 @@ const AnimeList: FC = (): ReactElement => {
 
 
     return (
-        <div>
+        <div>            
+            <div style={
+                {
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignContent: "space-evenly",
+                    justifyContent: "space-between",
+                }}>
+                {paginatedList?.items?.map((title) => (
+                    <AnimeTitle title={title} clickFunction={() => navigate(`/animes/${title?.id}`)} />
+                ))}
+            </div>
             <div style={{ display: "flex" }}>
                 {pages.map(p =>
                     <div
@@ -52,17 +64,6 @@ const AnimeList: FC = (): ReactElement => {
                         {p}
                     </div>
                 )}
-            </div>
-            <div style={
-                {
-                    display: "flex",
-                    flexWrap: "wrap",
-                    alignContent: "space-between",
-                    justifyContent: "space-between",
-                }}>
-                {paginatedList?.items?.map((title) => (
-                    <AnimeTitle title={title} clickFunction={() => navigate(`/animes/${title?.id}`)} />
-                ))}
             </div>
         </div>
     );

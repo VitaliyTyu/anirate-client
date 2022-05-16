@@ -1,5 +1,5 @@
 .mainPage{  
-    background: url("../images/intro.jpg") center;
+    background: url("../../UI/images/intro.jpg") center;
     background-repeat: no-repeat;
     background-attachment: center;    
     -moz-background-size: 100%; /* Firefox 3.6+ */

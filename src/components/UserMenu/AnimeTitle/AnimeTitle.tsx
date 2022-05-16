@@ -1,8 +1,8 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
-import { BriefTitleVM, Client, TitleDetailsVM } from "../api/api";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import { getTitleDetails } from "../store/actions-creators/titleDetails";
-import { useActions } from "../hooks/useActions";
+import { BriefTitleVM, Client, TitleDetailsVM } from "../../../api/api";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { getTitleDetails } from "../../../store/actions-creators/titleDetails";
+import { useActions } from "../../../hooks/useActions";
 import { useNavigate } from 'react-router-dom';
 
 const apiClient = new Client('https://localhost:5001');

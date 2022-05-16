@@ -1,7 +1,7 @@
 import React from 'react';
 import css from './MainPage.module.css'
-import Intro from '../Intro/Intro';
-import Slider from '../Slider/Slider';
+import Intro from '../../UI/Intro/Intro';
+import Slider from '../../UI/Slider/Slider';
 
 
 const MainPage = () => {
