@@ -2,13 +2,15 @@
     width: 100%;
     max-width: 1230px;
     padding: 0 15px;
-    margin: 0 auto; /*расположение по центру*/
+    margin: 0 auto;
     
   }
 
 .footer {
-    padding-top: 65px;  
+
     background-color: #fcc0f2;
+    margin-top: auto;
+    
   }
 
   .copyright {

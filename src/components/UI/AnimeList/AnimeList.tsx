@@ -1,7 +1,9 @@
 import React, { FC, ReactElement, useContext, useEffect, useState } from 'react';
-import { BriefCollectionVM, BriefTitleVM, BriefTitleVMPaginatedList, Client } from "../api/api";
+import { BriefCollectionVM, BriefTitleVM, BriefTitleVMPaginatedList, Client } from "../../../api/api";
 import { useNavigate } from 'react-router-dom';
-import AnimeItem from './AnimeItem';
+import AnimeItem from '../AnimeItem/AnimeItem';
+import css from './AnimeList.module.css'
+
 
 interface AnimeListProps {
     clickFunction: (item: BriefTitleVM) => void;
@@ -14,13 +16,7 @@ const AnimeList: FC<AnimeListProps> = (props): ReactElement => {
 
     return (
         <div>
-            <div style={
-                {
-                    display: "flex",
-                    flexWrap: "wrap",
-                    alignContent: "space-between",
-                    justifyContent: "space-between",
-                }}>
+            <div className={css.animeList}>
                 {props.paginatedList?.items?.map((title) => (
                     <AnimeItem title={title} clickFunction={() => props.clickFunction(title)} />
                 ))}

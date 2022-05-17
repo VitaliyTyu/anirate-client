@@ -1,0 +1,28 @@
+.title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+    height: 300px;
+    
+}
+
+.titleName{
+    width: 156; 
+    height: 50;
+}
+
+.titleScore{
+    margin-bottom: 40;
+}
+
+.titleImage{
+    width: 156; 
+    height: 250;
+}
+
+.titleImage img {
+    width: 150px; 
+    height: 250px; 
+    object-fit: cover;
+  }

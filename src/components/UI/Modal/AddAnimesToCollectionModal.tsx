@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AddTitlesInCollectionsDto, BriefTitleVM, Client, CreateCollectionDto } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import AnimeList from '../../AnimeList';
+import AnimeList from '../AnimeList/AnimeList';
 
 const apiClient = new Client('https://localhost:5001');
 
