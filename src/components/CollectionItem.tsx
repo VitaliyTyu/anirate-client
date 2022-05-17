@@ -12,13 +12,26 @@ interface CollectionItemProps {
 }
 
 const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
+    const [imgPath, setImgPath] = useState("https://dummyimage.com/150x250/b8b6b8/666669&text=Коллекция");
+
+    useEffect(() => {
+        if (props.collection?.image == undefined) {
+            setImgPath("https://dummyimage.com/150x250/b8b6b8/666669&text=Коллекция")
+        }
+        else {
+            setImgPath("https://shikimori.one/" + props.collection?.image?.preview)
+        }
+    }, [])
+
     return (
         <div
             onClick={() => props.clickFunction()}
             key={props.collection?.id}
         >
             <div>{props.collection?.name}</div>
+            {/* <div><img src={imgPath} /></div> */}
             <div><img src={"https://shikimori.one/" + props.collection?.image?.preview} /></div>
+
         </div>
     );
 };

@@ -9,24 +9,29 @@ const CollectionsPage = () => {
     const { paginatedList, loading, error, page } = useTypedSelector(state => state.collections)
     const { getCollections, setCollectionsPage, } = useActions()
     const pages: number[] = [];
-    const makePages = useMemo(() => makePagesArr(), [paginatedList])
+    const makePages = useMemo(() => makePagesArr(), [paginatedList?.totalPages])
     const navigate = useNavigate()
 
     function makePagesArr() {
-        //@ts-ignore
-        for (let i = 0; i < paginatedList?.totalPages; i++) {
-            pages.push(i + 1)
+        let arr: number[] = []
+        let list = paginatedList?.totalPages ?? 1
+        if (paginatedList !== undefined) {
+            for (let i = 0; i < list; i++) {
+                arr.push(i + 1)
+            }
         }
+
+        return arr;
     }
 
     useEffect(() => {
-        getCollections(page, 2)
+        getCollections(page, 10)
     }, [page]);
 
 
-    if (loading) {
-        return <h1>Идет загрузка...</h1>
-    }
+    // if (loading) {
+    //     return <h1>Идет загрузка...</h1>
+    // }
 
     if (error) {
         return <h1>{error}</h1>
@@ -34,9 +39,9 @@ const CollectionsPage = () => {
 
     return (
         <div>
-            <CreateCollectionModal />
+            <CreateCollectionModal page={page} size={10} />
             <div style={{ display: "flex" }}>
-                {pages.map(p =>
+                {makePages.map(p =>
                     <div
                         onClick={() => setCollectionsPage(p)}
                         style={{

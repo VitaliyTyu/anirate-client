@@ -1,15 +1,10 @@
 import React, { FC, ReactElement, useContext, useEffect, useState } from 'react';
-import { BriefTitleVM, BriefTitleVMPaginatedList, Client } from "../api/api";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import { useDispatch } from "react-redux";
-import { getTitles } from "../store/actions-creators/titles";
-import { useActions } from "../hooks/useActions";
-import { useMemo } from 'react';
+import { BriefCollectionVM, BriefTitleVM, BriefTitleVMPaginatedList, Client } from "../api/api";
 import { useNavigate } from 'react-router-dom';
 import AnimeItem from './AnimeItem';
 
 interface AnimeListProps {
-    // clickFunction: () => void;
+    clickFunction: (item: BriefTitleVM) => void;
     paginatedList: BriefTitleVMPaginatedList | undefined;
     children?: React.ReactChild | React.ReactNode;
 }
@@ -27,8 +22,7 @@ const AnimeList: FC<AnimeListProps> = (props): ReactElement => {
                     justifyContent: "space-between",
                 }}>
                 {props.paginatedList?.items?.map((title) => (
-                    <AnimeItem title={title} clickFunction={() => navigate(`/animes/${title?.id}`)} />
-                    // <AnimeItem title={title} clickFunction={props.clickFunction} />
+                    <AnimeItem title={title} clickFunction={() => props.clickFunction(title)} />
                 ))}
             </div>
         </div>
