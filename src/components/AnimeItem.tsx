@@ -6,12 +6,14 @@ import { useActions } from "../hooks/useActions";
 import { useNavigate } from 'react-router-dom';
 
 interface AnimeItemProps {
-    clickFunction: () => void;
+    clickFunction: () => void
     title: BriefTitleVM | undefined;
     children?: React.ReactChild | React.ReactNode;
 }
 
 const AnimeItem: FC<AnimeItemProps> = (props): ReactElement => {
+
+
     return (
         <div>
             <div

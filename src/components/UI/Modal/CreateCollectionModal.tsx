@@ -1,12 +1,28 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { Client, CreateCollectionDto } from '../../../api/api';
+import { useActions } from '../../../hooks/useActions';
 
-const CreateCollectionModal = () => {
+const apiClient = new Client('https://localhost:5001');
+
+interface CreateCollectionModalProps {
+    page: number;
+    size: number;
+    children?: React.ReactChild | React.ReactNode;
+}
+
+const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [name, setName] = useState("");
     const [nameError, setNameError] = useState("");
+    const { getCollections, setCollectionsPage } = useActions()
+
+    const createCollection = async (details: CreateCollectionDto) => {
+        let collectionId = await apiClient.collection(details);
+    }
 
     const handleValidation = () => {
         let formIsValid = true;
@@ -27,6 +43,7 @@ const CreateCollectionModal = () => {
         e.preventDefault();
         handleValidation();
         console.log(`Создание коллекции ${name}`);
+        getCollections(props.page, props.size)
     };
 
     return (
@@ -62,7 +79,7 @@ const CreateCollectionModal = () => {
                                             <Button variant="secondary" onClick={handleClose}>
                                                 Закрыть
                                             </Button>
-                                            <Button type="submit" variant="primary" onClick={handleClose}>
+                                            <Button type="submit" variant="primary" onClick={() => { handleClose(); createCollection({ name }) }}>
                                                 Создать
                                             </Button>
                                         </div>
