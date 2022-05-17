@@ -13,14 +13,22 @@ const Intro = () => {
                 <div className={css.container}>
                     <div className={css.intro_inner}>
                         <h1 className={css.intro_title}>Добро пожаловать в AniRate</h1>
-                        <Button
-                            onClick={() => navigate(`/collections`)}
-                        >
-                            Перейти к коллекциям
-                        </Button>
-                        <Button onClick={() => navigate(`/animes`)} >
-                            Перейти к аниме
-                        </Button>
+                        <div className={css.buttons}>
+                            <div className={css.button}>
+                            <Button
+                                onClick={() => navigate(`/collections`)}
+                                variant="outline-dark" size="lg"
+                            >
+                                Перейти к коллекциям
+                            </Button>
+                            </div>
+                            <div className={css.button}>
+                            <Button onClick={() => navigate(`/animes`)} 
+                            variant="outline-dark" size="lg">
+                                Перейти к аниме
+                            </Button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

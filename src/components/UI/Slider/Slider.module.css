@@ -4,7 +4,25 @@
   -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
   -o-background-size: 100%; /* Opera 9.6+ */
   background-size: 100%; /* Современные браузеры */   
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
 }
+
+.intro h1{
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper{
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px;
+  
+}
+
 
 /* Card */
 .card {

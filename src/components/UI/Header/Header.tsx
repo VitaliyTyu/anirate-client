@@ -14,38 +14,35 @@ const Header = () => {
         <div style={{ backgroundColor: '#fcc0f2' }}>
             <Navbar expand="lg">
                 <Container>
-                    <Link to="/">
+                    
+                    <Link  style = {{textDecoration: 'none'}} to="/">
+                   
                         <Navbar.Brand >
                             AniRate
                         </Navbar.Brand>
+                        
                     </Link>                   
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-
-                            <form className="d-flex">
-                                <input className="form-control ms-5" type="search" placeholder="Поиск" aria-label="Search" />
-                                <button className="btn btn-outline-success ms-1" type="submit">Поиск</button>
-                            </form>
-                                                      
-
-                        </Nav>
-                    </Navbar.Collapse>
+                                       
+                    <Nav className="me-auto">
+                        <form className="d-flex">
+                            <input className="form-control ms-5" type="search" placeholder="Поиск" aria-label="Search" />
+                            <Button variant="outline-dark" className="ms-1">Поиск</Button>
+                        </form>                                                      
+                    </Nav>
+                    
 
                     <div className='btn-wrapper-end'>
-                                {isAuth
-                                    ?
-                                    <Button onClick={() => { logout(); navigate("/") }}>
-                                        Выйти
-                                    </Button>
-                                    :
-                                    <Button onClick={() => navigate("/login")}>
-                                        Войти
-                                    </Button>
-                                }
-
-                            </div>  
+                        {isAuth
+                            ?
+                            <Button onClick={() => { logout(); navigate("/") }} variant="outline-dark" >
+                                Выйти
+                            </Button>
+                            :
+                            <Button onClick={() => navigate("/login")} variant="outline-dark" >
+                                Войти
+                            </Button>
+                        }
+                    </div>  
                 </Container>
             </Navbar>
         </div>

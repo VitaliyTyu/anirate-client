@@ -1,9 +1,11 @@
 import React, { FC, ReactElement, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BriefCollectionVM, BriefCollectionVMPaginatedList, Client } from '../api/api';
-import { useActions } from '../hooks/useActions';
-import { useTypedSelector } from '../hooks/useTypedSelector';
-import CollectionItem from './CollectionItem';
+import { BriefCollectionVM, BriefCollectionVMPaginatedList, Client } from '../../../api/api';
+import { useActions } from '../../../hooks/useActions';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import CollectionItem from '../CollectionItem/CollectionItem';
+import css from "./CollectionList.module.css"
+
 
 interface CollectionsListProps {
     paginatedList: BriefCollectionVMPaginatedList | undefined
@@ -14,13 +16,7 @@ const CollectionsList: FC<CollectionsListProps> = (props): ReactElement => {
     const navigate = useNavigate()
 
     return (
-        <div style={
-            {
-                display: "flex",
-                flexWrap: "wrap",
-                alignContent: "space-between",
-                justifyContent: "space-between",
-            }}>
+        <div className={css.collectionList}>
             {props.paginatedList?.items?.map((collection => (
                 <CollectionItem
                     clickFunction={() => navigate(`/collections/${collection?.id}`)}
