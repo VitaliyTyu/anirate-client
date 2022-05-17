@@ -5,6 +5,7 @@ import { getTitleDetails } from "../../../store/actions-creators/titleDetails";
 import { useActions } from "../../../hooks/useActions";
 import { useNavigate } from 'react-router-dom';
 import css from "./AnimeItem.module.css"
+import { Card } from 'react-bootstrap';
 
 interface AnimeItemProps {
     clickFunction: () => void
@@ -16,16 +17,21 @@ const AnimeItem: FC<AnimeItemProps> = (props): ReactElement => {
 
 
     return (
-        <div>
-            <div className={css.title}
-                onClick={() => props.clickFunction()}
-            >
-                <div className={css.titleName}>{props.title?.russian}</div>
-                <div className={css.titleImage}>
-                    <img src={"https://shikimori.one/" + props.title?.image?.original} />
-                </div>
-                <div className={css.titleScore}>{props.title?.score}</div>
-            </div>
+        <div >
+            
+            
+                <Card border="dark" className={css.title} onClick={() => props.clickFunction()}>
+                    
+                    <Card.Img variant="top" src={"https://shikimori.one/" + props.title?.image?.original} />
+                    <Card.Body className={css.titleName} >
+                        <Card.Title>{props.title?.russian}</Card.Title>
+                        <Card.Text>
+                            {props.title?.score}
+                        </Card.Text>                    
+                    </Card.Body>
+                </Card>
+            
+            
         </div>
     );
 };

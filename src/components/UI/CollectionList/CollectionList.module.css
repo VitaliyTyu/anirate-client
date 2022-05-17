@@ -1,4 +1,4 @@
-.animeList{
+.collectionList{
     display: flex;
     flex-wrap: wrap;
     align-content: space-between;

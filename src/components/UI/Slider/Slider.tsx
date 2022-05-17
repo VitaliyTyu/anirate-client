@@ -31,19 +31,22 @@ const Slider: FC = (): ReactElement => {
 
     return (
         <div className={css.intro}>
+            <h1>ПОПУЛЯРНЫЕ АНИМЕ</h1>
+            <div>
             <Swiper
-                modules={[Navigation, Pagination, Scrollbar, A11y]}
+                modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                 spaceBetween={40}
 
                 slidesPerView={6}
                 loop={true}
+                autoplay={{delay: 2000}}
             >
-                <div className={css.card}>
+                <div className={css.swiper}>
                     {paginatedList?.items?.map((title, index) => (
                         <SwiperSlide>
                             <div
                                 key={title.id}
-                                className={css.card__item}
+                                
                                 onClick={() => setCurrentTitleDetails(title.id)}
                             >
                                 <AnimeItem title={title} clickFunction={() => navigate(`/animes/${title?.id}`)} />
@@ -61,14 +64,9 @@ const Slider: FC = (): ReactElement => {
                             </div>
                         </SwiperSlide>
                     ))}
-                </div>
-
-                <div className={css.sliderButton}>
-                    <SlidePrevButton />
-                    <SlideNextButton />
-                </div>
-
+                </div>           
             </Swiper >
+            </div>
         </div >
     );
 };

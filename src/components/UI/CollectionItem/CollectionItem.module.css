@@ -1,0 +1,39 @@
+.collection{   
+    width: 100%;
+    height: 300px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.collectionView{
+    display: flex;
+    flex-direction: row;
+    margin-left: 15px;
+    height: 300px;
+}
+.collectionItem{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    height: 300px;
+    width: 80%;
+}
+ .collectionItem img{   
+    width: 200px; 
+    height: 100%;       
+ }
+
+ .details{
+     margin: 15px;
+ }
+
+.buttonPlace {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}

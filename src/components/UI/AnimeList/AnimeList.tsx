@@ -3,6 +3,7 @@ import { BriefCollectionVM, BriefTitleVM, BriefTitleVMPaginatedList, Client } fr
 import { useNavigate } from 'react-router-dom';
 import AnimeItem from '../AnimeItem/AnimeItem';
 import css from './AnimeList.module.css'
+import { CardGroup } from 'react-bootstrap';
 
 
 interface AnimeListProps {
@@ -16,11 +17,15 @@ const AnimeList: FC<AnimeListProps> = (props): ReactElement => {
 
     return (
         <div>
-            <div className={css.animeList}>
+            
+            <div >
+                <CardGroup className={css.animeList}> 
                 {props.paginatedList?.items?.map((title) => (
                     <AnimeItem title={title} clickFunction={() => props.clickFunction(title)} />
                 ))}
+                 </CardGroup>
             </div>
+            
         </div>
     );
 };

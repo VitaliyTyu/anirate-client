@@ -56,7 +56,7 @@ const AddAnimesToCollectionModal = () => {
 
     return (
         <div >
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="outline-dark" size="lg" onClick={handleShow}>
                 Добавить аниме
             </Button>
 
