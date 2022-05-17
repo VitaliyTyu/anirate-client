@@ -29,6 +29,7 @@ const AnimesPage = () => {
         return arr;
     }
 
+
     useEffect(() => {
         getTitles(page, 20)
         console.log("get");

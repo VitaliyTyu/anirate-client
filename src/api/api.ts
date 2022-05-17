@@ -187,7 +187,10 @@ export class Client extends ClientBase {
 
     protected processTitles(response: Response): Promise<void> {
         const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        let _headers: any = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v: any, k: any) => _headers[k] = v);
+        };
         if (status === 204) {
             return response.text().then((_responseText) => {
                 return;

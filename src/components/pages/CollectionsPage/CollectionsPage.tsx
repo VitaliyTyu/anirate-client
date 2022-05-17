@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import CollectionsList from '../../CollectionsList';
+
 import CreateCollectionModal from '../../UI/Modal/CreateCollectionModal';
 
 const CollectionsPage = () => {
