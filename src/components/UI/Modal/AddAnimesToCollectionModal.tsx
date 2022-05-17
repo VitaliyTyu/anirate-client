@@ -1,31 +1,61 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { AddTitlesInCollectionsDto, BriefTitleVM, Client, CreateCollectionDto } from '../../../api/api';
+import { AddTitlesInCollectionsDto, BriefTitleVM, Client, BriefCollectionVM } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import AnimeList from '../AnimeList/AnimeList';
 
 const apiClient = new Client('https://localhost:5001');
 
-const AddAnimesToCollectionModal = () => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    const [name, setName] = useState("");
-    const [nameError, setNameError] = useState("");
+interface AddAnimesToCollectionModalProps {
+    collectionId: string | undefined;
+    children?: React.ReactChild | React.ReactNode;
+}
+
+const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) => {
+    const [show, setShow] = useState(false)
+    const handleShow = () => setShow(true)
     const { paginatedList, loading, error, page } = useTypedSelector(state => state.titles)
     const { getTitles, setTitlesPage } = useActions()
-    const pages: number[] = [];
     const makePages = useMemo(() => makePagesArr(), [paginatedList?.totalPages])
     const navigate = useNavigate()
+    const [animesIds, setAnimesIds] = useState<string[]>([])
+    const _collectionIds: string[] = []
+    const { getCollectionDetails } = useActions()
+
+
+    useEffect(() => {
+        if (props.collectionId !== undefined) {
+            _collectionIds.push(props.collectionId)
+        }
+    }, []);
+
+
 
     const functionOnClick = (item: BriefTitleVM) => {
-        navigate(`/animes/${item?.id}`)
+        if (item.id !== undefined) {
+            setAnimesIds([...animesIds, item.id])
+        }
     }
 
-    const addTitles = async (details: AddTitlesInCollectionsDto) => {
-        await apiClient.titles(details);
+    const handleClose = () => {
+        setShow(false)
+        setAnimesIds([])
+    }
+
+
+    useEffect(() => {
+        console.log("details", animesIds);
+    }, [animesIds]);
+
+    const addTitles = async () => {
+        console.log(_collectionIds);
+        console.log(animesIds);
+        // "CollectionsIds": ["b8a763cc-36d7-4f7b-94c5-cf73665d952f"],
+        // "AnimeTitlesIds": ["8acfbba6-8247-4358-b14a-5558102637fd"]
+        await apiClient.titles({ collectionsIds: ["b8a763cc-36d7-4f7b-94c5-cf73665d952f"], animeTitlesIds: animesIds });
+        getCollectionDetails("b8a763cc-36d7-4f7b-94c5-cf73665d952f", 1, 10)
     }
 
     function makePagesArr() {
@@ -89,7 +119,13 @@ const AddAnimesToCollectionModal = () => {
                                 <Button variant="secondary" onClick={handleClose}>
                                     Закрыть
                                 </Button>
-                                <Button type="submit" variant="primary" onClick={() => { handleClose(); }}>
+                                <Button
+                                    type="submit"
+                                    variant="primary"
+                                    onClick={() => {
+                                        addTitles();
+                                        handleClose();
+                                    }}>
                                     Добавить
                                 </Button>
                             </div>

@@ -12,7 +12,6 @@ interface AnimeListProps {
 }
 
 const AnimeList: FC<AnimeListProps> = (props): ReactElement => {
-    const navigate = useNavigate()
 
     return (
         <div>
