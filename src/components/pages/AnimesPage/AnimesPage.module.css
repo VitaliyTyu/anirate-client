@@ -1,0 +1,4 @@
+.animesPage{
+   display: flex;
+   flex-direction: column;
+}

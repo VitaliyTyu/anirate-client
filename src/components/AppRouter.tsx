@@ -3,7 +3,6 @@ import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/context';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import ExactAnimePage from './pages/ExactAnimePage/ExactAnimePage';
-import StartPage from './pages/StartPage';
 import { privateRoutes, publicRoutes } from '../router/routes';
 
 const AppRouter = () => {

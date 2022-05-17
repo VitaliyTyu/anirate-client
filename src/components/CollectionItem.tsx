@@ -30,7 +30,7 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
         >
             <div>{props.collection?.name}</div>
             {/* <div><img src={imgPath} /></div> */}
-            <div><img src={"https://shikimori.one/" + props.collection?.image?.preview} /></div>
+           <div><img src={"https://shikimori.one/" + props.collection?.image?.preview} /></div>
 
         </div>
     );

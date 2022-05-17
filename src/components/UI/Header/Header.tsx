@@ -18,37 +18,34 @@ const Header = () => {
                         <Navbar.Brand >
                             AniRate
                         </Navbar.Brand>
-                    </Link>
-                    <div>
-                        {isAuth
-                            ?
-                            <Button onClick={() => { logout(); navigate("/") }}>
-                                Выйти
-                            </Button>
-                            :
-                            <Button onClick={() => navigate("/login")}>
-                                Войти
-                            </Button>
-                        }
-
-                    </div>
+                    </Link>                   
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
 
                             <form className="d-flex">
-                                <input className="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" />
-                                <button className="btn btn-outline-success" type="submit">Поиск</button>
+                                <input className="form-control ms-5" type="search" placeholder="Поиск" aria-label="Search" />
+                                <button className="btn btn-outline-success ms-1" type="submit">Поиск</button>
                             </form>
-
-                            <NavDropdown title="Аккаунт" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Войти</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Регистрация</NavDropdown.Item>
-                            </NavDropdown>
+                                                      
 
                         </Nav>
                     </Navbar.Collapse>
+
+                    <div className='btn-wrapper-end'>
+                                {isAuth
+                                    ?
+                                    <Button onClick={() => { logout(); navigate("/") }}>
+                                        Выйти
+                                    </Button>
+                                    :
+                                    <Button onClick={() => navigate("/login")}>
+                                        Войти
+                                    </Button>
+                                }
+
+                            </div>  
                 </Container>
             </Navbar>
         </div>

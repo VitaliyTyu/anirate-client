@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { BriefTitleVM } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import AnimeList from '../../AnimeList';
+import AnimeList from '../../UI/AnimeList/AnimeList';
+import css from "./AnimesPage.module.css"
 
 const AnimesPage = () => {
     const { paginatedList, loading, error, page } = useTypedSelector(state => state.titles)
@@ -43,7 +44,7 @@ const AnimesPage = () => {
     // }
 
     return (
-        <div>
+        <div className={css.animesPage}>
             <div style={{ display: "flex" }}>
                 {makePages.map(p =>
                     <div

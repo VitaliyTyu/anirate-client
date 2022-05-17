@@ -10,7 +10,7 @@ import SlidePrevButton from './SlidePrevButton';
 // Import Swiper styles
 import 'swiper/css';
 import { Link, useNavigate } from 'react-router-dom';
-import AnimeItem from '../../AnimeItem';
+import AnimeItem from '../AnimeItem/AnimeItem';
 
 const Slider: FC = (): ReactElement => {
     const { paginatedList, loading, error } = useTypedSelector(state => state.titles)
@@ -35,7 +35,7 @@ const Slider: FC = (): ReactElement => {
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                 spaceBetween={40}
 
-                slidesPerView={3}
+                slidesPerView={6}
                 loop={true}
             >
                 <div className={css.card}>
