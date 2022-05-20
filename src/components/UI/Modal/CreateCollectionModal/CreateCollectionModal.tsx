@@ -1,8 +1,9 @@
 import React, { FC, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { Client, CreateCollectionDto } from '../../../api/api';
-import { useActions } from '../../../hooks/useActions';
+import { Client, CreateCollectionDto } from '../../../../api/api';
+import { useActions } from '../../../../hooks/useActions';
+import css from '../CreateCollectionModal/CreateCollectionModal.module.css'
 
 const apiClient = new Client('https://localhost:5001');
 
@@ -48,10 +49,12 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
 
     return (
         <div>
-            <Button variant="primary" onClick={handleShow}>
-                Создать коллекцию
+            <Button className={css.button}
+                                    onClick={handleShow} 
+                                    variant="outline-dark" size="lg"
+                                >
+                                    Создать коллекцию
             </Button>
-
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Создание коллекции</Modal.Title>
@@ -75,7 +78,7 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
                                             {nameError}
                                         </small>
 
-                                        <div style={{ display: "flex", marginTop: 20 }}>
+                                        <div style={{ display: "flex", margin: "20 auto", justifyContent:'space-between' }}>
                                             <Button variant="secondary" onClick={handleClose}>
                                                 Закрыть
                                             </Button>

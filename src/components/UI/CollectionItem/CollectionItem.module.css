@@ -36,7 +36,7 @@
 }
 @media  screen and (max-width: 800px) {
     .detailsAnim{
-        visibility: hidden;
+        display: none;
     }
 }
 
@@ -48,3 +48,4 @@
     margin-top: 25px;
     margin-bottom: 15px;
 }
+

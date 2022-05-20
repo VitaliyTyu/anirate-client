@@ -77,7 +77,7 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Добвление аниме</Modal.Title>
+                    <Modal.Title>Добавление аниме</Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
                     <div className="App">

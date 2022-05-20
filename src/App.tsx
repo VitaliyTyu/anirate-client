@@ -5,6 +5,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import AppRouter from "./components/AppRouter";
 import { useEffect, useState } from "react";
 import { AuthContext } from "./context/context";
+import css from '../src/styles/App.module.css'
 
 const App = () => {
     const [isAuth, setIsAuth] = useState(false);
@@ -20,17 +21,29 @@ const App = () => {
     }, [localStorage.getItem("auth")])
 
     return (
-        <AuthContext.Provider value={{
-            isAuth,
-            setIsAuth,
-            isLoading,
-        }}>
-            <BrowserRouter>
-                <Header />
-                <AppRouter />
-                <Footer />
-            </BrowserRouter>
-        </AuthContext.Provider>
+        <div className={css.all}>
+            <AuthContext.Provider value={{
+                isAuth,
+                setIsAuth,
+                isLoading,
+            }}>
+                
+                <BrowserRouter>
+                <div className={css.mainBody}>
+                    <div className={css.header}> 
+                        <Header />
+                    </div>
+                    <div className={css.mainContent}>
+                        <AppRouter />
+                    </div>
+                    <div className={css.footer}>
+                        <Footer />
+                    </div>
+                </div>
+                </BrowserRouter>
+                
+            </AuthContext.Provider>
+        </div>
     );
 };
 
