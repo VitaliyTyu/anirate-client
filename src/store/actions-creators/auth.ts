@@ -15,8 +15,6 @@ export const login = (email: string, password: string) => {
             await apiClient.login({ password: password, username: email });
 
             localStorage.setItem('auth', 'true')
-            console.log(localStorage.getItem('auth'));
-
 
             dispatch({
                 type: AuthActionTypes.LOGIN_SUCCESS,
@@ -32,6 +30,38 @@ export const login = (email: string, password: string) => {
         }
     }
 }
+
+
+export const register = (email: string, password: string, confirmPassword: string) => {
+    return async (dispatch: Dispatch<AuthAction>) => {
+        try {
+            dispatch({
+                type: AuthActionTypes.REGISTER
+            })
+
+            await apiClient.register({ password: password, username: email, confirmPassword: confirmPassword });
+
+            localStorage.setItem('auth', 'true')
+
+            dispatch({
+                type: AuthActionTypes.REGISTER_SUCCESS,
+            })
+        } catch (e) {
+            let msg = "Ошибка при регистрации пользователя";
+            if (e instanceof Error) {
+                console.log(e.message);
+                msg = e.message;
+            }
+            localStorage.setItem('auth', 'false')
+
+            dispatch({
+                type: AuthActionTypes.REGISTER_ERROR,
+                payload: msg,
+            })
+        }
+    }
+}
+
 
 export const logout = () => {
 
