@@ -16,24 +16,25 @@ const CollectionsPage = () => {
 
     function makePagesArr() {
         let arr: number[] = []
-        let list = paginatedList?.totalPages ?? 1
-        if (paginatedList !== undefined) {
-            for (let i = 0; i < list; i++) {
-                arr.push(i + 1)
-            }
+        let len = paginatedList?.totalPages ?? 0
+        for (let i = 0; i < len; i++) {
+            arr.push(i + 1)
         }
 
         return arr;
     }
 
+
+    useEffect(() => {
+        setCollectionsPage(1);
+        getCollections(1, 10)
+    }, []);
+
+
     useEffect(() => {
         getCollections(page, 10)
     }, [page]);
 
-
-    // if (loading) {
-    //     return <h1>Идет загрузка...</h1>
-    // }
 
     if (error) {
         return <h1>{error}</h1>

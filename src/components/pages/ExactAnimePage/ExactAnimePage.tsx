@@ -26,9 +26,6 @@ const ExactAnimePage = () => {
         }
     }, []);
 
-    // if (loading) {
-    //     return <h1>Идет загрузка...</h1>
-    // }
 
     if (error) {
         return <h1>{error}</h1>
@@ -38,37 +35,37 @@ const ExactAnimePage = () => {
 
     return (
         <div className={css.animepages}>
-            <div className={css.box1}>  
+            <div className={css.box1}>
                 <div className={css.animeInfo}>
-                    <div className={css.info}>                                         
+                    <div className={css.info}>
                         <div className={css.leftside} >
                             <div className={css.title}>{titleDetails?.russian}</div>
                             <div className={css.title}>
-                                <img src={"https://shikimori.one/" + titleDetails?.image?.original} />  
-                            </div>                    
+                                <img src={"https://shikimori.one/" + titleDetails?.image?.original} />
+                            </div>
                         </div>
-                        
-                        <div className={css.rightside}>    
-                            <div className={css.details}>Рейтинг: {titleDetails?.score}</div> 
-                            <div className={css.details}>Эпизоды: {titleDetails?.episodes}</div> 
+
+                        <div className={css.rightside}>
+                            <div className={css.details}>Рейтинг: {titleDetails?.score}</div>
+                            <div className={css.details}>Эпизоды: {titleDetails?.episodes}</div>
                             <div className={css.genre}>
                                 <div >Жанры: </div>
-                                {titleDetails?.genres?.map((genre) =>(
-                                    <div style = {{marginLeft: '5px'}}>{genre.russian}</div>
-                                ))}                                           
+                                {titleDetails?.genres?.map((genre) => (
+                                    <div style={{ marginLeft: '5px' }}>{genre.russian}</div>
+                                ))}
                             </div>
-                            
-                           
+
+
                             <div>Описание:</div>
-                            <div className={css.descript} dangerouslySetInnerHTML={createMarkup()} />              
-                        </div>                   
+                            <div className={css.descript} dangerouslySetInnerHTML={createMarkup()} />
+                        </div>
                     </div>
-                    
-                    <div className={css.buttonsElems}>                        
-                        <a href='/#' className={css.buttonStart}>Добавить в коллекцию</a>                                        
-                    </div>         
+
+                    <div className={css.buttonsElems}>
+                        <a href='/#' className={css.buttonStart}>Добавить в коллекцию</a>
+                    </div>
                 </div>
-            </div> 
+            </div>
         </div>
     );
 };

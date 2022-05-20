@@ -1,7 +1,7 @@
-import {Client} from "../../api/api";
-import {Dispatch} from "redux";
-import {TitleDetailsAction, TitleDetailsActionTypes} from "../../types/titleDetails";
-import {TitlesAction, TitlesActionTypes} from "../../types/titles";
+import { Client } from "../../api/api";
+import { Dispatch } from "redux";
+import { TitleDetailsAction, TitleDetailsActionTypes } from "../../types/titleDetails";
+import { TitlesAction, TitlesActionTypes } from "../../types/titles";
 
 const apiClient = new Client('https://localhost:5001');
 
@@ -31,6 +31,6 @@ export const getTitleDetails = (id: string | undefined) => {
     }
 }
 
-export function setCurrentTitleDetails(id: string | undefined): TitleDetailsAction {
-    return {type: TitleDetailsActionTypes.SET_CURRENT_TITLE_DETAILS, payload: id}
-}
+// export function setCurrentTitleDetails(id: string | undefined): TitleDetailsAction {
+//     return {type: TitleDetailsActionTypes.SET_CURRENT_TITLE_DETAILS, payload: id}
+// }

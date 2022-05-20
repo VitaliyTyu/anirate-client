@@ -19,6 +19,7 @@ const CollectionsList: FC<CollectionsListProps> = (props): ReactElement => {
         <div className={css.collectionList}>
             {props.paginatedList?.items?.map((collection => (
                 <CollectionItem
+                    key={collection?.id}
                     clickFunction={() => navigate(`/collections/${collection?.id}`)}
                     collection={collection}
                 />

@@ -14,16 +14,16 @@ import AnimeItem from '../AnimeItem/AnimeItem';
 
 const Slider: FC = (): ReactElement => {
     const { paginatedList, loading, error } = useTypedSelector(state => state.titles)
-    const { getTitles, setTitlesPage, setCurrentTitleDetails } = useActions()
+    const { getTitles, setTitlesPage } = useActions()
     const navigate = useNavigate()
 
     useEffect(() => {
-        getTitles(1, 20)
+        getTitles(1, 50)
     }, []);
 
-    if (loading) {
-        return <h1>Идет загрузка...</h1>
-    }
+    // if (loading) {
+    //     return <h1>Идет загрузка...</h1>
+    // }
 
     if (error) {
         return <h1>{error}</h1>
@@ -33,39 +33,30 @@ const Slider: FC = (): ReactElement => {
         <div className={css.intro}>
             <h1>ПОПУЛЯРНЫЕ АНИМЕ</h1>
             <div>
-            <Swiper
-                modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-                spaceBetween={40}
+                <Swiper
+                    modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+                    spaceBetween={40}
 
-                slidesPerView={6}
-                loop={true}
-                autoplay={{delay: 2000}}
-            >
-                <div className={css.swiper}>
-                    {paginatedList?.items?.map((title, index) => (
-                        <SwiperSlide>
-                            <div
-                                key={title.id}
-                                
-                                onClick={() => setCurrentTitleDetails(title.id)}
-                            >
-                                <AnimeItem title={title} clickFunction={() => navigate(`/animes/${title?.id}`)} />
-                                {/* <Link to="/title">
-
-                                    <div className={css.card__inner}>
-                                        <div className={css.card__img}>
-                                            <div className={css.card__name} >{index + 1}</div>
-                                            <img src={"https://shikimori.one/" + title.image?.original} />
-                                            <div className={css.card__text}>{title.russian} и его счет {title.score} а его номер {index + 1}</div>
-                                        </div>
-                                    </div>
-                                </Link> */}
-
-                            </div>
-                        </SwiperSlide>
-                    ))}
-                </div>           
-            </Swiper >
+                    slidesPerView={6}
+                    loop={true}
+                    autoplay={{ delay: 2000 }}
+                >
+                    <div className={css.swiper}>
+                        {paginatedList?.items?.map((title, index) => (
+                            <SwiperSlide>
+                                <div
+                                    key={title.id}
+                                    onClick={() => navigate(`/animes/${title?.id}`)}
+                                >
+                                    <AnimeItem
+                                        key={title.id}
+                                        title={title}
+                                        clickFunction={() => navigate(`/animes/${title?.id}`)} />
+                                </div>
+                            </SwiperSlide>
+                        ))}
+                    </div>
+                </Swiper >
             </div>
         </div >
     );

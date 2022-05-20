@@ -7,7 +7,7 @@ import AnimeList from '../../UI/AnimeList/AnimeList';
 import css from "./AnimesPage.module.css"
 
 const AnimesPage = () => {
-    const { paginatedList, loading, error, page } = useTypedSelector(state => state.titles)
+    const { paginatedList, error, page } = useTypedSelector(state => state.titles)
     const { getTitles, setTitlesPage } = useActions()
     const pages: number[] = [];
     const makePages = useMemo(() => makePagesArr(), [paginatedList?.totalPages])
@@ -19,11 +19,9 @@ const AnimesPage = () => {
 
     function makePagesArr() {
         let arr: number[] = []
-        let list = paginatedList?.totalPages ?? 1
-        if (paginatedList !== undefined) {
-            for (let i = 0; i < list; i++) {
-                arr.push(i + 1)
-            }
+        let len = paginatedList?.totalPages ?? 1
+        for (let i = 0; i < len; i++) {
+            arr.push(i + 1)
         }
 
         return arr;
@@ -32,17 +30,18 @@ const AnimesPage = () => {
 
     useEffect(() => {
         getTitles(page, 20)
-        console.log("get");
     }, [page]);
+
+    useEffect(() => {
+        setTitlesPage(1);
+        getTitles(1, 20)
+    }, []);
 
 
     if (error) {
         return <h1>{error}</h1>
     }
 
-    // if (loading) {
-    //     return <h1>Идет загрузка...</h1>
-    // }
 
     return (
         <div className={css.animesPage}>
