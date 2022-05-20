@@ -9,8 +9,13 @@ import { AuthContext } from "./context/context";
 const App = () => {
     const [isAuth, setIsAuth] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    //const { isAuth, } = useTypedSelector(state => state.auth)
-    //const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (localStorage.getItem('auth') === "true") {
+            setIsAuth(true)
+        }
+        setIsLoading(false)
+    }, [])
 
     useEffect(() => {
         if (localStorage.getItem('auth') === "true") {

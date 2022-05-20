@@ -7,7 +7,7 @@ import { privateRoutes, publicRoutes } from '../router/routes';
 
 const AppRouter = () => {
     //const { isAuth, isLoading } = useContext(AuthContext);
-    const { isAuth, } = useTypedSelector(state => state.auth)
+    const { isAuth } = useTypedSelector(state => state.auth)
 
     useEffect(() => {
         console.log(isAuth);

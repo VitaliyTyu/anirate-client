@@ -578,7 +578,12 @@ export class Client extends ClientBase {
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
+                localStorage.setItem('token', _responseText ? _responseText : '');
                 return;
+            });
+        } else if (status === 409) {
+            return response.text().then((_responseText) => {
+                return throwException("Имя занято", status, _responseText, _headers);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {

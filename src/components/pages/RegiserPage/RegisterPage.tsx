@@ -1,15 +1,17 @@
-import React, { FC, ReactElement, useContext, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import { useActions } from "../../../hooks/useActions";
+import React, { useState } from 'react';
+import { useActions } from '../../../hooks/useActions';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { register } from '../../../store/actions-creators/auth';
 
-const LoginPage: FC = (): ReactElement => {
-    const { error } = useTypedSelector(state => state.auth)
-    const { login } = useActions()
+const RegisterPage = () => {
+    const { register } = useActions()
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [email, setEmail] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [emailError, setEmailError] = useState("");
+    const { error } = useTypedSelector(state => state.auth)
+
 
     const handleValidation = () => {
         let formIsValid = true;
@@ -34,13 +36,24 @@ const LoginPage: FC = (): ReactElement => {
             formIsValid = true;
         }
 
+        if (password !== confirmPassword) {
+            formIsValid = false;
+            setPasswordError(
+                "Пароли не совпадают"
+            );
+            return false;
+        } else {
+            setPasswordError("");
+            formIsValid = true;
+        }
+
         return formIsValid;
     };
 
     const loginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         handleValidation();
-        login(email, password)
+        register(email, password, confirmPassword)
     };
 
     if (error) {
@@ -83,6 +96,20 @@ const LoginPage: FC = (): ReactElement => {
                                 </small>
                             </div>
 
+                            <div className="form-group">
+                                <label>Повторите пароль</label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="exampleInputPassword1"
+                                    placeholder="Пароль"
+                                    onChange={(event) => setConfirmPassword(event.target.value)}
+                                />
+                                <small id="passworderror" className="text-danger form-text">
+                                    {passwordError}
+                                </small>
+                            </div>
+
                             <button
                                 style={{ marginTop: 10 }}
                                 type="submit"
@@ -95,5 +122,6 @@ const LoginPage: FC = (): ReactElement => {
             </div>
         </div>
     );
-}
-export default LoginPage;
+};
+
+export default RegisterPage;

@@ -14,22 +14,22 @@ const Header = () => {
         <div style={{ backgroundColor: '#fcc0f2' }}>
             <Navbar expand="lg">
                 <Container>
-                    
-                    <Link  style = {{textDecoration: 'none'}} to="/">
-                   
+
+                    <Link style={{ textDecoration: 'none' }} to="/">
+
                         <Navbar.Brand >
                             AniRate
                         </Navbar.Brand>
-                        
-                    </Link>                   
-                                       
+
+                    </Link>
+
                     <Nav className="me-auto">
                         <form className="d-flex">
                             <input className="form-control ms-5" type="search" placeholder="Поиск" aria-label="Search" />
                             <Button variant="outline-dark" className="ms-1">Поиск</Button>
-                        </form>                                                      
+                        </form>
                     </Nav>
-                    
+
 
                     <div className='btn-wrapper-end'>
                         {isAuth
@@ -38,11 +38,21 @@ const Header = () => {
                                 Выйти
                             </Button>
                             :
-                            <Button onClick={() => navigate("/login")} variant="outline-dark" >
-                                Войти
-                            </Button>
+                            <div>
+                                <Button
+                                    onClick={() => navigate("/login")} variant="outline-dark"
+                                    style={{ marginRight: 10 }}
+                                >
+                                    Войти
+                                </Button>
+                                <Button
+                                    onClick={() => navigate("/register")} variant="outline-dark"
+                                >
+                                    Регистрация
+                                </Button>
+                            </div>
                         }
-                    </div>  
+                    </div>
                 </Container>
             </Navbar>
         </div>

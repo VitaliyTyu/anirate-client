@@ -18,8 +18,6 @@ export enum AuthActionTypes {
     REGISTER_ERROR = "REGISTER_ERROR",
 
     LOGOUT = "LOGOUT",
-    LOGOUT_SUCCESS = "LOGOUT_SUCCESS",
-    LOGOUT_ERROR = "LOGOUT_ERROR",
 }
 
 
@@ -55,14 +53,6 @@ export interface LogoutAction {
     type: AuthActionTypes.LOGOUT;
 }
 
-export interface LogoutActionSuccess {
-    type: AuthActionTypes.LOGOUT_SUCCESS;
-}
-
-export interface LogoutActionError {
-    type: AuthActionTypes.LOGOUT_ERROR;
-    payload: string | null;
-}
 
 
 export type AuthAction = LoginAction
@@ -71,6 +61,4 @@ export type AuthAction = LoginAction
     | RegisterAction
     | RegisterActionSuccess
     | RegisterActionError
-    | LogoutAction
-    | LogoutActionSuccess
-    | LogoutActionError;
+    | LogoutAction;
