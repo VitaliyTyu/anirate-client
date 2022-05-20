@@ -1,53 +1,59 @@
-.intro{
-    display: flex;    
-    flex-direction: column;    
-    justify-content: space-evenly;    
-    width: 100%;  
-    height: auto;/*ЗАнимает весь экран*/    
+.intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+    height: auto;
+    /*ЗАнимает весь экран*/
     /*background: url("../../images/intro.jpg") center no-repeat;  */
-    -moz-background-size: 100%; /* Firefox 3.6+ */
-    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
-    -o-background-size: 100%; /* Opera 9.6+ */
-    background-size: 100%; /* Современные браузеры */
-  }
+    -moz-background-size: 100%;
+    /* Firefox 3.6+ */
+    -webkit-background-size: 100%;
+    /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%;
+    /* Opera 9.6+ */
+    background-size: 100%;
+    /* Современные браузеры */
+}
 
-.container{
+.container {
     width: 100%;
     max-width: 1230px;
     padding: 0 15px;
-    margin: 0 auto; /*расположение по центру*/
-  }
-  
-  .intro_inner{
+    margin: 0 auto;
+    /*расположение по центру*/
+}
+
+.intro_inner {
     width: 100%;
     max-width: 880px;
     margin: 0 auto;
-    text-align: center;    
-  }
+    text-align: center;
+}
 
-  .intro_title{
+.intro_title {
     font-size: calc(40px + 30 * (100vw / 1280));
     font-weight: 700;
     text-transform: uppercase;
     margin: 50px auto;
     line-height: 1;
-  
-  }
 
-  .buttons{
+}
+
+.buttons {
     display: flex;
     justify-content: space-between;
-    flex-direction: row; 
+    flex-direction: row;
 
-  }
+}
 
- .button{
-   width: 60%;
-   height: 80px;
-   min-width: 30px;  
-   margin-top: 30px;
-   margin-left: 15px;
-   margin-right: 15px;
-   object-fit: cover;
-   font-size: calc(5px + 20 * (100vw / 1280));
- } 
+.button {
+    width: 60%;
+    height: 80px;
+    min-width: 30px;
+    margin-top: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
+    object-fit: cover;
+    font-size: 20px;
+}
