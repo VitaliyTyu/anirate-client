@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import CollectionsList from '../../UI/CollectionList/CollectionsList';
-import CreateCollectionModal from '../../UI/Modal/CreateCollectionModal';
+import CreateCollectionModal from '../../UI/Modal/CreateCollectionModal/CreateCollectionModal';
 import css from "./CollectionsPage.module.css"
 
 
