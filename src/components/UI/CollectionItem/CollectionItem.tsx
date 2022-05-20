@@ -25,27 +25,44 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
             setImgPath("https://shikimori.one/" + props.collection?.image?.preview)
         }
     }, [])
+    
+    const secondHandle = (e: { stopPropagation: () => void; }) => {
+        e.stopPropagation();
+      }
 
     return (
-            <div  className={css.collection} > 
+            <div  className={css.collection} onClick={() => props.clickFunction()}> 
                 <Card border="dark" className={css.collectionView} >                 
-                    <div className={css.collectionItem} onClick={() => props.clickFunction()} key={props.collection?.id}>
+                    <div className={css.collectionItem}  key={props.collection?.id}>
                         <Card.Img  src={"https://shikimori.one/" + props.collection?.image?.preview}/>
-                        <Card.Body className={css.details} >
+                        <Card.Body className={css.detailsCol} >
                             <Card.Title>{props.collection?.name}</Card.Title>
                             <Card.Text>
                                 ЧТО_НИБУДЬ
                             </Card.Text>                    
                         </Card.Body>
                     
-                    <Card.Body className={css.details} >
+                    <Card.Body className={css.detailsAnim} >
                         <Card.Title>АНИМЕ:</Card.Title>
                         <Card.Text>
                             список аниме
                         </Card.Text>                    
                     </Card.Body>
+                    <div onClick={secondHandle} >
+                    <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                Действия
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu variant = 'dark'>
+                                <Dropdown.Item href="#/action-1">Переименовать</Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">Удалить</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        </div>
                     </div>
-                    <div className={css.buttonPlace}>
+                    {/* <div className={css.buttonPlace}>
                         <Dropdown>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
                                 Действия
@@ -57,7 +74,7 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
                                 <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
-                    </div>
+                    </div> */}
                 </Card>
                  
             </div>

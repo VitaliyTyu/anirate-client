@@ -1,5 +1,5 @@
 .intro{   
-  width: 100%;    
+  width: 80%;    
   -moz-background-size: 100%; /* Firefox 3.6+ */
   -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
   -o-background-size: 100%; /* Opera 9.6+ */
@@ -7,19 +7,26 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  
 }
 
 .intro h1{
-  margin-bottom: 50px;
+  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
+  
 }
 
+
 .swiper{
-  margin-left: auto;
-  margin-right: auto;
-  padding: 50px;
+  
+  
+  display: flex;
+  justify-content: center;
   
 }
 

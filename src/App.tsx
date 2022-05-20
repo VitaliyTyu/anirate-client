@@ -25,7 +25,7 @@ const App = () => {
             setIsAuth,
             isLoading,
         }}>
-            <BrowserRouter>
+            <BrowserRouter>             
                 <Header />
                 <AppRouter />
                 <Footer />

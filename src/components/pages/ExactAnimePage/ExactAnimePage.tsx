@@ -37,8 +37,7 @@ const ExactAnimePage = () => {
 
 
     return (
-        <div className={css.animepages}>
-            <div className={css.box1}>  
+        <div className={css.animepages}>  
                 <div className={css.animeInfo}>
                     <div className={css.info}>                                         
                         <div className={css.leftside} >
@@ -68,7 +67,6 @@ const ExactAnimePage = () => {
                         <a href='/#' className={css.buttonStart}>Добавить в коллекцию</a>                                        
                     </div>         
                 </div>
-            </div> 
         </div>
     );
 };
