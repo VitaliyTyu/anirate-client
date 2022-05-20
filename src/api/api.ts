@@ -62,26 +62,26 @@ export class Client extends ClientBase {
     }
 
     /**
-    * получить детали коллекции с пагинацией тайтлов
-    * @param id (optional) 
-    * @param animePage (optional) 
-    * @param animeSize (optional) 
-    * @return Success
-    */
-    collectionDetails(id: string | undefined, animePage: number | undefined, animeSize: number | undefined): Promise<CollectionDetailsVM> {
+     * получить детали коллекции с пагинацией тайтлов
+     * @param id (optional) 
+     * @param page (optional) 
+     * @param size (optional) 
+     * @return Success
+     */
+    collectionDetails(id: string | undefined, page: number | undefined, size: number | undefined): Promise<CollectionDetailsVM> {
         let url_ = this.baseUrl + "/api/AnimeCollections/CollectionDetails?";
         if (id === null)
             throw new Error("The parameter 'id' cannot be null.");
         else if (id !== undefined)
             url_ += "id=" + encodeURIComponent("" + id) + "&";
-        if (animePage === null)
-            throw new Error("The parameter 'animePage' cannot be null.");
-        else if (animePage !== undefined)
-            url_ += "animePage=" + encodeURIComponent("" + animePage) + "&";
-        if (animeSize === null)
-            throw new Error("The parameter 'animeSize' cannot be null.");
-        else if (animeSize !== undefined)
-            url_ += "animeSize=" + encodeURIComponent("" + animeSize) + "&";
+        if (page === null)
+            throw new Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        if (size === null)
+            throw new Error("The parameter 'size' cannot be null.");
+        else if (size !== undefined)
+            url_ += "size=" + encodeURIComponent("" + size) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -454,31 +454,26 @@ export class Client extends ClientBase {
     }
 
     /**
-     * Получение всех аниме в конкретной коллекции с пагинацией аниме
-     * @param collectionId (optional)
-     * @param userId (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
-     * @return Success
-     */
-    titlesFromCollection(collectionId: string | undefined, userId: string | undefined, pageNumber: number | undefined, pageSize: number | undefined): Promise<TitlesListVM> {
+      * Получение всех аниме в конкретной коллекции с пагинацией аниме
+      * @param collectionId (optional) 
+      * @param page (optional) 
+      * @param size (optional) 
+      * @return Success
+      */
+    titlesFromCollection(collectionId: string | undefined, page: number | undefined, size: number | undefined): Promise<BriefTitleVMPaginatedList> {
         let url_ = this.baseUrl + "/api/AnimeTitles/TitlesFromCollection?";
         if (collectionId === null)
             throw new Error("The parameter 'collectionId' cannot be null.");
         else if (collectionId !== undefined)
-            url_ += "CollectionId=" + encodeURIComponent("" + collectionId) + "&";
-        if (userId === null)
-            throw new Error("The parameter 'userId' cannot be null.");
-        else if (userId !== undefined)
-            url_ += "UserId=" + encodeURIComponent("" + userId) + "&";
-        if (pageNumber === null)
-            throw new Error("The parameter 'pageNumber' cannot be null.");
-        else if (pageNumber !== undefined)
-            url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
-        if (pageSize === null)
-            throw new Error("The parameter 'pageSize' cannot be null.");
-        else if (pageSize !== undefined)
-            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
+            url_ += "collectionId=" + encodeURIComponent("" + collectionId) + "&";
+        if (page === null)
+            throw new Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        if (size === null)
+            throw new Error("The parameter 'size' cannot be null.");
+        else if (size !== undefined)
+            url_ += "size=" + encodeURIComponent("" + size) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -495,13 +490,13 @@ export class Client extends ClientBase {
         });
     }
 
-    protected processTitlesFromCollection(response: Response): Promise<TitlesListVM> {
+    protected processTitlesFromCollection(response: Response): Promise<BriefTitleVMPaginatedList> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
                 let result200: any = null;
-                result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as TitlesListVM;
+                result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as BriefTitleVMPaginatedList;
                 return result200;
             });
         } else if (status !== 200 && status !== 204) {
@@ -509,7 +504,7 @@ export class Client extends ClientBase {
                 return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<TitlesListVM>(null as any);
+        return Promise.resolve<BriefTitleVMPaginatedList>(null as any);
     }
 
     /**

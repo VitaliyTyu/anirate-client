@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { AddTitlesInCollectionsDto, BriefTitleVM, Client, BriefCollectionVM } from '../../../api/api';
+import { BriefTitleVM, Client, CollectionDetailsVM } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import AnimeList from '../AnimeList/AnimeList';
@@ -16,21 +16,19 @@ interface AddAnimesToCollectionModalProps {
 const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) => {
     const [show, setShow] = useState(false)
     const handleShow = () => setShow(true)
-    const { paginatedList, loading, error, page } = useTypedSelector(state => state.titles)
-    const { getTitles, setTitlesPage } = useActions()
-    const makePages = useMemo(() => makePagesArr(), [paginatedList?.totalPages])
-    const navigate = useNavigate()
+    const titlesState = useTypedSelector(state => state.titles)
+    const { getTitles, setTitlesPage, getCollectionDetails, setTitlesInCollectionPage } = useActions()
     const [animesIds, setAnimesIds] = useState<string[]>([])
-    const _collectionIds: string[] = []
-    const { getCollectionDetails } = useActions()
+    const makePages = useMemo(() => makePagesArr(), [titlesState?.paginatedList?.totalPages])
 
+    // const makePages = useMemo(() => makePagesArr(), [paginatedList?.totalPages])
+    // const navigate = useNavigate()
+    // const _collectionIds: string[] = []
 
-    useEffect(() => {
-        if (props.collectionId !== undefined) {
-            _collectionIds.push(props.collectionId)
-        }
-    }, []);
-
+    const handleClose = () => {
+        setShow(false)
+        setAnimesIds([])
+    }
 
 
     const functionOnClick = (item: BriefTitleVM) => {
@@ -39,49 +37,36 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
         }
     }
 
-    const handleClose = () => {
-        setShow(false)
-        setAnimesIds([])
-    }
-
-
-    useEffect(() => {
-        console.log("details", animesIds);
-    }, [animesIds]);
-
-    const addTitles = async () => {
-        console.log(_collectionIds);
-        console.log(animesIds);
-        // "CollectionsIds": ["b8a763cc-36d7-4f7b-94c5-cf73665d952f"],
-        // "AnimeTitlesIds": ["8acfbba6-8247-4358-b14a-5558102637fd"]
-        await apiClient.titles({ collectionsIds: ["b8a763cc-36d7-4f7b-94c5-cf73665d952f"], animeTitlesIds: animesIds });
-        getCollectionDetails("b8a763cc-36d7-4f7b-94c5-cf73665d952f", 1, 10)
-    }
-
     function makePagesArr() {
         let arr: number[] = []
-        let list = paginatedList?.totalPages ?? 1
-        if (paginatedList !== undefined) {
-            for (let i = 0; i < list; i++) {
-                arr.push(i + 1)
-            }
+        let len = titlesState?.paginatedList?.totalPages ?? 1
+        for (let i = 0; i < len; i++) {
+            arr.push(i + 1)
         }
 
         return arr;
     }
 
     useEffect(() => {
-        getTitles(page, 20)
-    }, [page]);
+        getTitles(1, 20)
+        setTitlesPage(1)
+    }, [])
 
-    if (error) {
-        return <h1>{error}</h1>
+
+    useEffect(() => {
+        getTitles(titlesState.page, 20)
+    }, [titlesState.page]);
+
+
+    const addTitles = async () => {
+        await apiClient.titles({ collectionsIds: [props.collectionId ?? ""], animeTitlesIds: animesIds });
+        getCollectionDetails(props.collectionId)
     }
 
 
-    // if (loading) {
-    //     return <h1>Идет загрузка...</h1>
-    // }
+    if (titlesState.error) {
+        return <h1>{titlesState.error}</h1>
+    }
 
 
     return (
@@ -103,7 +88,7 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
                                         <div
                                             onClick={() => setTitlesPage(p)}
                                             style={{
-                                                border: p === page ? "2px solid green" : "1px solid gray",
+                                                border: p === titlesState.page ? "2px solid green" : "1px solid gray",
                                                 padding: 10,
                                                 margin: 10,
                                             }}
@@ -112,7 +97,7 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
                                         </div>
                                     )}
                                 </div>
-                                <AnimeList paginatedList={paginatedList} clickFunction={functionOnClick} />
+                                <AnimeList paginatedList={titlesState?.paginatedList} clickFunction={functionOnClick} />
                             </div>
 
                             <div style={{ display: "flex", marginTop: 20 }}>

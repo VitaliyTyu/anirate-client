@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useContext, useEffect, useState } from 'react';
-import { BriefCollectionVM, BriefTitleVM, BriefTitleVMPaginatedList, Client } from "../../../api/api";
+import { BriefCollectionVM, BriefTitleVM, BriefTitleVMPaginatedList, Client, TitlesListVM } from "../../../api/api";
 import { useNavigate } from 'react-router-dom';
 import AnimeItem from '../AnimeItem/AnimeItem';
 import css from './AnimeList.module.css'
@@ -16,15 +16,19 @@ const AnimeList: FC<AnimeListProps> = (props): ReactElement => {
 
     return (
         <div>
-            
+
             <div >
-                <CardGroup className={css.animeList}> 
-                {props.paginatedList?.items?.map((title) => (
-                    <AnimeItem title={title} clickFunction={() => props.clickFunction(title)} />
-                ))}
-                 </CardGroup>
+                <CardGroup className={css.animeList}>
+                    {props.paginatedList?.items?.map((title) => (
+                        <AnimeItem
+                            key={title.id}
+                            title={title}
+                            clickFunction={() => props.clickFunction(title)}
+                        />
+                    ))}
+                </CardGroup>
             </div>
-            
+
         </div>
     );
 };

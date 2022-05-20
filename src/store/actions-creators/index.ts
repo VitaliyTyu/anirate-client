@@ -3,6 +3,8 @@ import * as TitleDetailsActionCreators from "./titleDetails";
 import * as CollectionsActionCreators from "./collections";
 import * as CollectionDetailsActionCreators from "./collectionDetails";
 import * as AuthActionCreators from "./auth";
+import * as TitlesFromCollectionActionCreators from "./titlesFromCollection";
+
 
 
 export default {
@@ -11,4 +13,5 @@ export default {
     ...AuthActionCreators,
     ...CollectionsActionCreators,
     ...CollectionDetailsActionCreators,
+    ...TitlesFromCollectionActionCreators,
 }

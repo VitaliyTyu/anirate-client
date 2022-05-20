@@ -4,6 +4,7 @@ import { titleDetailsReducer } from "./titleDetailsReducer";
 import { authReducer } from "./authReducer";
 import { collectionsReducer } from "./collectionsReducer";
 import { collectionDetailsReducer } from "./collectionDetails";
+import { titlesFromCollectionReducer } from "./titlesFromCollectionReducer";
 
 
 export const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ export const rootReducer = combineReducers({
     auth: authReducer,
     collections: collectionsReducer,
     collectionDetails: collectionDetailsReducer,
+    titlesFromCollection: titlesFromCollectionReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>
