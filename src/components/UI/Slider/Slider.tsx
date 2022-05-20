@@ -37,12 +37,38 @@ const Slider: FC = (): ReactElement => {
                     modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                     spaceBetween={40}
 
-                    slidesPerView={6}
+                    slidesPerView={5}
+                    breakpoints = {{
+                        0: {
+                            slidesPerView: 1,
+                            spaceBetween: 10
+                          },
+    
+                        580: {
+                          slidesPerView: 2,
+                          spaceBetween: 20
+                        },
+    
+                        880: {
+                          slidesPerView: 3,
+                          spaceBetween: 30
+                        },
+    
+                        1150: {
+                          slidesPerView: 4,
+                          spaceBetween: 40
+                        },
+    
+                        1800: {
+                            slidesPerView: 5,
+                            spaceBetween: 50
+                          }
+                    }}
                     loop={true}
-                    autoplay={{ delay: 2000 }}
+                    autoplay={{ delay: 2000, disableOnInteraction: false }}
                 >
                     <div className={css.swiper}>
-                        {paginatedList?.items?.map((title, index) => (
+                        {paginatedList?.items?.map((title) => (
                             <SwiperSlide>
                                 <div
                                     key={title.id}

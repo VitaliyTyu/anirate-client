@@ -9,6 +9,8 @@
 .footer {
     padding-top: 65px;  
     background-color: #fcc0f2;
+    display: flex;
+    align-self: flex-end;
   }
 
   .copyright {
