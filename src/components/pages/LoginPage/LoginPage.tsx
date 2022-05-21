@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useContext, useState } from "react";
+import React, { FC, ReactElement, useContext, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
@@ -12,59 +12,75 @@ const LoginPage: FC = (): ReactElement => {
     const [emailError, setEmailError] = useState("");
 
     const handleValidation = () => {
-        let formIsValid = true;
+        let nameIsValid = false;
+        let pwdIsValid = false;
 
         if (!email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
-            formIsValid = false;
+            nameIsValid = false;
             setEmailError("Адрес введен неверно");
-            return false;
         } else {
             setEmailError("");
-            formIsValid = true;
+            nameIsValid = true;
         }
 
+
         if (password.length < 4) {
-            formIsValid = false;
+            pwdIsValid = false;
             setPasswordError(
                 "Минимальная длина пароля - 4 символа"
             );
-            return false;
         } else {
             setPasswordError("");
-            formIsValid = true;
+            pwdIsValid = true;
         }
+
+        let formIsValid = nameIsValid && pwdIsValid;
 
         return formIsValid;
     };
 
     const loginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        handleValidation();
-        login(email, password)
+        if (handleValidation()) {
+            login(email, password)
+            console.log(error);
+        }
+
+        if (error !== null) {
+
+        }
     };
 
-    if (error) {
-        return <h1>{error}</h1>
-    }
+    useEffect(() => {
+        if (error !== null) {
+            setEmailError(error);
+            setPassword(error);
+        }
+    }, [error])
+
+
+    useEffect(() => {
+        setEmailError("");
+        setPassword("");
+    }, [])
+
 
     return (
         <div className="App">
             <div className="container">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-4">
-                        <form id="loginform" onSubmit={loginSubmit}>
+                        <form onSubmit={loginSubmit}>
                             <div className="form-group">
                                 <label>Адрес электронной почты</label>
                                 <input
                                     type="email"
                                     className="form-control"
-                                    id="EmailInput"
-                                    name="EmailInput"
                                     aria-describedby="emailHelp"
                                     placeholder="user@email.com"
                                     onChange={(event) => setEmail(event.target.value)}
                                 />
-                                <small id="emailHelp" className="text-danger form-text">
+                                <small className="text-danger form-text">
                                     {emailError}
                                 </small>
                             </div>
@@ -74,11 +90,10 @@ const LoginPage: FC = (): ReactElement => {
                                 <input
                                     type="password"
                                     className="form-control"
-                                    id="exampleInputPassword1"
-                                    placeholder="Пароль"
+                                    placeholder="password"
                                     onChange={(event) => setPassword(event.target.value)}
                                 />
-                                <small id="passworderror" className="text-danger form-text">
+                                <small className="text-danger form-text">
                                     {passwordError}
                                 </small>
                             </div>
@@ -87,7 +102,7 @@ const LoginPage: FC = (): ReactElement => {
                                 style={{ marginTop: 10 }}
                                 type="submit"
                                 className="btn btn-primary">
-                                Submit
+                                Войти
                             </button>
                         </form>
                     </div>

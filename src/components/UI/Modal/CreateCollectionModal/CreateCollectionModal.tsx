@@ -23,6 +23,7 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
 
     const createCollection = async (details: CreateCollectionDto) => {
         let collectionId = await apiClient.collection(details);
+        getCollections(props.page, props.size)
     }
 
     const handleValidation = () => {
@@ -40,20 +41,14 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
         return formIsValid;
     };
 
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        handleValidation();
-        console.log(`Создание коллекции ${name}`);
-        getCollections(props.page, props.size)
-    };
 
     return (
         <div>
             <Button className={css.button}
-                                    onClick={handleShow} 
-                                    variant="outline-dark" size="lg"
-                                >
-                                    Создать коллекцию
+                onClick={handleShow}
+                variant="outline-dark" size="lg"
+            >
+                Создать коллекцию
             </Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -64,30 +59,26 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
                         <div className="container">
                             <div className="row d-flex justify-content-center">
                                 <div className="col-md-4">
-                                    <form id="loginform" onSubmit={onSubmit}>
+                                    <div className="form-group">
+                                        <label>Название коллекции</label>
+                                        <input
+                                            placeholder="название"
+                                            onChange={(event) => setName(event.target.value)}
+                                        />
+                                    </div>
 
-                                        <div className="form-group">
-                                            <label>Название коллекции</label>
-                                            <input
-                                                placeholder="название"
-                                                onChange={(event) => setName(event.target.value)}
-                                            />
-                                        </div>
+                                    <small id="emailHelp" className="text-danger form-text">
+                                        {nameError}
+                                    </small>
 
-                                        <small id="emailHelp" className="text-danger form-text">
-                                            {nameError}
-                                        </small>
-
-                                        <div style={{ display: "flex", margin: "20 auto", justifyContent:'space-between' }}>
-                                            <Button variant="secondary" onClick={handleClose}>
-                                                Закрыть
-                                            </Button>
-                                            <Button type="submit" variant="primary" onClick={() => { handleClose(); createCollection({ name }) }}>
-                                                Создать
-                                            </Button>
-                                        </div>
-
-                                    </form>
+                                    <div style={{ display: "flex", margin: "20 auto", justifyContent: 'space-between' }}>
+                                        <Button variant="secondary" onClick={handleClose}>
+                                            Закрыть
+                                        </Button>
+                                        <Button type="submit" variant="primary" onClick={() => { handleClose(); createCollection({ name }) }}>
+                                            Создать
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -1,4 +1,4 @@
-import { Client } from "../../api/api";
+import { Client, LoginViewModel, RegisterViewModel } from "../../api/api";
 import { Dispatch } from "redux";
 import { AuthAction, AuthActionTypes } from "../../types/auth";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,14 @@ export const login = (email: string, password: string) => {
                 type: AuthActionTypes.LOGIN
             })
 
-            await apiClient.login({ password: password, username: email });
+            console.log("login");
+
+            let loginVM: LoginViewModel = {
+                emailAddress: email,
+                password: password,
+            }
+
+            let userInfo = await apiClient.login(loginVM);
 
             localStorage.setItem('auth', 'true')
 
@@ -32,15 +39,16 @@ export const login = (email: string, password: string) => {
 }
 
 
-export const register = (email: string, password: string, confirmPassword: string) => {
+export const register = (registerVm: RegisterViewModel) => {
     return async (dispatch: Dispatch<AuthAction>) => {
         try {
             dispatch({
                 type: AuthActionTypes.REGISTER
             })
 
-            await apiClient.register({ password: password, username: email, confirmPassword: confirmPassword });
+            console.log("register");
 
+            let userInfo = await apiClient.register(registerVm);
             localStorage.setItem('auth', 'true')
 
             dispatch({

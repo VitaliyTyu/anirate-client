@@ -5,7 +5,7 @@ import { BriefCollectionVM, BriefTitleVM } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import AnimeList from '../../UI/AnimeList/AnimeList';
-import AddAnimesToCollectionModal from '../../UI/Modal/AddAnimesToCollectionModal';
+import AddAnimesToCollectionModal from '../../UI/Modal/AddAnimesToCollectionModal/AddAnimesToCollectionModal';
 import css from './ExactCollectionPage.module.css'
 
 const ExactCollectionPage = () => {

@@ -1,83 +1,129 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { RegisterViewModel } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { register } from '../../../store/actions-creators/auth';
 
 const RegisterPage = () => {
     const { register } = useActions()
+    const { error } = useTypedSelector(state => state.auth)
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [email, setEmail] = useState("");
+    const [emailAddress, setEmailAddress] = useState("");
+    const [name, setName] = useState("");
+
+    const [nameError, setNameError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [emailError, setEmailError] = useState("");
-    const { error } = useTypedSelector(state => state.auth)
 
 
     const handleValidation = () => {
-        let formIsValid = true;
+        let nameIsValid = false;
+        let emailIsValid = false;
+        let pwdIsValid = false;
+        let isPwdConfirmed = false;
 
-        if (!email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
-            formIsValid = false;
-            setEmailError("Адрес введен неверно");
-            return false;
-        } else {
-            setEmailError("");
-            formIsValid = true;
+        setEmailError("");
+        setPasswordError("");
+        setNameError("");
+
+        if (name.length < 2) {
+            nameIsValid = false;
+            setNameError("Минимальная длина имени 2 символа");
+        } else if (name.length > 30) {
+            nameIsValid = false;
+            setNameError("Максимальная длина имени 30 символов");
+        } else if (name.length <= 30 && name.length >= 2) {
+            nameIsValid = true;
         }
 
-        if (password.length < 4) {
-            formIsValid = false;
-            setPasswordError(
-                "Минимальная длина пароля - 4 символа"
-            );
-            return false;
+        if (!emailAddress.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+            emailIsValid = false;
+            setEmailError("Адрес введен неверно");
         } else {
-            setPasswordError("");
-            formIsValid = true;
+            emailIsValid = true;
+        }
+
+
+        if (password.length < 4) {
+            pwdIsValid = false;
+            setPasswordError("Минимальная длина пароля 4 символа");
+        } else {
+            pwdIsValid = true;
         }
 
         if (password !== confirmPassword) {
-            formIsValid = false;
-            setPasswordError(
-                "Пароли не совпадают"
-            );
-            return false;
+            isPwdConfirmed = false;
+            setPasswordError("Пароли не совпадают");
         } else {
-            setPasswordError("");
-            formIsValid = true;
+            isPwdConfirmed = true;
         }
+
+        let formIsValid = nameIsValid && pwdIsValid && isPwdConfirmed && emailIsValid;
 
         return formIsValid;
     };
 
-    const loginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+    const registerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        handleValidation();
-        register(email, password, confirmPassword)
+
+        if (handleValidation()) {
+            let registerVm: RegisterViewModel = {
+                emailAddress,
+                password,
+                confirmPassword,
+                name: name,
+            }
+            register(registerVm)
+        }
     };
 
-    if (error) {
-        return <h1>{error}</h1>
-    }
+
+    useEffect(() => {
+        if (error !== null) {
+            setEmailError(error);
+        }
+    }, [error])
+
+
+    useEffect(() => {
+        setEmailError("");
+        setPassword("");
+        setNameError("");
+    }, [])
+
 
     return (
         <div className="App">
             <div className="container">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-4">
-                        <form id="loginform" onSubmit={loginSubmit}>
+                        <form onSubmit={registerSubmit}>
+
+                            <div className="form-group">
+                                <label>Имя пользователя</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="User Name"
+                                    onChange={(event) => setName(event.target.value)}
+                                />
+                                <small className="text-danger form-text">
+                                    {nameError}
+                                </small>
+                            </div>
+
                             <div className="form-group">
                                 <label>Адрес электронной почты</label>
                                 <input
                                     type="email"
                                     className="form-control"
-                                    id="EmailInput"
-                                    name="EmailInput"
                                     aria-describedby="emailHelp"
                                     placeholder="user@email.com"
-                                    onChange={(event) => setEmail(event.target.value)}
+                                    onChange={(event) => setEmailAddress(event.target.value)}
                                 />
-                                <small id="emailHelp" className="text-danger form-text">
+                                <small className="text-danger form-text">
                                     {emailError}
                                 </small>
                             </div>
@@ -87,11 +133,10 @@ const RegisterPage = () => {
                                 <input
                                     type="password"
                                     className="form-control"
-                                    id="exampleInputPassword1"
-                                    placeholder="Пароль"
+                                    placeholder="password"
                                     onChange={(event) => setPassword(event.target.value)}
                                 />
-                                <small id="passworderror" className="text-danger form-text">
+                                <small className="text-danger form-text">
                                     {passwordError}
                                 </small>
                             </div>
@@ -101,11 +146,10 @@ const RegisterPage = () => {
                                 <input
                                     type="password"
                                     className="form-control"
-                                    id="exampleInputPassword1"
-                                    placeholder="Пароль"
+                                    placeholder="password"
                                     onChange={(event) => setConfirmPassword(event.target.value)}
                                 />
-                                <small id="passworderror" className="text-danger form-text">
+                                <small className="text-danger form-text">
                                     {passwordError}
                                 </small>
                             </div>
@@ -113,8 +157,9 @@ const RegisterPage = () => {
                             <button
                                 style={{ marginTop: 10 }}
                                 type="submit"
-                                className="btn btn-primary">
-                                Submit
+                                className="btn btn-primary"
+                            >
+                                Войти
                             </button>
                         </form>
                     </div>
