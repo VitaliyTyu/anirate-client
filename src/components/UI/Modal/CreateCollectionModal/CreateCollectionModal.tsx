@@ -3,7 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Client, CreateCollectionDto } from '../../../../api/api';
 import { useActions } from '../../../../hooks/useActions';
-import css from '../CreateCollectionModal/CreateCollectionModal.module.css'
+import css from './CreateCollectionModal.module.css'
 
 const apiClient = new Client('https://localhost:5001');
 
@@ -51,9 +51,9 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
             >
                 Создать коллекцию
             </Button>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Создание коллекции</Modal.Title>
+            <Modal show={show} onHide={handleClose} >
+                <Modal.Header closeButton className={css.setBackground}>
+                    <Modal.Title >Создание коллекции</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="App">
@@ -71,21 +71,26 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
                                     <small id="emailHelp" className="text-danger form-text">
                                         {nameError}
                                     </small>
-
-                                    <div style={{ display: "flex", margin: "20 auto", justifyContent: 'space-between' }}>
-                                        <Button variant="secondary" onClick={handleClose}>
-                                            Закрыть
-                                        </Button>
-                                        <Button type="submit" variant="primary" onClick={() => { handleClose(); createCollection({ name }) }}>
-                                            Создать
-                                        </Button>
-                                    </div>
+                                   
                                 </div>
-                            </div>
+
+                                <small id="emailHelp" className="text-danger form-text">
+                                    {nameError}
+                                </small>
+
+                                <div className={css.buttonsPlace}>
+                                    <Button variant="secondary" onClick={handleClose} className={css.button}>
+                                        Закрыть
+                                    </Button>
+                                    <Button type="submit" variant="primary" onClick={() => { handleClose(); createCollection({ name }) }} className={css.button}>
+                                        Создать
+                                    </Button>
+                                </div>
+                            </div>                                                            
                         </div>
                     </div>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className={css.setBackground}>
 
                 </Modal.Footer>
             </Modal>

@@ -68,7 +68,7 @@ const LoginPage: FC = (): ReactElement => {
 
 
     return (
-        <div className="App">
+        <div className='App'>
             <div className="container">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-4">

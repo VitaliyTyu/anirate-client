@@ -3,6 +3,8 @@ import { RegisterViewModel } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { register } from '../../../store/actions-creators/auth';
+import css from "./RegisterPage.module.css"
+import { Button } from "react-bootstrap";
 
 const RegisterPage = () => {
     const { register } = useActions()
@@ -97,7 +99,7 @@ const RegisterPage = () => {
 
 
     return (
-        <div className="App">
+        <div className={css.App}>
             <div className="container">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-4">

@@ -13,11 +13,74 @@
 
 .exactCollection{
     display: flex;
-    margin-right: 15px;
-    justify-content: space-between;
+    margin: 25px;
+    justify-content: flex-start;
+    flex-direction: row;
 }
+.exactCollection img{   
+    
+    width: 200px;
+    height: 300px;
+    border: 10px solid #333
+}  
+
+.collectionPart{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 25px;
+}
+.collection{
+    display: flex;
+    flex-direction: row;
+}
+
+.collectionInfo{
+    display: flex;
+    flex-direction: column;
+}
+.collectionInfo h1{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
+}
+@media screen and (max-width: 480px){
+    .collectionPart{
+        display: flex;
+        flex-direction: column;
+        margin: 25px;
+    }
+}
+@media screen and (max-width: 745px){
+    .exactCollection img{   
+    
+        width: 170px;
+        height: 255px;
+        border: 10px solid #333
+    }
+}
+
+@media screen and (max-width: 400px){
+    .exactCollection img{   
+    
+        display: none;
+    }
+}
+
+@media screen and (max-width: 580px){
+    .collection{
+        display: flex;
+        flex-direction: column;
+    }
+}
+.collectionModal{
+    flex-grow: 1;
+    margin: 25px;
+ }
 
 .animes{
     display: flex;
     flex-direction: column;
+    margin: 15px;
 }

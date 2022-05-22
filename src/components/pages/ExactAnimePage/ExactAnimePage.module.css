@@ -2,19 +2,25 @@
 
 .animepages{   
     width: 100%;
-    height: 100%;       
+    
+    height: 100vh;      
     background: rgb(255,241,255);
-    background: radial-gradient(circle, rgba(255,241,255,1) 43%, rgba(255,255,255,1) 100%);
+    background: radial-gradient(circle, rgba(255,241,255,1) 43%, rgba(255,255,255,1) 100%) center no-repeat;
     -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
-    -o-background-size: 100%; /* Opera 9.6+ */
+    -o-background-size: 100% ; /* Opera 9.6+ */
     background-size: 100% 100%; /* Современные браузеры */
+    
+    
 }
 
 .title{
-    text-align: left;
+    text-align: center;
     text-transform: uppercase;
-    margin: 5px auto;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    
+    
     font-size: 40px;
     font-family: Impact;
 }
@@ -26,6 +32,8 @@
     
     width: 90%; 
     margin:0 auto;
+    
+
 
 }
 
@@ -46,6 +54,9 @@
 .image{    
     margin: 20px auto;
     text-align: center;
+}
+.image img{
+    border: 10px solid #333
 }
 
 .rightside{
@@ -104,7 +115,7 @@
     margin-top: 30px;
     margin-left: 50px;
     margin-right: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 40px;
     object-fit: cover;
     font-size: 20px;
 }
@@ -117,5 +128,16 @@
             justify-content: center;   
             align-items: center; 
             cursor:default;
-}
+        }
+        .button {
+            width: 50%;
+            height: 80px;
+            min-width: 30px;
+            margin-top: 30px;
+            margin-left: 50px;
+            margin-right: 15px;
+            margin-bottom: 40px;
+            object-fit: cover;
+            font-size: 14px;
+        }
   }  
