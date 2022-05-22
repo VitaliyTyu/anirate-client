@@ -1,19 +1,21 @@
-import { Client } from "../../api/api";
+import { ApiException, Client, LoginViewModel, RegisterViewModel } from "../../api/api";
 import { Dispatch } from "redux";
 import { AuthAction, AuthActionTypes } from "../../types/auth";
 import { useNavigate } from "react-router-dom";
 
 const apiClient = new Client('https://localhost:5001');
 
-export const login = (email: string, password: string) => {
+export const login = (loginVM: LoginViewModel) => {
     return async (dispatch: Dispatch<AuthAction>) => {
         try {
             dispatch({
                 type: AuthActionTypes.LOGIN
             })
 
-            await apiClient.login({ password: password, username: email });
+            console.log("login");
 
+            let userInfo = await apiClient.login(loginVM);
+            localStorage.setItem('token', userInfo.token ? userInfo.token : '');
             localStorage.setItem('auth', 'true')
 
             dispatch({
@@ -25,22 +27,24 @@ export const login = (email: string, password: string) => {
 
             dispatch({
                 type: AuthActionTypes.LOGIN_ERROR,
-                payload: "Ошибка при входе пользователя"
+                payload: e as ApiException
             })
         }
     }
 }
 
 
-export const register = (email: string, password: string, confirmPassword: string) => {
+export const register = (registerVm: RegisterViewModel) => {
     return async (dispatch: Dispatch<AuthAction>) => {
         try {
             dispatch({
                 type: AuthActionTypes.REGISTER
             })
 
-            await apiClient.register({ password: password, username: email, confirmPassword: confirmPassword });
+            console.log("register");
 
+            let userInfo = await apiClient.register(registerVm);
+            localStorage.setItem('token', userInfo.token ? userInfo.token : '');
             localStorage.setItem('auth', 'true')
 
             dispatch({
@@ -56,7 +60,7 @@ export const register = (email: string, password: string, confirmPassword: strin
 
             dispatch({
                 type: AuthActionTypes.REGISTER_ERROR,
-                payload: msg,
+                payload: e as ApiException,
             })
         }
     }
@@ -64,13 +68,29 @@ export const register = (email: string, password: string, confirmPassword: strin
 
 
 export const logout = () => {
-
     return async (dispatch: Dispatch<AuthAction>) => {
+        localStorage.setItem('token', '')
         localStorage.setItem('auth', 'false')
         console.log("выход");
 
         dispatch({
             type: AuthActionTypes.LOGOUT
         })
+    }
+}
+
+export const authCheck = () => {
+    return async (dispatch: Dispatch<AuthAction>) => {
+        try {
+            await apiClient.check();
+        } catch (e) {
+            localStorage.setItem('token', '')
+            localStorage.setItem('auth', 'false')
+            console.log("выход");
+
+            dispatch({
+                type: AuthActionTypes.LOGOUT
+            })
+        }
     }
 }

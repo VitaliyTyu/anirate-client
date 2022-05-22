@@ -28,7 +28,7 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
 
     const secondHandle = (e: { stopPropagation: () => void; }) => {
         e.stopPropagation();
-      }
+    }
 
     return (
             <div  className={css.collection} onClick={() => props.clickFunction()}> 
@@ -64,7 +64,7 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
                     </div>                   
                 </Card>
 
-            </div>
+        </div>
     );
 };
 export default CollectionItem;

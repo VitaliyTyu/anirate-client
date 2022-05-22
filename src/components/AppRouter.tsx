@@ -10,7 +10,7 @@ const AppRouter = () => {
     const { isAuth } = useTypedSelector(state => state.auth)
 
     useEffect(() => {
-        console.log(isAuth);
+        console.log("auth", isAuth);
     }, [isAuth])
 
     return (

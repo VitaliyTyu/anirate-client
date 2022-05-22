@@ -19,10 +19,12 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
     const handleShow = () => setShow(true);
     const [name, setName] = useState("");
     const [nameError, setNameError] = useState("");
-    const { getCollections, setCollectionsPage } = useActions()
+    const { getCollections, authCheck } = useActions()
 
     const createCollection = async (details: CreateCollectionDto) => {
+        authCheck()
         let collectionId = await apiClient.collection(details);
+        getCollections(props.page, props.size)
     }
 
     const handleValidation = () => {
@@ -40,36 +42,36 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
         return formIsValid;
     };
 
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        handleValidation();
-        console.log(`Создание коллекции ${name}`);
-        getCollections(props.page, props.size)
-    };
 
     return (
         <div>
             <Button className={css.button}
-                                    onClick={handleShow} 
-                                    variant="outline-dark" size="lg"
-                                >
-                                    Создать коллекцию
+                onClick={handleShow}
+                variant="outline-dark" size="lg"
+            >
+                Создать коллекцию
             </Button>
             <Modal show={show} onHide={handleClose} >
                 <Modal.Header closeButton className={css.setBackground}>
                     <Modal.Title >Создание коллекции</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className={css.setBackground}>
-                    <div className='App'>
-                        <div className="container">                                                           
-                            <form id="loginform" onSubmit={onSubmit} className={css.App}>
+                <Modal.Body>
+                    <div className="App">
+                        <div className="container">
+                            <div className="row d-flex justify-content-center">
+                                <div className="col-md-4">
+                                    <div className="form-group">
+                                        <label>Название коллекции</label>
+                                        <input
+                                            placeholder="название"
+                                            onChange={(event) => setName(event.target.value)}
+                                        />
+                                    </div>
 
-                                <div className={css.formGroup}>
-                                    <label>Название коллекции</label>
-                                    <input
-                                        placeholder="Название"
-                                        onChange={(event) => setName(event.target.value)}
-                                    />
+                                    <small id="emailHelp" className="text-danger form-text">
+                                        {nameError}
+                                    </small>
+                                   
                                 </div>
 
                                 <small id="emailHelp" className="text-danger form-text">
@@ -84,7 +86,7 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
                                         Создать
                                     </Button>
                                 </div>
-                            </form>                                                            
+                            </div>                                                            
                         </div>
                     </div>
                 </Modal.Body>

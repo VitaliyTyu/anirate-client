@@ -3,7 +3,7 @@ import { createContext, FC } from "react";
 
 export interface IAuth {
     isAuth: boolean;
-    isLoading: boolean;
+    // isLoading: boolean;
     setIsAuth: Dispatch<SetStateAction<boolean>>;
     // token: string | null;
     // handleAuthentication: () => void;
@@ -13,7 +13,7 @@ export interface IAuth {
 
 export const authDefaults: IAuth = {
     isAuth: false,
-    isLoading: false,
+    // isLoading: false,
     setIsAuth: () => null,
     // token: null,
     // handleAuthentication: () => null,

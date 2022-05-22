@@ -18,13 +18,10 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
     const [show, setShow] = useState(false)
     const handleShow = () => setShow(true)
     const titlesState = useTypedSelector(state => state.titles)
-    const { getTitles, setTitlesPage, getCollectionDetails, setTitlesInCollectionPage } = useActions()
+    const { getTitles, setTitlesPage, getCollectionDetails, authCheck } = useActions()
     const [animesIds, setAnimesIds] = useState<string[]>([])
     const makePages = useMemo(() => makePagesArr(), [titlesState?.paginatedList?.totalPages])
 
-    // const makePages = useMemo(() => makePagesArr(), [paginatedList?.totalPages])
-    // const navigate = useNavigate()
-    // const _collectionIds: string[] = []
 
     const handleClose = () => {
         setShow(false)
@@ -60,6 +57,7 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
 
 
     const addTitles = async () => {
+        authCheck()
         await apiClient.titles({ collectionsIds: [props.collectionId ?? ""], animeTitlesIds: animesIds });
         getCollectionDetails(props.collectionId)
     }

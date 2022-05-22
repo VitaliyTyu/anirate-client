@@ -46,12 +46,19 @@ export class Client extends ClientBase {
 
     protected processAnimeCollections(response: Response): Promise<BriefCollectionVMPaginatedList> {
         const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        let _headers: any = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v: any, k: any) => _headers[k] = v);
+        };
         if (status === 200) {
             return response.text().then((_responseText) => {
                 let result200: any = null;
                 result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as BriefCollectionVMPaginatedList;
                 return result200;
+            });
+        } else if (status === 401) {
+            return response.text().then((_responseText) => {
+                return throwException("Unauthorized", status, _responseText, _headers);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
@@ -507,11 +514,13 @@ export class Client extends ClientBase {
         return Promise.resolve<BriefTitleVMPaginatedList>(null as any);
     }
 
+
     /**
-     * @param body (optional)
+     * Логин
+     * @param body (optional) 
      * @return Success
      */
-    login(body: LoginViewModel | undefined): Promise<void> {
+    login(body: LoginViewModel | undefined): Promise<UserInfo> {
         let url_ = this.baseUrl + "/api/Auth/login";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -522,6 +531,7 @@ export class Client extends ClientBase {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "text/plain"
             }
         };
 
@@ -532,27 +542,33 @@ export class Client extends ClientBase {
         });
     }
 
-    protected processLogin(response: Response): Promise<void> {
+    protected processLogin(response: Response): Promise<UserInfo> {
         const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        let _headers: any = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v: any, k: any) => _headers[k] = v);
+        };
         if (status === 200) {
             return response.text().then((_responseText) => {
-                localStorage.setItem('token', _responseText ? _responseText : '');
-                return;
+                let result200: any = null;
+                result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as UserInfo;
+                return result200;
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
                 return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<void>(null as any);
+        return Promise.resolve<UserInfo>(null as any);
     }
 
+
     /**
-     * @param body (optional)
+     * Регистрация
+     * @param body (optional) 
      * @return Success
      */
-    register(body: RegisterViewModel | undefined): Promise<void> {
+    register(body: RegisterViewModel | undefined): Promise<UserInfo> {
         let url_ = this.baseUrl + "/api/Auth/register";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -563,6 +579,7 @@ export class Client extends ClientBase {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "text/plain"
             }
         };
 
@@ -573,17 +590,58 @@ export class Client extends ClientBase {
         });
     }
 
-    protected processRegister(response: Response): Promise<void> {
+    protected processRegister(response: Response): Promise<UserInfo> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v: any, k: any) => _headers[k] = v);
+        };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+                let result200: any = null;
+                result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as UserInfo;
+                return result200;
+            });
+        } else if (status === 409) {
+            return response.text().then((_responseText) => {
+                return throwException("Адрес электронной почты занят", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<UserInfo>(null as any);
+    }
+
+
+    /**
+     * Проверка на авторизованность
+     * @return Success
+     */
+    check(): Promise<void> {
+        let url_ = this.baseUrl + "/api/Auth/check";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+            }
+        };
+
+        return this.transformOptions(options_).then(transformedOptions_ => {
+            return this.http.fetch(url_, transformedOptions_);
+        }).then((_response: Response) => {
+            return this.processCheck(_response);
+        });
+    }
+
+    protected processCheck(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
-                localStorage.setItem('token', _responseText ? _responseText : '');
                 return;
-            });
-        } else if (status === 409) {
-            return response.text().then((_responseText) => {
-                return throwException("Имя занято", status, _responseText, _headers);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
@@ -592,6 +650,14 @@ export class Client extends ClientBase {
         }
         return Promise.resolve<void>(null as any);
     }
+}
+
+
+
+export interface UserInfo {
+    token?: string | undefined;
+    userName?: string | undefined;
+    errorMessage?: string | undefined;
 }
 
 export interface AddTitlesInCollectionsDto {
@@ -705,12 +771,13 @@ export interface Image {
 }
 
 export interface LoginViewModel {
-    username: string;
+    emailAddress: string;
     password: string;
 }
 
 export interface RegisterViewModel {
-    username: string;
+    name: string;
+    emailAddress: string;
     password: string;
     confirmPassword: string;
 }

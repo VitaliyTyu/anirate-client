@@ -4,8 +4,7 @@ import { AuthAction, AuthActionTypes, AuthState } from "../../types/auth";
 const initialState: AuthState = {
     error: null,
     loading: false,
-    isAuth: localStorage.getItem("auth") == "true",
-
+    isAuth: localStorage.getItem("auth") === "true",
 }
 
 export const authReducer = (state = initialState, action: AuthAction): AuthState => {
@@ -25,7 +24,7 @@ export const authReducer = (state = initialState, action: AuthAction): AuthState
             return { error: action.payload, loading: false, isAuth: false }
 
         case AuthActionTypes.LOGOUT:
-            return { error: null, loading: true, isAuth: false }
+            return { error: null, loading: false, isAuth: false }
         default:
             return state
     }

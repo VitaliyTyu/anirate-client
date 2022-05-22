@@ -1,10 +1,8 @@
-import React, { FC, ReactElement, useContext, useState } from "react";
+import React, { FC, ReactElement, useContext, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
-import css from "./LoginPage.module.css"
-import { Button } from "react-bootstrap";
-
+import { LoginViewModel } from "../../../api/api";
 
 const LoginPage: FC = (): ReactElement => {
     const { error } = useTypedSelector(state => state.auth)
@@ -15,59 +13,76 @@ const LoginPage: FC = (): ReactElement => {
     const [emailError, setEmailError] = useState("");
 
     const handleValidation = () => {
-        let formIsValid = true;
+        let nameIsValid = false;
+        let pwdIsValid = false;
+
+        setEmailError("");
+        setPasswordError("");
 
         if (!email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
-            formIsValid = false;
+            nameIsValid = false;
             setEmailError("Адрес введен неверно");
-            return false;
         } else {
             setEmailError("");
-            formIsValid = true;
+            nameIsValid = true;
         }
 
         if (password.length < 4) {
-            formIsValid = false;
-            setPasswordError(
-                "Минимальная длина пароля - 4 символа"
-            );
-            return false;
-        } else {
-            setPasswordError("");
-            formIsValid = true;
+            pwdIsValid = false;
+            setPasswordError("Минимальная длина пароля 4 символа");
+        } else if (password.length > 30) {
+            pwdIsValid = false;
+            setPasswordError("Максимальная длина пароля 30 символов");
+        } else if (password.length <= 30 && password.length >= 2) {
+            pwdIsValid = true;
         }
+
+        let formIsValid = nameIsValid && pwdIsValid;
 
         return formIsValid;
     };
 
+
+
     const loginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        handleValidation();
-        login(email, password)
+        if (handleValidation()) {
+            let loginVM: LoginViewModel = {
+                emailAddress: email,
+                password: password,
+            }
+            login(loginVM)
+        }
     };
 
-    if (error) {
-        return <h1>{error}</h1>
-    }
+    useEffect(() => {
+        if (error !== null) {
+            setEmailError("Пользователь не найден");
+        }
+    }, [error])
+
+    useEffect(() => {
+        setEmailError("");
+        setPassword("");
+    }, [])
+
 
     return (
-        <div className={css.App}>
+        <div className='App'>
             <div className="container">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-4">
-                        <form id="loginform" onSubmit={loginSubmit}>
+                        <form onSubmit={loginSubmit}>
                             <div className="form-group">
                                 <label>Адрес электронной почты</label>
                                 <input
                                     type="email"
                                     className="form-control"
-                                    id="EmailInput"
-                                    name="EmailInput"
                                     aria-describedby="emailHelp"
                                     placeholder="user@email.com"
                                     onChange={(event) => setEmail(event.target.value)}
                                 />
-                                <small id="emailHelp" className="text-danger form-text">
+                                <small className="text-danger form-text">
                                     {emailError}
                                 </small>
                             </div>
@@ -77,21 +92,20 @@ const LoginPage: FC = (): ReactElement => {
                                 <input
                                     type="password"
                                     className="form-control"
-                                    id="exampleInputPassword1"
-                                    placeholder="Пароль"
+                                    placeholder="password"
                                     onChange={(event) => setPassword(event.target.value)}
                                 />
-                                <small id="passworderror" className="text-danger form-text">
+                                <small className="text-danger form-text">
                                     {passwordError}
                                 </small>
                             </div>
 
-                            <Button
+                            <button
                                 style={{ marginTop: 10 }}
-                                type="submit"                                
-                                variant="outline-dark" size="lg">
+                                type="submit"
+                                className="btn btn-primary">
                                 Войти
-                            </Button>
+                            </button>
                         </form>
                     </div>
                 </div>
