@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ApiException } from '../../../api/api';
+import { ApiException, BriefCollectionVM, Client, DeleteCollectionsDto } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import CollectionsList from '../../UI/CollectionList/CollectionsList';
+import CollectionsList from '../../UI/Collections/CollectionList/CollectionsList';
 import CreateCollectionModal from '../../UI/Modal/CreateCollectionModal/CreateCollectionModal';
 import css from "./CollectionsPage.module.css"
 
@@ -14,6 +14,11 @@ const CollectionsPage = () => {
     const { getCollections, setCollectionsPage, logout, authCheck } = useActions()
     const pages: number[] = [];
     const makePages = useMemo(() => makePagesArr(), [paginatedList?.totalPages])
+    const navigate = useNavigate()
+
+    const functionOnClick = (item: BriefCollectionVM) => {
+        navigate(`/collections/${item?.id}`)
+    }
 
     function makePagesArr() {
         let arr: number[] = []
@@ -59,7 +64,7 @@ const CollectionsPage = () => {
                     </div>
                 )}
             </div>
-            <CollectionsList paginatedList={paginatedList} />
+            <CollectionsList paginatedList={paginatedList} clickFunction={functionOnClick} />
         </div>
     );
 };

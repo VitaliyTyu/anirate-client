@@ -10,7 +10,7 @@ import SlidePrevButton from './SlidePrevButton';
 // Import Swiper styles
 import 'swiper/css';
 import { Link, useNavigate } from 'react-router-dom';
-import AnimeItem from '../AnimeItem/AnimeItem';
+import AnimeItem from '../Anime/AnimeItem/AnimeItem';
 
 const Slider: FC = (): ReactElement => {
     const { paginatedList, loading, error } = useTypedSelector(state => state.titles)
@@ -38,31 +38,31 @@ const Slider: FC = (): ReactElement => {
                     spaceBetween={40}
 
                     slidesPerView={5}
-                    breakpoints = {{
+                    breakpoints={{
                         0: {
                             slidesPerView: 1,
                             spaceBetween: 10
-                          },
-    
+                        },
+
                         580: {
-                          slidesPerView: 2,
-                          spaceBetween: 20
+                            slidesPerView: 2,
+                            spaceBetween: 20
                         },
-    
+
                         880: {
-                          slidesPerView: 3,
-                          spaceBetween: 30
+                            slidesPerView: 3,
+                            spaceBetween: 30
                         },
-    
+
                         1150: {
-                          slidesPerView: 4,
-                          spaceBetween: 40
+                            slidesPerView: 4,
+                            spaceBetween: 40
                         },
-    
+
                         1800: {
                             slidesPerView: 5,
                             spaceBetween: 50
-                          }
+                        }
                     }}
                     loop={true}
                     autoplay={{ delay: 2000, disableOnInteraction: false }}

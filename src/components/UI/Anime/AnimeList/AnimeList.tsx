@@ -1,9 +1,10 @@
-import React, { FC, ReactElement, useContext, useEffect, useState } from 'react';
-import { BriefTitleVM, BriefTitleVMPaginatedList } from "../../../api/api";
-import { useNavigate } from 'react-router-dom';
-import AnimeItem from '../AnimeItem/AnimeItem';
-import css from './AnimeList.module.css'
-import { CardGroup } from 'react-bootstrap';
+
+import { FC, ReactElement } from "react";
+import { CardGroup } from "react-bootstrap";
+import { BriefTitleVM, BriefTitleVMPaginatedList } from "../../../../api/api";
+import AnimeItem from "../AnimeItem/AnimeItem";
+import css from "./AnimeList.module.css"
+
 
 
 interface AnimeListProps {
@@ -13,7 +14,6 @@ interface AnimeListProps {
 }
 
 const AnimeList: FC<AnimeListProps> = (props): ReactElement => {
-
     return (
         <div>
 

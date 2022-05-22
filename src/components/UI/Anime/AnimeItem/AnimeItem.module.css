@@ -1,0 +1,42 @@
+
+.title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    width: 202px;
+    height: 450px;
+    flex-grow: 1;
+    margin: 20px 10px ; 
+    user-select: none;
+    cursor: pointer;
+}
+.title:hover {
+    border: 2px solid #000000;
+    color: #000000;
+    background: rgba(0, 0, 0, 0);
+    -webkit-box-shadow: 0px 0px 5px 7px rgba(34, 60, 80, 0.6);
+    -moz-box-shadow: 0px 0px 5px 7px rgba(34, 60, 80, 0.6);
+    box-shadow: 0px 0px 5px 7px rgba(34, 60, 80, 0.6);
+   }
+.title img {
+    width: 200px; 
+    height: 270px;   
+  }
+
+.titleName{
+    width: 156; 
+    height: 40;   
+}
+
+.titleNameTitle{
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.titleScore{
+    margin-bottom: 40;
+}
+
+

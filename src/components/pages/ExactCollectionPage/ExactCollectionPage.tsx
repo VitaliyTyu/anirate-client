@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom';
-import { BriefCollectionVM, BriefTitleVM } from '../../../api/api';
+
+import { useMemo, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { BriefCollectionVM } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import AnimeList from '../../UI/AnimeList/AnimeList';
+import AnimeInCollectionList from '../../UI/Anime/AnimeInCollectionList/AnimeInCollectionList';
+import AnimeList from '../../UI/Anime/AnimeList/AnimeList';
 import AddAnimesToCollectionModal from '../../UI/Modal/AddAnimesToCollectionModal/AddAnimesToCollectionModal';
 import css from './ExactCollectionPage.module.css'
 
@@ -86,7 +87,7 @@ const ExactCollectionPage = () => {
                     )}
                 </div>
 
-                <AnimeList clickFunction={functionOnClick} paginatedList={collectionState.collectionDetails?.animeTitles} />
+                <AnimeInCollectionList clickFunction={functionOnClick} paginatedList={collectionState.collectionDetails?.animeTitles} />
             </div>
         </div>
     );

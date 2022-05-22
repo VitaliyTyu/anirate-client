@@ -1,10 +1,11 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { AddTitlesInCollectionsDto, BriefTitleVM, Client } from '../../../../api/api';
+import { AddTitlesInCollectionsDto, BriefCollectionVM, BriefTitleVM, Client } from '../../../../api/api';
 import { useActions } from '../../../../hooks/useActions';
 import { useTypedSelector } from '../../../../hooks/useTypedSelector';
-import AnimeList from '../../AnimeList/AnimeList';
-import CollectionsList from '../../CollectionList/CollectionsList';
+import AnimeList from '../../Anime/AnimeList/AnimeList';
+import CollectionsList from '../../Collections/CollectionList/CollectionsList';
+import SimpleCollectionList from '../../Collections/SimpleCollectionList/SimpleCollectionList';
 import css from './AddAnimesToCollectionModal.module.css'
 
 const apiClient = new Client('https://localhost:5001');
@@ -29,7 +30,7 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
     }
 
 
-    const functionOnClick = (item: BriefTitleVM) => {
+    const functionOnClick = (item: BriefCollectionVM) => {
         if (item.id !== undefined) {
             setCollectionsIds([...collectionsIds, item.id])
         }
@@ -59,7 +60,7 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
     const addCollections = async () => {
         authCheck()
         let addTitlesInCollectionsDto: AddTitlesInCollectionsDto = {
-            collectionsIds: [],
+            collectionsIds,
             animeTitlesIds: [props.animeId ?? ""],
         }
         await apiClient.titles(addTitlesInCollectionsDto);
@@ -74,7 +75,7 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
     return (
         <div >
             <Button variant="outline-dark" size="lg" onClick={handleShow} className={css.button}>
-                Добавить аниме
+                Добавить в коллекции
             </Button>
 
             <Modal show={show} onHide={handleClose}>
@@ -99,7 +100,7 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
                                         </div>
                                     )}
                                 </div>
-                                {/* <CollectionsList paginatedList={collectionsState?.paginatedList} clickFunction={functionOnClick} /> */}
+                                <SimpleCollectionList paginatedList={collectionsState?.paginatedList} clickFunction={functionOnClick} />
                             </div>
 
                             <div style={{ display: "flex", marginTop: 20 }}>
