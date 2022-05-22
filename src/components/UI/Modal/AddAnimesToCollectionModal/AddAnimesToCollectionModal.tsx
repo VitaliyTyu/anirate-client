@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+
+import { FC, useState, useMemo, useEffect } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { BriefTitleVM, Client, CollectionDetailsVM } from '../../../../api/api';
+import { Client, BriefTitleVM } from '../../../../api/api';
 import { useActions } from '../../../../hooks/useActions';
 import { useTypedSelector } from '../../../../hooks/useTypedSelector';
-import AnimeList from '../../AnimeList/AnimeList';
+import AnimeList from '../../Anime/AnimeList/AnimeList';
 import css from './AddAnimesToCollectionModal.module.css'
 
 const apiClient = new Client('https://localhost:5001');

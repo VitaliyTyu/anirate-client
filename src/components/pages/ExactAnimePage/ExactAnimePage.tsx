@@ -27,7 +27,7 @@ const ExactAnimePage = () => {
         if (!error) {
             setDescriptionHtml(titleDetails?.descriptionHtml)
         }
-    }, []);
+    }, [titleDetails]);
 
 
     if (error) {

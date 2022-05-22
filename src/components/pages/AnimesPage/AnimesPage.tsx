@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { BriefTitleVM } from '../../../api/api';
-import { useActions } from '../../../hooks/useActions';
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import AnimeList from '../../UI/AnimeList/AnimeList';
+
+import { useMemo, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { BriefTitleVM } from "../../../api/api";
+import { useActions } from "../../../hooks/useActions";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import AnimeList from "../../UI/Anime/AnimeList/AnimeList";
 import css from "./AnimesPage.module.css"
 
 const AnimesPage = () => {

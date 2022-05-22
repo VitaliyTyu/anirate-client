@@ -256,7 +256,7 @@ export class Client extends ClientBase {
      * @param body (optional)
      * @return Success
      */
-    collections(body: DeleteCollectionsDto | undefined): Promise<void> {
+    deleteCollections(body: DeleteCollectionsDto | undefined): Promise<void> {
         let url_ = this.baseUrl + "/api/AnimeCollections/Collections";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -273,11 +273,11 @@ export class Client extends ClientBase {
         return this.transformOptions(options_).then(transformedOptions_ => {
             return this.http.fetch(url_, transformedOptions_);
         }).then((_response: Response) => {
-            return this.processCollections(_response);
+            return this.processDeleteCollections(_response);
         });
     }
 
-    protected processCollections(response: Response): Promise<void> {
+    protected processDeleteCollections(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 204) {
