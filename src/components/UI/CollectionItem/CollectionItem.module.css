@@ -1,9 +1,9 @@
 .collection {  
-    width: 500px;
-    height: 50%;   
+    width: 450px;
+    
     margin: 20px 20px ; 
     cursor: pointer;
-    min-width: 250px;
+    min-width: 200px;
 }
 
 .collectionView {
@@ -14,6 +14,8 @@
     margin-right: 15px;
     height: 30%;
     border: 1px solid black;
+    height: 20%;   
+    min-height: 270px;
 }
 
 .collectionItem {
@@ -32,7 +34,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 300px;
+    max-width: 250px;
 }
 
 .detailsAnim{
@@ -43,23 +45,13 @@
     margin: 15px;
 }
 
-@media screen and (max-width: 800px) {
-    .detailsAnim {
-        display: none;
-    }   
+.userComment{
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
-@media  screen and (max-width: 470px) {
-    .collectionItem{
-        display: flex;
-        flex-direction: column;
-        height: 300px;
-        width: 80%;
-        min-width: 200px;
-    }
-    .collectionItem img{
-        display: none;
-    }   
-}
+
 
 .buttonPlace {
     display: flex;
@@ -69,3 +61,39 @@
     margin-top: 25px;
     margin-bottom: 15px;
 }
+
+@media  screen and (max-width: 550px) {
+    .collection {  
+        
+        
+        margin-bottom: 50px; 
+        
+    }
+    .collectionView {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        margin-right: 15px;
+        height: 30%;
+        border: 1px solid black;
+        height: 20%;   
+        min-height: 270px;
+    }
+    
+    .collectionTitle{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 140px;
+    } 
+    .userComment{
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    
+}
+
