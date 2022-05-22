@@ -15,54 +15,42 @@ interface CollectionItemProps {
 }
 
 const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
-    const [imgPath, setImgPath] = useState("https://dummyimage.com/150x250/b8b6b8/666669&text=Коллекция");
-
-    useEffect(() => {
-        if (props.collection?.image == undefined) {
-            setImgPath("https://dummyimage.com/150x250/b8b6b8/666669&text=Коллекция")
-        }
-        else {
-            setImgPath("https://shikimori.one/" + props.collection?.image?.preview)
-        }
-    }, [props.collection?.image])
-
     const secondHandle = (e: { stopPropagation: () => void; }) => {
         e.stopPropagation();
     }
 
     return (
-            <div  className={css.collection} onClick={() => props.clickFunction()}> 
-                <Card border="dark" className={css.collectionView} >                 
-                    <div className={css.collectionItem}  key={props.collection?.id}>
-                        <Card.Img  src={"https://shikimori.one/" + props.collection?.image?.preview}/>
-                        <Card.Body className={css.detailsCol} >
-                            <Card.Title className={css.collectionTitle}>{props.collection?.name}</Card.Title>
-                            <Card.Text>
-                                ЧТО_НИБУДЬ
-                            </Card.Text>                    
-                        </Card.Body>
+        <div className={css.collection} onClick={() => props.clickFunction()}>
+            <Card border="dark" className={css.collectionView} >
+                <div className={css.collectionItem} key={props.collection?.id}>
+                    <Card.Body className={css.detailsCol} >
+                        <Card.Title className={css.collectionTitle}>{props.collection?.name}</Card.Title>
+                        <Card.Text>
+                            ЧТО_НИБУДЬ
+                        </Card.Text>
+                    </Card.Body>
 
-                        <Card.Body className={css.detailsAnim} >
-                            <Card.Title>АНИМЕ:</Card.Title>
-                            <Card.Text>
-                                список аниме
-                            </Card.Text>                    
-                        </Card.Body>
-                        <div onClick={secondHandle} >
-                            <Dropdown>
-                                <Dropdown.Toggle variant="outline" id="dropdown-basic">
-                                    Действия
-                                </Dropdown.Toggle>
+                    <Card.Body className={css.detailsAnim} >
+                        <Card.Title>Колличество:</Card.Title>
+                        <Card.Text>
+                            {props.collection?.animesCount}
+                        </Card.Text>
+                    </Card.Body>
+                    <div onClick={secondHandle} >
+                        <Dropdown>
+                            <Dropdown.Toggle variant="outline" id="dropdown-basic">
+                                Действия
+                            </Dropdown.Toggle>
 
-                                <Dropdown.Menu variant = 'dark'>
-                                    <Dropdown.Item href="#/action-1">Переименовать</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">Удалить</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </div>
-                    </div>                   
-                </Card>
+                            <Dropdown.Menu variant='dark'>
+                                <Dropdown.Item href="#/action-1">Переименовать</Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">Удалить</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
+                </div>
+            </Card>
 
         </div>
     );
