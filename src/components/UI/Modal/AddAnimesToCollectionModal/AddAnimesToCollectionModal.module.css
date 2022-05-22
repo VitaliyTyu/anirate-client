@@ -8,4 +8,5 @@
     margin-bottom: 8px;
     object-fit: cover;
     font-size: calc( (100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
+    /* font-size: calc(40px + 30 * (100vw / 1280)); */
 }

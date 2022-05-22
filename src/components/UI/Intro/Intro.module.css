@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 100%;
-    height: 90vh;
+    width: 100%;  
+    height: auto;  
     /*ЗАнимает весь экран*/
     /*background: url("../../images/intro.jpg") center no-repeat;  */
     -moz-background-size: 100%;
@@ -34,6 +34,7 @@
 
 .intro_title {
     font-size: calc( (100vw - 480px)/(1280 - 480) * (45 - 28) + 28px);
+    /* font-size: calc(40px + 30 * (100vw / 1280)); */
     font-weight: 700;
     text-transform: uppercase;
     margin: 50px auto;

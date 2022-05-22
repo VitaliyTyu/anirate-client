@@ -55,12 +55,12 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
                 <Modal.Header closeButton className={css.setBackground}>
                     <Modal.Title >Создание коллекции</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <div className="App">
-                        <div className="container">
-                            <div className="row d-flex justify-content-center">
-                                <div className="col-md-4">
-                                    <div className="form-group">
+                <Modal.Body className={css.setBackground}>
+                    <div className={css.App}>
+                       
+                            
+                                
+                                    <div className={css.formGroup}>
                                         <label>Название коллекции</label>
                                         <input
                                             placeholder="название"
@@ -85,9 +85,9 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
                                     <Button type="submit" variant="primary" onClick={() => { handleClose(); createCollection({ name }) }} className={css.button}>
                                         Создать
                                     </Button>
-                                </div>
-                            </div>                                                            
-                        </div>
+                               
+                                                                                      
+                        
                     </div>
                 </Modal.Body>
                 <Modal.Footer className={css.setBackground}>

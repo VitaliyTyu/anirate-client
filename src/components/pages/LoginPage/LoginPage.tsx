@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
 import { LoginViewModel } from "../../../api/api";
+import css from "./LoginPage.module.css"
 
 const LoginPage: FC = (): ReactElement => {
     const { error } = useTypedSelector(state => state.auth)
@@ -68,7 +69,7 @@ const LoginPage: FC = (): ReactElement => {
 
 
     return (
-        <div className='App'>
+        <div className={css.App}>
             <div className="container">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-4">

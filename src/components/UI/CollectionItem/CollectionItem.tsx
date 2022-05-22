@@ -20,37 +20,34 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
     }
 
     return (
-        <div className={css.collection} onClick={() => props.clickFunction()}>
-            <Card border="dark" className={css.collectionView} >
-                <div className={css.collectionItem} key={props.collection?.id}>
-                    <Card.Body className={css.detailsCol} >
-                        <Card.Title className={css.collectionTitle}>{props.collection?.name}</Card.Title>
-                        <Card.Text>
-                            ЧТО_НИБУДЬ
-                        </Card.Text>
-                    </Card.Body>
+            <div  className={css.collection} onClick={() => props.clickFunction()}> 
+                <Card border="dark" className={css.collectionView} key={props.collection?.id} >                 
+                    
+                        <Card.Body className={css.detailsCol} >
+                            <Card.Title className={css.collectionTitle}>{props.collection?.name}</Card.Title>
+                            <Card.Text>
+                                Аниме в коллекции: 
+                            </Card.Text>   
+                            <Card.Text>
+                                Описание:
+                            </Card.Text>                    
+                        </Card.Body>
+                        
+                        <div onClick={secondHandle} >
+                            <Dropdown>
+                                <Dropdown.Toggle variant="outline" id="dropdown-basic">
+                                    Действия
+                                </Dropdown.Toggle>
 
-                    <Card.Body className={css.detailsAnim} >
-                        <Card.Title>Колличество:</Card.Title>
-                        <Card.Text>
-                            {props.collection?.animesCount}
-                        </Card.Text>
-                    </Card.Body>
-                    <div onClick={secondHandle} >
-                        <Dropdown>
-                            <Dropdown.Toggle variant="outline" id="dropdown-basic">
-                                Действия
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu variant='dark'>
-                                <Dropdown.Item href="#/action-1">Переименовать</Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">Удалить</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </div>
-                </div>
-            </Card>
+                                <Dropdown.Menu variant = 'dark'>
+                                    <Dropdown.Item href="#/action-1">Переименовать</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-2">Удалить</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-3">Добавить аниме</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </div>
+                                      
+                </Card>
 
         </div>
     );
