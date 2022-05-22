@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { logout } from "../../../store/actions-creators/auth";
 import { useActions } from "../../../hooks/useActions";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Header = () => {
     const { isAuth, } = useTypedSelector(state => state.auth)

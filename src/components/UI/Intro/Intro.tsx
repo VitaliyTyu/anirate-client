@@ -2,7 +2,7 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useActions } from '../../../hooks/useActions';
 import css from './Intro.module.css'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 const Intro = () => {
@@ -20,7 +20,7 @@ const Intro = () => {
                                 onClick={() => navigate(`/collections`)}
                                 variant="outline-dark" size="lg"
                             >
-                                Перейти к коллекциям
+                                Коллекции
                             </Button>
 
 
@@ -28,9 +28,8 @@ const Intro = () => {
                                 onClick={() => navigate(`/animes`)}
                                 variant="outline-dark" size="lg"
                             >
-                                Перейти к аниме
-                            </Button>
-
+                                Аниме
+                            </Button>                            
                         </div>
                     </div>
                 </div>

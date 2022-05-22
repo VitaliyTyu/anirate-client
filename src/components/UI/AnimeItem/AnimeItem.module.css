@@ -17,7 +17,8 @@
     -webkit-box-shadow: 0px 0px 5px 7px rgba(34, 60, 80, 0.6);
     -moz-box-shadow: 0px 0px 5px 7px rgba(34, 60, 80, 0.6);
     box-shadow: 0px 0px 5px 7px rgba(34, 60, 80, 0.6);
-   }
+}
+
 .title img {
     width: 200px; 
     height: 270px;   
