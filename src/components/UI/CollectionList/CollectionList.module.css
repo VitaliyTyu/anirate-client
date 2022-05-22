@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     align-content: space-between;
     justify-content: flex-start;
-    flex-direction: column;
+    flex-direction: row;
     margin-left: 15px;
     margin-right: 15px;
     margin-top: 15px;

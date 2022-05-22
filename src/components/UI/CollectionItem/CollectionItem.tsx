@@ -32,22 +32,18 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
 
     return (
             <div  className={css.collection} onClick={() => props.clickFunction()}> 
-                <Card border="dark" className={css.collectionView} >                 
-                    <div className={css.collectionItem}  key={props.collection?.id}>
-                        <Card.Img  src={"https://shikimori.one/" + props.collection?.image?.preview}/>
+                <Card border="dark" className={css.collectionView} key={props.collection?.id} >                 
+                    
                         <Card.Body className={css.detailsCol} >
                             <Card.Title className={css.collectionTitle}>{props.collection?.name}</Card.Title>
                             <Card.Text>
-                                ЧТО_НИБУДЬ
-                            </Card.Text>                    
-                        </Card.Body>
-
-                        <Card.Body className={css.detailsAnim} >
-                            <Card.Title>АНИМЕ:</Card.Title>
+                                Аниме в коллекции: 
+                            </Card.Text>   
                             <Card.Text>
-                                список аниме
+                                Описание:
                             </Card.Text>                    
                         </Card.Body>
+                        
                         <div onClick={secondHandle} >
                             <Dropdown>
                                 <Dropdown.Toggle variant="outline" id="dropdown-basic">
@@ -57,11 +53,11 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
                                 <Dropdown.Menu variant = 'dark'>
                                     <Dropdown.Item href="#/action-1">Переименовать</Dropdown.Item>
                                     <Dropdown.Item href="#/action-2">Удалить</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-3">Добавить аниме</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </div>
-                    </div>                   
+                                      
                 </Card>
 
         </div>
