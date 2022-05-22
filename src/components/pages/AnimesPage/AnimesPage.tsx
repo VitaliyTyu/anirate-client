@@ -60,7 +60,9 @@ const AnimesPage = () => {
                     </div>
                 )}
             </div>
-            <AnimeList paginatedList={paginatedList} clickFunction={functionOnClick} />
+            <div className={css.animeList}>   
+                <AnimeList paginatedList={paginatedList} clickFunction={functionOnClick} />
+            </div>
         </div>
     );
 };

@@ -6,6 +6,7 @@ import AppRouter from "./components/AppRouter";
 import { useEffect, useState } from "react";
 import { AuthContext } from "./context/context";
 import css from '../src/styles/App.module.css'
+import ScrollToTop from './components/ScrollToTop';
 
 const App = () => {
     const [isAuth, setIsAuth] = useState(false);
@@ -33,6 +34,7 @@ const App = () => {
                 // isLoading,
             }}>
                 <BrowserRouter>
+                    <ScrollToTop/>
                     <div className={css.mainBody}>
                         <div className={css.header}>
                             <Header />
