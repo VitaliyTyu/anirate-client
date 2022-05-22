@@ -9,20 +9,20 @@ import css from '../src/styles/App.module.css'
 
 const App = () => {
     const [isAuth, setIsAuth] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    // const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         if (localStorage.getItem('auth') === "true") {
             setIsAuth(true)
         }
-        setIsLoading(false)
+        // setIsLoading(false)
     }, [])
 
     useEffect(() => {
         if (localStorage.getItem('auth') === "true") {
             setIsAuth(true)
         }
-        setIsLoading(false)
+        // setIsLoading(false)
     }, [localStorage.getItem("auth")])
 
     return (
@@ -30,23 +30,22 @@ const App = () => {
             <AuthContext.Provider value={{
                 isAuth,
                 setIsAuth,
-                isLoading,
+                // isLoading,
             }}>
-                
                 <BrowserRouter>
-                <div className={css.mainBody}>
-                    <div className={css.header}> 
-                        <Header />
+                    <div className={css.mainBody}>
+                        <div className={css.header}>
+                            <Header />
+                        </div>
+                        <div className={css.mainContent}>
+                            <AppRouter />
+                        </div>
+                        <div className={css.footer}>
+                            <Footer />
+                        </div>
                     </div>
-                    <div className={css.mainContent}>
-                        <AppRouter />
-                    </div>
-                    <div className={css.footer}>
-                        <Footer />
-                    </div>
-                </div>
                 </BrowserRouter>
-                
+
             </AuthContext.Provider>
         </div>
     );

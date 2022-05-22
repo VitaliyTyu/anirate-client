@@ -16,8 +16,6 @@ export const getCollectionDetails = (id: string | undefined, page: number = 1, s
             }
 
             const collectionDetails = await apiClient.collectionDetails(id, page, size);
-            console.log(collectionDetails.animeTitles?.items);
-
 
             dispatch({
                 type: CollectionDetailsActionTypes.FETCH_COLLECTION_DETAILS_SUCCESS,
@@ -35,7 +33,3 @@ export const getCollectionDetails = (id: string | undefined, page: number = 1, s
 export function setTitlesInCollectionPage(page: number): CollectionDetailsAction {
     return { type: CollectionDetailsActionTypes.SET_TITLES_IN_COLLECION_PAGE, payload: page }
 }
-
-// export function setCurrentCollectionDetails(id: string | undefined): CollectionDetailsAction {
-//     return { type: CollectionDetailsActionTypes.SET_CURRENT_COLLECTION_DETAILS, payload: id }
-// }

@@ -2,6 +2,7 @@ import React, { FC, ReactElement, useContext, useEffect, useState } from "react"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
+import { LoginViewModel } from "../../../api/api";
 
 const LoginPage: FC = (): ReactElement => {
     const { error } = useTypedSelector(state => state.auth)
@@ -15,6 +16,9 @@ const LoginPage: FC = (): ReactElement => {
         let nameIsValid = false;
         let pwdIsValid = false;
 
+        setEmailError("");
+        setPasswordError("");
+
         if (!email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
             nameIsValid = false;
             setEmailError("Адрес введен неверно");
@@ -23,14 +27,13 @@ const LoginPage: FC = (): ReactElement => {
             nameIsValid = true;
         }
 
-
         if (password.length < 4) {
             pwdIsValid = false;
-            setPasswordError(
-                "Минимальная длина пароля - 4 символа"
-            );
-        } else {
-            setPasswordError("");
+            setPasswordError("Минимальная длина пароля 4 символа");
+        } else if (password.length > 30) {
+            pwdIsValid = false;
+            setPasswordError("Максимальная длина пароля 30 символов");
+        } else if (password.length <= 30 && password.length >= 2) {
             pwdIsValid = true;
         }
 
@@ -39,25 +42,24 @@ const LoginPage: FC = (): ReactElement => {
         return formIsValid;
     };
 
+
+
     const loginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (handleValidation()) {
-            login(email, password)
-            console.log(error);
-        }
-
-        if (error !== null) {
-
+            let loginVM: LoginViewModel = {
+                emailAddress: email,
+                password: password,
+            }
+            login(loginVM)
         }
     };
 
     useEffect(() => {
         if (error !== null) {
-            setEmailError(error);
-            setPassword(error);
+            setEmailError("Пользователь не найден");
         }
     }, [error])
-
 
     useEffect(() => {
         setEmailError("");

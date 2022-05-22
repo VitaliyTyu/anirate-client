@@ -1,11 +1,11 @@
-import { Client, LoginViewModel, RegisterViewModel } from "../../api/api";
+import { ApiException, Client, LoginViewModel, RegisterViewModel } from "../../api/api";
 import { Dispatch } from "redux";
 import { AuthAction, AuthActionTypes } from "../../types/auth";
 import { useNavigate } from "react-router-dom";
 
 const apiClient = new Client('https://localhost:5001');
 
-export const login = (email: string, password: string) => {
+export const login = (loginVM: LoginViewModel) => {
     return async (dispatch: Dispatch<AuthAction>) => {
         try {
             dispatch({
@@ -14,13 +14,8 @@ export const login = (email: string, password: string) => {
 
             console.log("login");
 
-            let loginVM: LoginViewModel = {
-                emailAddress: email,
-                password: password,
-            }
-
             let userInfo = await apiClient.login(loginVM);
-
+            localStorage.setItem('token', userInfo.token ? userInfo.token : '');
             localStorage.setItem('auth', 'true')
 
             dispatch({
@@ -32,7 +27,7 @@ export const login = (email: string, password: string) => {
 
             dispatch({
                 type: AuthActionTypes.LOGIN_ERROR,
-                payload: "Ошибка при входе пользователя"
+                payload: e as ApiException
             })
         }
     }
@@ -49,6 +44,7 @@ export const register = (registerVm: RegisterViewModel) => {
             console.log("register");
 
             let userInfo = await apiClient.register(registerVm);
+            localStorage.setItem('token', userInfo.token ? userInfo.token : '');
             localStorage.setItem('auth', 'true')
 
             dispatch({
@@ -64,7 +60,7 @@ export const register = (registerVm: RegisterViewModel) => {
 
             dispatch({
                 type: AuthActionTypes.REGISTER_ERROR,
-                payload: msg,
+                payload: e as ApiException,
             })
         }
     }
@@ -72,13 +68,29 @@ export const register = (registerVm: RegisterViewModel) => {
 
 
 export const logout = () => {
-
     return async (dispatch: Dispatch<AuthAction>) => {
+        localStorage.setItem('token', '')
         localStorage.setItem('auth', 'false')
         console.log("выход");
 
         dispatch({
             type: AuthActionTypes.LOGOUT
         })
+    }
+}
+
+export const authCheck = () => {
+    return async (dispatch: Dispatch<AuthAction>) => {
+        try {
+            await apiClient.check();
+        } catch (e) {
+            localStorage.setItem('token', '')
+            localStorage.setItem('auth', 'false')
+            console.log("выход");
+
+            dispatch({
+                type: AuthActionTypes.LOGOUT
+            })
+        }
     }
 }

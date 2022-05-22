@@ -44,11 +44,13 @@ const RegisterPage = () => {
             emailIsValid = true;
         }
 
-
         if (password.length < 4) {
             pwdIsValid = false;
             setPasswordError("Минимальная длина пароля 4 символа");
-        } else {
+        } else if (password.length > 30) {
+            pwdIsValid = false;
+            setPasswordError("Максимальная длина пароля 30 символов");
+        } else if (password.length <= 30 && password.length >= 2) {
             pwdIsValid = true;
         }
 
@@ -82,7 +84,7 @@ const RegisterPage = () => {
 
     useEffect(() => {
         if (error !== null) {
-            setEmailError(error);
+            setEmailError(error.message);
         }
     }, [error])
 

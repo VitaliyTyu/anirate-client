@@ -1,10 +1,10 @@
-import { TitleDetailsVM } from "../api/api";
+import { ApiException, TitleDetailsVM } from "../api/api";
 import { TitleDetailsActionTypes } from "./titleDetails";
 
 export interface AuthState {
     isAuth: boolean;
     loading: boolean;
-    error: null | string;
+    error: null | ApiException;
 }
 
 
@@ -31,7 +31,7 @@ export interface LoginActionSuccess {
 
 export interface LoginActionError {
     type: AuthActionTypes.LOGIN_ERROR;
-    payload: string | null;
+    payload: ApiException | null;
 }
 
 
@@ -45,7 +45,7 @@ export interface RegisterActionSuccess {
 
 export interface RegisterActionError {
     type: AuthActionTypes.REGISTER_ERROR;
-    payload: string | null;
+    payload: ApiException | null;
 }
 
 

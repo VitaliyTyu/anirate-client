@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ApiException } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import CollectionsList from '../../UI/CollectionList/CollectionsList';
@@ -8,11 +9,11 @@ import css from "./CollectionsPage.module.css"
 
 
 const CollectionsPage = () => {
-    const { paginatedList, loading, error, page } = useTypedSelector(state => state.collections)
-    const { getCollections, setCollectionsPage, } = useActions()
+    const { isAuth } = useTypedSelector(state => state.auth)
+    const { paginatedList, error, page } = useTypedSelector(state => state.collections)
+    const { getCollections, setCollectionsPage, logout, authCheck } = useActions()
     const pages: number[] = [];
     const makePages = useMemo(() => makePagesArr(), [paginatedList?.totalPages])
-    const navigate = useNavigate()
 
     function makePagesArr() {
         let arr: number[] = []
@@ -24,9 +25,9 @@ const CollectionsPage = () => {
         return arr;
     }
 
-
     useEffect(() => {
-        setCollectionsPage(1);
+        authCheck()
+        setCollectionsPage(1)
         getCollections(1, 10)
     }, []);
 
@@ -37,8 +38,9 @@ const CollectionsPage = () => {
 
 
     if (error) {
-        return <h1>{error}</h1>
+        return <h1>{error.message}</h1>
     }
+
 
     return (
         <div className={css.collectionsPage}>

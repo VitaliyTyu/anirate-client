@@ -11,7 +11,7 @@ import css from './ExactCollectionPage.module.css'
 const ExactCollectionPage = () => {
     const collectionState = useTypedSelector(state => state.collectionDetails)
     const titlesState = useTypedSelector(state => state.titles)
-    const { getCollectionDetails, setTitlesInCollectionPage } = useActions()
+    const { getCollectionDetails, setTitlesInCollectionPage, authCheck } = useActions()
     const params = useParams()
     const [imgPath, setImgPath] = useState("https://dummyimage.com/150x250/b8b6b8/666669&text=Коллекция");
     const navigate = useNavigate()
@@ -43,6 +43,7 @@ const ExactCollectionPage = () => {
 
 
     useEffect(() => {
+        authCheck()
         getCollectionDetails(params.id, 1, 10)
         setTitlesInCollectionPage(1);
     }, [])

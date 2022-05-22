@@ -1,9 +1,9 @@
-import { BriefCollectionVMPaginatedList } from "../api/api";
+import { ApiException, BriefCollectionVMPaginatedList } from "../api/api";
 
 export interface CollectionsState {
     paginatedList: BriefCollectionVMPaginatedList | undefined;
     loading: boolean;
-    error: null | string;
+    error: null | ApiException;
     page: number;
 }
 
@@ -26,7 +26,7 @@ export interface FetchCollectionsSuccessAction {
 
 export interface FetchCollectionsErrorAction {
     type: CollectionsActionTypes.FETCH_COLLECTIONS_ERROR;
-    payload: string | null;
+    payload: ApiException | null;
 }
 
 export interface SetCollectionsPage {

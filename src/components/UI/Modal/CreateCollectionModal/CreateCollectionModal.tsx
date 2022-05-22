@@ -19,9 +19,10 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
     const handleShow = () => setShow(true);
     const [name, setName] = useState("");
     const [nameError, setNameError] = useState("");
-    const { getCollections, setCollectionsPage } = useActions()
+    const { getCollections, authCheck } = useActions()
 
     const createCollection = async (details: CreateCollectionDto) => {
+        authCheck()
         let collectionId = await apiClient.collection(details);
         getCollections(props.page, props.size)
     }
