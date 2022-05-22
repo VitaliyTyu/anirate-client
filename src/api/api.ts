@@ -654,12 +654,6 @@ export class Client extends ClientBase {
 
 
 
-export interface UserInfo {
-    token?: string | undefined;
-    userName?: string | undefined;
-    errorMessage?: string | undefined;
-}
-
 export interface AddTitlesInCollectionsDto {
     collectionsIds?: string[] | undefined;
     animeTitlesIds?: string[] | undefined;
@@ -670,8 +664,7 @@ export interface AnimeCollection {
     id?: string;
     name?: string | undefined;
     userComment?: string | undefined;
-    userRating?: number | undefined;
-    image?: Image;
+    readonly animesCount?: number;
     animeTitles?: AnimeTitle[] | undefined;
 }
 
@@ -695,7 +688,8 @@ export interface AnimeTitle {
 export interface BriefCollectionVM {
     id?: string;
     name?: string | undefined;
-    image?: Image;
+    userComment?: string | undefined;
+    animesCount?: number;
 }
 
 export interface BriefCollectionVMPaginatedList {
@@ -728,14 +722,13 @@ export interface CollectionDetailsVM {
     id?: string;
     name?: string | undefined;
     userComment?: string | undefined;
-    userRating?: number | undefined;
-    image?: Image;
     animeTitles?: BriefTitleVMPaginatedList;
 }
 
 export interface CreateCollectionDto {
     name?: string | undefined;
     animeTitlesIds?: string[] | undefined;
+    userComment?: string | undefined;
 }
 
 export interface DeleteCollectionsDto {
@@ -799,15 +792,16 @@ export interface TitleDetailsVM {
     animeCollections?: AnimeCollection[] | undefined;
 }
 
-export interface TitlesListVM {
-    animeTitles?: BriefTitleVM[] | undefined;
-}
-
 export interface UpdateCollectionDetailsDto {
     id?: string;
     name?: string | undefined;
     userComment?: string | undefined;
-    userRating?: number | undefined;
+}
+
+export interface UserInfo {
+    token?: string | undefined;
+    userName?: string | undefined;
+    errorMessage?: string | undefined;
 }
 
 export class ApiException extends Error {

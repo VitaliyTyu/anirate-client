@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useContext, useEffect, useState } from 'react';
-import { BriefCollectionVM, BriefTitleVM, BriefTitleVMPaginatedList, Client, TitlesListVM } from "../../../api/api";
+import { BriefTitleVM, BriefTitleVMPaginatedList } from "../../../api/api";
 import { useNavigate } from 'react-router-dom';
 import AnimeItem from '../AnimeItem/AnimeItem';
 import css from './AnimeList.module.css'

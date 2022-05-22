@@ -15,17 +15,6 @@ interface CollectionItemProps {
 }
 
 const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
-    const [imgPath, setImgPath] = useState("https://dummyimage.com/150x250/b8b6b8/666669&text=Коллекция");
-
-    useEffect(() => {
-        if (props.collection?.image == undefined) {
-            setImgPath("https://dummyimage.com/150x250/b8b6b8/666669&text=Коллекция")
-        }
-        else {
-            setImgPath("https://shikimori.one/" + props.collection?.image?.preview)
-        }
-    }, [props.collection?.image])
-
     const secondHandle = (e: { stopPropagation: () => void; }) => {
         e.stopPropagation();
     }

@@ -13,7 +13,6 @@ const ExactCollectionPage = () => {
     const titlesState = useTypedSelector(state => state.titles)
     const { getCollectionDetails, setTitlesInCollectionPage, authCheck } = useActions()
     const params = useParams()
-    const [imgPath, setImgPath] = useState("https://dummyimage.com/150x250/b8b6b8/666669&text=Коллекция");
     const navigate = useNavigate()
     const makePages = useMemo(() => makePagesArr(), [collectionState.collectionDetails?.animeTitles?.totalPages])
 
@@ -31,16 +30,6 @@ const ExactCollectionPage = () => {
 
         return arr;
     }
-
-    useEffect(() => {
-        if (collectionState.collectionDetails?.image == undefined) {
-            setImgPath("https://dummyimage.com/150x250/b8b6b8/666669&text=Коллекция")
-        }
-        else {
-            setImgPath("https://shikimori.one/" + collectionState.collectionDetails?.image?.preview)
-        }
-    }, [collectionState?.collectionDetails?.image])
-
 
     useEffect(() => {
         authCheck()
@@ -62,24 +51,23 @@ const ExactCollectionPage = () => {
 
     return (
         <div className={css.exactCollectionPage}>
-            <div className={css.exactCollection}>                
-                <img src={imgPath} /> 
-                <div className={css.collection}>                  
+            <div className={css.exactCollection}>
+                <div className={css.collection}>
                     <div className={css.collectionPart}>
                         <div className={css.collectionInfo}>
-                            <h1>{collectionState.collectionDetails?.name}</h1>                    
+                            <h1>{collectionState.collectionDetails?.name}</h1>
                             <div>Аниме в коллекции: </div>
                             <div>Средний рейтинг аниме: </div>
-                            <div className = {css.description}>
+                            <div className={css.description}>
                                 <div>Описание: </div>
                                 <textarea></textarea>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <div className={css.collectionModal}>
-                        <AddAnimesToCollectionModal collectionId={collectionState.collectionDetails?.id} />  
-                    </div> 
-                </div> 
+                        <AddAnimesToCollectionModal collectionId={collectionState.collectionDetails?.id} />
+                    </div>
+                </div>
             </div>
             <div className={css.animes}>
                 <h1>Аниме в этой коллекции:</h1>
