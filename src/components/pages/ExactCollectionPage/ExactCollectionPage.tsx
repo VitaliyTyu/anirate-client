@@ -5,7 +5,7 @@ import { BriefCollectionVM, BriefTitleVM } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import AnimeList from '../../UI/AnimeList/AnimeList';
-import AddAnimesToCollectionModal from '../../UI/Modal/AddAnimesToCollectionModal';
+import AddAnimesToCollectionModal from '../../UI/Modal/AddAnimesToCollectionModal/AddAnimesToCollectionModal';
 import css from './ExactCollectionPage.module.css'
 
 const ExactCollectionPage = () => {
@@ -61,10 +61,24 @@ const ExactCollectionPage = () => {
 
     return (
         <div className={css.exactCollectionPage}>
-            <div className={css.exactCollection}>
-                <img src={imgPath} />
-                <div>{collectionState.collectionDetails?.name}</div>
-                <AddAnimesToCollectionModal collectionId={collectionState.collectionDetails?.id} />
+            <div className={css.exactCollection}>                
+                <img src={imgPath} /> 
+                <div className={css.collection}>                  
+                    <div className={css.collectionPart}>
+                        <div className={css.collectionInfo}>
+                            <h1>{collectionState.collectionDetails?.name}</h1>                    
+                            <div>Аниме в коллекции: </div>
+                            <div>Средний рейтинг аниме: </div>
+                            <div className = {css.description}>
+                                <div>Описание: </div>
+                                <textarea></textarea>
+                            </div>
+                        </div>  
+                    </div>
+                    <div className={css.collectionModal}>
+                        <AddAnimesToCollectionModal collectionId={collectionState.collectionDetails?.id} />  
+                    </div> 
+                </div> 
             </div>
             <div className={css.animes}>
                 <h1>Аниме в этой коллекции:</h1>

@@ -25,7 +25,14 @@
 
 .titleName{
     width: 156; 
-    height: 50;
+    height: 40;   
+}
+
+.titleNameTitle{
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .titleScore{

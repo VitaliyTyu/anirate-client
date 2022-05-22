@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { register } from '../../../store/actions-creators/auth';
+import css from "./RegisterPage.module.css"
+import { Button } from "react-bootstrap";
 
 const RegisterPage = () => {
     const { register } = useActions()
@@ -61,7 +63,7 @@ const RegisterPage = () => {
     }
 
     return (
-        <div className="App">
+        <div className={css.App}>
             <div className="container">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-4">
@@ -110,12 +112,12 @@ const RegisterPage = () => {
                                 </small>
                             </div>
 
-                            <button
+                            <Button
                                 style={{ marginTop: 10 }}
-                                type="submit"
-                                className="btn btn-primary">
-                                Submit
-                            </button>
+                                type="submit"                                
+                                variant="outline-dark" size="lg">
+                                Регистрация
+                            </Button>
                         </form>
                     </div>
                 </div>

@@ -1,10 +1,11 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { BriefTitleVM, Client, CollectionDetailsVM } from '../../../api/api';
-import { useActions } from '../../../hooks/useActions';
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import AnimeList from '../AnimeList/AnimeList';
+import { BriefTitleVM, Client, CollectionDetailsVM } from '../../../../api/api';
+import { useActions } from '../../../../hooks/useActions';
+import { useTypedSelector } from '../../../../hooks/useTypedSelector';
+import AnimeList from '../../AnimeList/AnimeList';
+import css from './AddAnimesToCollectionModal.module.css'
 
 const apiClient = new Client('https://localhost:5001');
 
@@ -71,7 +72,7 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
 
     return (
         <div >
-            <Button variant="outline-dark" size="lg" onClick={handleShow}>
+            <Button variant="outline-dark" size="lg" onClick={handleShow} className={css.button}>
                 Добавить аниме
             </Button>
 

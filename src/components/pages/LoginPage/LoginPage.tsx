@@ -2,6 +2,9 @@ import React, { FC, ReactElement, useContext, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
+import css from "./LoginPage.module.css"
+import { Button } from "react-bootstrap";
+
 
 const LoginPage: FC = (): ReactElement => {
     const { error } = useTypedSelector(state => state.auth)
@@ -48,7 +51,7 @@ const LoginPage: FC = (): ReactElement => {
     }
 
     return (
-        <div className="App">
+        <div className={css.App}>
             <div className="container">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-4">
@@ -83,12 +86,12 @@ const LoginPage: FC = (): ReactElement => {
                                 </small>
                             </div>
 
-                            <button
+                            <Button
                                 style={{ marginTop: 10 }}
-                                type="submit"
-                                className="btn btn-primary">
-                                Submit
-                            </button>
+                                type="submit"                                
+                                variant="outline-dark" size="lg">
+                                Войти
+                            </Button>
                         </form>
                     </div>
                 </div>

@@ -24,7 +24,7 @@ const AnimeItem: FC<AnimeItemProps> = (props): ReactElement => {
                     
                     <Card.Img variant="top" src={"https://shikimori.one/" + props.title?.image?.original} />
                     <Card.Body className={css.titleName} >
-                        <Card.Title>{props.title?.russian}</Card.Title>
+                        <Card.Title className={css.titleNameTitle}>{props.title?.russian}</Card.Title>
                         <Card.Text>
                             {props.title?.score}
                         </Card.Text>                    

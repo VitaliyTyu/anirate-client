@@ -1,11 +1,46 @@
+.setBackground{
+    background: rgb(255,241,255);
+    background: radial-gradient(circle, rgba(255,241,255,1) 43%, rgba(255,255,255,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: center;    
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100% 100%; /* Современные браузеры */
+}
+
+.App{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    
+}
+.formGroup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+.inputForm input{
+    width: 100%;
+}
+
+.buttonsPlace{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+
 .button {
-    width: 40%;
-    height: 50px;
-    min-width: 30px;
-    margin-top: 30px;
-    margin-left: 50px;
+    width:30%;
+    height: 40px;
+    min-width: 15px;
+    margin-top: 15px;
+    margin-left: 15px;
     margin-right: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
     object-fit: cover;
-    font-size: 20px;
+    font-size: calc( (100vw - 480px)/(1600 - 480) * (17 - 10) + 10px);
 }

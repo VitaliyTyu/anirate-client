@@ -12,7 +12,7 @@ const Intro = () => {
             <div className={css.intro} id="intro">
                 <div className={css.container}>
                     <div className={css.intro_inner}>
-                        <h1 className={css.intro_title}>Добро пожаловать в AniRate</h1>
+                        <h1 className={css.intro_title}>AniRate</h1>
                         <div className={css.buttons}>
                             
                             <Button className={css.button}
