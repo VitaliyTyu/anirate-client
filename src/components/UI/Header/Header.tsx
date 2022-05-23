@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from "react-router-dom";
@@ -10,7 +10,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const Header = () => {
     const { isAuth, } = useTypedSelector(state => state.auth)
     const navigate = useNavigate()
-    const { logout } = useActions()
+    const { logout, searchTitles } = useActions()
+    const [searchString, setSearchString] = useState("")
+
+    const handleValidation = () => {
+        let searchStringIsValid = true;
+
+        if (searchString.length < 1) {
+            searchStringIsValid = false;
+        }
+
+        return searchStringIsValid;
+    };
+
+    const search = () => {
+        if (handleValidation()) {
+            navigate(`search/${searchString}`)
+        }
+    }
+
+    const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.keyCode == 13 && handleValidation()) {
+            e.preventDefault();
+            navigate(`search/${searchString}`)
+        }
+    }
+
     return (
         <div style={{ backgroundColor: '#fcc0f2' }}>
             <Navbar expand="lg">
@@ -26,8 +51,19 @@ const Header = () => {
 
                     <Nav className="me-auto">
                         <form className="d-flex">
-                            <input className="form-control ms-5" type="search" placeholder="Поиск" aria-label="Search" />
-                            <Button variant="outline-dark" className="ms-1">Поиск</Button>
+                            <input className="form-control ms-5"
+                                placeholder="Поиск"
+                                aria-label="Search"
+                                onChange={(event) => setSearchString(event.target.value)}
+                                onKeyDown={(event) => onEnterPress(event)}
+                            />
+                            <Button
+                                variant="outline-dark"
+                                className="ms-1"
+                                onClick={search}
+                            >
+                                Поиск
+                            </Button>
                         </form>
                     </Nav>
 

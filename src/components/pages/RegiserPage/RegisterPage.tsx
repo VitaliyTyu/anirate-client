@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { RegisterViewModel } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
@@ -6,7 +6,7 @@ import { register } from '../../../store/actions-creators/auth';
 import css from "./RegisterPage.module.css"
 import { Button } from "react-bootstrap";
 
-const RegisterPage = () => {
+const RegisterPage: FC = (): ReactElement => {
     const { register } = useActions()
     const { error } = useTypedSelector(state => state.auth)
     const [password, setPassword] = useState("");
@@ -163,7 +163,7 @@ const RegisterPage = () => {
                                 type="submit"
                                 className="btn btn-primary"
                             >
-                                Войти
+                                Создать аккаунт
                             </button>
                         </form>
                     </div>

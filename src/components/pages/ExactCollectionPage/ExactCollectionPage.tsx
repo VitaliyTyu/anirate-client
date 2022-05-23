@@ -1,5 +1,5 @@
 
-import { useMemo, useEffect } from 'react';
+import { useMemo, useEffect, ReactElement, FC } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BriefCollectionVM } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
@@ -9,7 +9,7 @@ import AnimeList from '../../UI/Anime/AnimeList/AnimeList';
 import AddAnimesToCollectionModal from '../../UI/Modal/AddAnimesToCollectionModal/AddAnimesToCollectionModal';
 import css from './ExactCollectionPage.module.css'
 
-const ExactCollectionPage = () => {
+const ExactCollectionPage: FC = (): ReactElement => {
     const collectionState = useTypedSelector(state => state.collectionDetails)
     const titlesState = useTypedSelector(state => state.titles)
     const { getCollectionDetails, setTitlesInCollectionPage, authCheck } = useActions()
@@ -17,8 +17,8 @@ const ExactCollectionPage = () => {
     const navigate = useNavigate()
     const makePages = useMemo(() => makePagesArr(), [collectionState.collectionDetails?.animeTitles?.totalPages])
 
-    
-    
+
+
     const functionOnClick = (item: BriefCollectionVM) => {
         navigate(`/animes/${item?.id}`)
     }
@@ -35,14 +35,14 @@ const ExactCollectionPage = () => {
 
     useEffect(() => {
         authCheck()
-        getCollectionDetails(params.id, 1, 10)
+        getCollectionDetails(params.id, 1, 25)
         setTitlesInCollectionPage(1);
     }, [])
 
 
     useEffect(() => {
         console.log(collectionState.page);
-        getCollectionDetails(params.id, collectionState.page, 10)
+        getCollectionDetails(params.id, collectionState.page, 25)
     }, [collectionState.page]);
 
 
@@ -60,12 +60,9 @@ const ExactCollectionPage = () => {
                             <h1>{collectionState.collectionDetails?.name}</h1>
                             <div>Аниме в коллекции: {collectionState.collectionDetails?.animeTitles?.items?.length}</div>
                             <div className={css.description}>
-                                <div>Описание: <br/>
-                                {collectionState.collectionDetails?.userComment}</div>
-                                Кто приходит на ум, когда речь заходит о тайных агентах? Конечно же, невероятный Джеймс Бонд, который постоянно подвергает жизнь опасности, выполняя секретные миссии. О таком харизматичном и смелом мужчине мечтают многие дамы, так что Агент 007 купается в лучах женского внимания.
-Герой этой истории, Лойд Форджер, является «Джеймсом Бондом» своего времени. Погони, шпионаж, перестрелки, тайные миссии — всё это является неотъемлемой частью его жизни. Закончив одно задание, он тут же принимается за другое — усталость ему неведома. Однако на этот раз миссия оказывается немного необычной: он должен сохранить мир между двумя странами, а для этого ему предстоит обзавестись фиктивной семьёй. Роль «роковой красотки из Бондианы», и по совместительству жены Лойда, достаётся Йор Форджер — профессиональной наёмной убийце с кодовым именем Тернистая Принцесса. Для полноты картины осталось обзавестись ещё и ребёнком, и эспер Аня Форджер только рада заполучить себе крутых новых родителей.
-
-Теперь новой семье предстоит не только выполнить секретное задание, не раскрыв себя, но и понять, что семья — это гораздо больше, чем просто кровные родственники.
+                                <div>Описание: <br />
+                                    {collectionState.collectionDetails?.userComment}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -91,7 +88,11 @@ const ExactCollectionPage = () => {
                     )}
                 </div>
 
-                <AnimeInCollectionList clickFunction={functionOnClick} paginatedList={collectionState.collectionDetails?.animeTitles} />
+                <AnimeInCollectionList
+                    clickFunction={functionOnClick}
+                    paginatedList={collectionState.collectionDetails?.animeTitles}
+                    collectionId={collectionState.collectionDetails?.id ?? ""}
+                />
             </div>
         </div>
     );

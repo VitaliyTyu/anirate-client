@@ -1,35 +1,39 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, ReactElement, useEffect, useMemo, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { Client, CreateCollectionDto } from '../../../../api/api';
+import { Client, BriefTitleVM, BriefCollectionVM, UpdateCollectionDetailsDto } from '../../../../api/api';
 import { useActions } from '../../../../hooks/useActions';
-import css from './CreateCollectionModal.module.css'
+import { useTypedSelector } from '../../../../hooks/useTypedSelector';
+import AnimeList from '../../Anime/AnimeList/AnimeList';
+import css from './ChangeCollectionModal.module.css'
+
 
 const apiClient = new Client('https://localhost:5001');
 
-interface CreateCollectionModalProps {
+interface ChangeCollectionModalProps {
     page: number;
     size: number;
+    collection: BriefCollectionVM | undefined;
     children?: React.ReactChild | React.ReactNode;
 }
 
-const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
+const ChangeCollectionModal: FC<ChangeCollectionModalProps> = (props): ReactElement => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const [name, setName] = useState("");
+    const [name, setName] = useState(props.collection?.name ?? "");
     const [nameError, setNameError] = useState("");
-    const [description, setDescription] = useState("");
+    const [description, setDescription] = useState(props.collection?.userComment ?? "");
     const [descriptionError, setDescriptionError] = useState("");
     const { getCollections, authCheck } = useActions()
 
     const createCollection = async () => {
         authCheck()
         if (handleValidation()) {
-            let createCollectionDto: CreateCollectionDto = {
+            let updateCollectionDetailsDto: UpdateCollectionDetailsDto = {
+                id: props.collection?.id,
                 name,
-                userComment: description
+                userComment: description,
             }
-            let collectionId = await apiClient.collection(createCollectionDto);
+            await apiClient.changeDetails(updateCollectionDetailsDto);
             getCollections(props.page, props.size)
             handleClose()
         }
@@ -37,9 +41,9 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
 
     const handleShow = () => {
         setShow(true);
-        setName("")
+        setName(props.collection?.name ?? "")
         setNameError("")
-        setDescription("")
+        setDescription(props.collection?.userComment ?? "")
         setDescriptionError("")
     }
 
@@ -81,11 +85,11 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
                 onClick={handleShow}
                 variant="outline-dark" size="lg"
             >
-                Создать коллекцию
+                Редактировать
             </Button>
             <Modal show={show} onHide={handleClose} >
                 <Modal.Header closeButton className={css.setBackground}>
-                    <Modal.Title >Создание коллекции</Modal.Title>
+                    <Modal.Title >Редактирование коллекции</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={css.setBackground}>
                     <div className={css.App}>
@@ -94,6 +98,7 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
                             <div className={css.formGroup}>
                                 <label>Название коллекции</label>
                                 <input
+                                    value={name}
                                     placeholder="название"
                                     onChange={(event) => setName(event.target.value)}
                                 />
@@ -107,6 +112,7 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
                             <div className={css.formGroup}>
                                 <label>Описание коллекции</label>
                                 <input
+                                    value={description}
                                     placeholder="описание"
                                     onChange={(event) => setDescription(event.target.value)}
                                 />
@@ -128,7 +134,7 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
                             Закрыть
                         </Button>
                         <Button type="submit" variant="primary" onClick={() => createCollection()} className={css.button}>
-                            Создать
+                            Изменить
                         </Button>
                     </div>
                 </Modal.Footer>
@@ -137,4 +143,4 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
     );
 };
 
-export default CreateCollectionModal;
+export default ChangeCollectionModal;

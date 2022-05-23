@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { FC, ReactElement, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ApiException, BriefCollectionVM, Client, DeleteCollectionsDto } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
@@ -8,7 +8,7 @@ import CreateCollectionModal from '../../UI/Modal/CreateCollectionModal/CreateCo
 import css from "./CollectionsPage.module.css"
 
 
-const CollectionsPage = () => {
+const CollectionsPage: FC = (): ReactElement => {
     const { isAuth } = useTypedSelector(state => state.auth)
     const { paginatedList, error, page } = useTypedSelector(state => state.collections)
     const { getCollections, setCollectionsPage, logout, authCheck } = useActions()
@@ -33,12 +33,12 @@ const CollectionsPage = () => {
     useEffect(() => {
         authCheck()
         setCollectionsPage(1)
-        getCollections(1, 10)
+        getCollections(1, 20)
     }, []);
 
 
     useEffect(() => {
-        getCollections(page, 10)
+        getCollections(page, 20)
     }, [page]);
 
 
@@ -49,7 +49,7 @@ const CollectionsPage = () => {
 
     return (
         <div className={css.collectionsPage}>
-            <CreateCollectionModal page={page} size={10} />
+            <CreateCollectionModal page={page} size={20} />
             <div style={{ display: "flex" }}>
                 {makePages.map(p =>
                     <div

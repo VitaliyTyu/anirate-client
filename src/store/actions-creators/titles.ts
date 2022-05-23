@@ -25,3 +25,25 @@ export const getTitles = (page: number = 1, size: number = 10) => {
 export function setTitlesPage(page: number): TitlesAction {
     return { type: TitlesActionTypes.SET_TITLES_PAGE, payload: page }
 }
+
+export const searchTitles = (serachString: string, page: number = 1, size: number = 10) => {
+    return async (dispatch: Dispatch<TitlesAction>) => {
+        try {
+            dispatch({
+                type: TitlesActionTypes.FETCH_TITLES
+            })
+
+            const paginatedList = await apiClient.searchTitles(serachString, page, size);
+
+            dispatch({
+                type: TitlesActionTypes.FETCH_TITLES_SUCCESS,
+                payload: paginatedList
+            })
+        } catch (e) {
+            dispatch({
+                type: TitlesActionTypes.FETCH_TITLES_ERROR,
+                payload: "Ошибка при получении аниме тайтлов с сервера"
+            })
+        }
+    }
+}

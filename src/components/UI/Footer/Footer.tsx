@@ -4,15 +4,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Footer = () => {
     return (
-        
+
         <footer className={css.footer} >
-            <div className={css.container}>                                
+            <div className={css.container}>
                 <div className={css.copyright}>
-                    © 2022 AniRate  by <span>LOL</span>
-                </div>    
+                    © 2022 AniRate  by <span>HSE</span>
+                </div>
             </div>
         </footer>
-       
+
     );
 };
 

@@ -18,7 +18,7 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
     const [show, setShow] = useState(false)
     const handleShow = () => setShow(true)
     const titlesState = useTypedSelector(state => state.titles)
-    const { getTitles, setTitlesPage, getCollectionDetails, authCheck } = useActions()
+    const { getTitles, setTitlesPage, getCollectionDetails, authCheck, getCollections } = useActions()
     const [animesIds, setAnimesIds] = useState<string[]>([])
     const makePages = useMemo(() => makePagesArr(), [titlesState?.paginatedList?.totalPages])
 
@@ -46,20 +46,21 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
     }
 
     useEffect(() => {
-        getTitles(1, 20)
+        getTitles(1, 25)
         setTitlesPage(1)
     }, [])
 
 
     useEffect(() => {
-        getTitles(titlesState.page, 20)
+        getTitles(titlesState.page, 25)
     }, [titlesState.page]);
 
 
     const addTitles = async () => {
         authCheck()
         await apiClient.titles({ collectionsIds: [props.collectionId ?? ""], animeTitlesIds: animesIds });
-        getCollectionDetails(props.collectionId)
+        getCollectionDetails(props.collectionId, 1, 25)
+        getCollections(1, 20)
     }
 
 

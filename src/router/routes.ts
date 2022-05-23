@@ -4,6 +4,7 @@ import ExactAnimePage from "../components/pages/ExactAnimePage/ExactAnimePage"
 import ExactCollectionPage from "../components/pages/ExactCollectionPage/ExactCollectionPage"
 import LoginPage from "../components/pages/LoginPage/LoginPage"
 import RegisterPage from "../components/pages/RegiserPage/RegisterPage"
+import SearchPage from "../components/pages/SearchPage/SearchPage"
 import StartPage from "../components/pages/StartPage/StartPage"
 
 export const publicRoutes = [
@@ -12,7 +13,7 @@ export const publicRoutes = [
     { path: "/animes/:id", component: ExactAnimePage },
     { path: "/login", component: LoginPage },
     { path: "/register", component: RegisterPage },
-
+    { path: "/search/:searchString", component: SearchPage },
 ]
 
 export const privateRoutes = [
@@ -21,4 +22,6 @@ export const privateRoutes = [
     { path: "/animes/:id", component: ExactAnimePage },
     { path: "/collections", component: CollectionsPage },
     { path: "/collections/:id", component: ExactCollectionPage },
+    { path: "/search/:searchString", component: SearchPage },
+
 ]

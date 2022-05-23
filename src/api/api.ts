@@ -650,6 +650,116 @@ export class Client extends ClientBase {
         }
         return Promise.resolve<void>(null as any);
     }
+
+
+    /**
+     * Поиск коллекций
+     * @param searchString (optional) 
+     * @param page (optional) 
+     * @param size (optional) 
+     * @return Success
+     */
+    searchCollections(searchString: string | undefined, page: number | undefined, size: number | undefined): Promise<BriefCollectionVMPaginatedList> {
+        let url_ = this.baseUrl + "/api/AnimeCollections/SearchCollections?";
+        if (searchString === null)
+            throw new Error("The parameter 'searchString' cannot be null.");
+        else if (searchString !== undefined)
+            url_ += "searchString=" + encodeURIComponent("" + searchString) + "&";
+        if (page === null)
+            throw new Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        if (size === null)
+            throw new Error("The parameter 'size' cannot be null.");
+        else if (size !== undefined)
+            url_ += "size=" + encodeURIComponent("" + size) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.transformOptions(options_).then(transformedOptions_ => {
+            return this.http.fetch(url_, transformedOptions_);
+        }).then((_response: Response) => {
+            return this.processSearchCollections(_response);
+        });
+    }
+
+    protected processSearchCollections(response: Response): Promise<BriefCollectionVMPaginatedList> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+                let result200: any = null;
+                result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as BriefCollectionVMPaginatedList;
+                return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<BriefCollectionVMPaginatedList>(null as any);
+    }
+
+
+    /**
+     * Поиск всех аниме
+     * @param searchString (optional) 
+     * @param page (optional) 
+     * @param size (optional) 
+     * @return Success
+     */
+    searchTitles(searchString: string | undefined, page: number | undefined, size: number | undefined): Promise<BriefTitleVMPaginatedList> {
+        let url_ = this.baseUrl + "/api/AnimeTitles/SearchTitles?";
+        if (searchString === null)
+            throw new Error("The parameter 'searchString' cannot be null.");
+        else if (searchString !== undefined)
+            url_ += "searchString=" + encodeURIComponent("" + searchString) + "&";
+        if (page === null)
+            throw new Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        if (size === null)
+            throw new Error("The parameter 'size' cannot be null.");
+        else if (size !== undefined)
+            url_ += "size=" + encodeURIComponent("" + size) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.transformOptions(options_).then(transformedOptions_ => {
+            return this.http.fetch(url_, transformedOptions_);
+        }).then((_response: Response) => {
+            return this.processSearchTitles(_response);
+        });
+    }
+
+    protected processSearchTitles(response: Response): Promise<BriefTitleVMPaginatedList> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+                let result200: any = null;
+                result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as BriefTitleVMPaginatedList;
+                return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<BriefTitleVMPaginatedList>(null as any);
+    }
 }
 
 

@@ -13,12 +13,15 @@ interface CollectionsListProps {
 }
 
 const CollectionsList: FC<CollectionsListProps> = (props): ReactElement => {
+
     return (
         <div className={css.collectionList}>
             {props.paginatedList?.items?.map((collection => (
                 <CollectionItem
                     key={collection?.id}
                     clickFunction={() => props.clickFunction(collection)}
+                    page={props.paginatedList?.pageNumber ?? 1}
+                    size={20}
                     collection={collection}
                 />
             )))}

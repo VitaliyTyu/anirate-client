@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useActions } from '../../../hooks/useActions';
@@ -7,12 +7,14 @@ import AddAnimeToCollectionsModal from '../../UI/Modal/AddAnimeToCollectionsModa
 import css from './ExactAnimePage.module.css'
 
 
-const ExactAnimePage = () => {
+const ExactAnimePage: FC = (): ReactElement => {
     const [descriptionHtml, setDescriptionHtml] = useState<string | undefined>("")
     const { titleDetails, loading, error } = useTypedSelector(state => state.titleDetails)
+    const { isAuth } = useTypedSelector(state => state.auth)
     const { getTitleDetails } = useActions()
     const params = useParams()
     const navigate = useNavigate();
+
 
     function createMarkup() {
         return { __html: `${descriptionHtml}` };
@@ -64,7 +66,12 @@ const ExactAnimePage = () => {
                     </div>
                 </div>
                 <div className={css.buttonsElems}>
-                    <AddAnimeToCollectionsModal animeId={titleDetails?.id} />
+                    {
+                        isAuth
+                            ?
+                            <AddAnimeToCollectionsModal animeId={titleDetails?.id} />
+                            : <h1></h1>
+                    }
                 </div>
 
             </div>

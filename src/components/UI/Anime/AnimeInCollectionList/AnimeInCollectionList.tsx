@@ -9,6 +9,7 @@ interface AnimeInCollectionListProps {
     clickFunction: (item: BriefTitleVM) => void;
     paginatedList: BriefTitleVMPaginatedList | undefined;
     children?: React.ReactChild | React.ReactNode;
+    collectionId: string;
 }
 
 const AnimeInCollectionList: FC<AnimeInCollectionListProps> = (props): ReactElement => {
@@ -21,6 +22,9 @@ const AnimeInCollectionList: FC<AnimeInCollectionListProps> = (props): ReactElem
                             key={title.id}
                             title={title}
                             clickFunction={() => props.clickFunction(title)}
+                            page={props.paginatedList?.pageNumber ?? 1}
+                            size={25}
+                            collectionId={props.collectionId}
                         />
                     ))}
                 </CardGroup>

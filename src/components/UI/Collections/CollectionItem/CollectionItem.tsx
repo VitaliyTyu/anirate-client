@@ -3,6 +3,7 @@ import { Button, Card, Dropdown } from "react-bootstrap";
 import { BriefCollectionVM, Client, DeleteCollectionsDto } from "../../../../api/api";
 import { useActions } from "../../../../hooks/useActions";
 import AddAnimesToCollectionModal from "../../Modal/AddAnimesToCollectionModal/AddAnimesToCollectionModal";
+import ChangeCollectionModal from "../../Modal/ChangeCollectionModal/ChangeCollectionModal";
 import css from "./CollectionItem.module.css"
 
 
@@ -12,6 +13,8 @@ interface CollectionItemProps {
     clickFunction: () => void;
     collection: BriefCollectionVM | undefined;
     children?: React.ReactChild | React.ReactNode;
+    page: number;
+    size: number;
 }
 
 const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
@@ -26,8 +29,7 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
             animeCollectionsIds: [props.collection?.id ?? ""],
         }
         await apiClient.deleteCollections(deleteCollectionsDto)
-        getCollections(1, 10)
-
+        getCollections(props.page, props.size)
     }
 
     return (
@@ -52,7 +54,13 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu variant='dark'>
-                            <Dropdown.Item>Редактировать</Dropdown.Item>
+                            <Dropdown.Item>
+                                <ChangeCollectionModal
+                                    collection={props.collection}
+                                    page={props.page}
+                                    size={props.size}
+                                />
+                            </Dropdown.Item>
                             <Dropdown.Item>
                                 <Button onClick={() => deleteCollection()}>
                                     Удалить коллекцию
