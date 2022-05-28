@@ -381,7 +381,8 @@ export class Client extends ClientBase {
      * @return Success
      */
     animeTitles(pageNumber: number | undefined, pageSize: number | undefined): Promise<BriefTitleVMPaginatedList> {
-        let url_ = this.baseUrl + "/api/AnimeTitles?";
+        // let url_ = this.baseUrl + "/api/AnimeTitles?";
+        let url_ = "AnimeTitles?";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
         else if (pageNumber !== undefined)

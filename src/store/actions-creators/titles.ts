@@ -2,7 +2,8 @@ import { Client } from "../../api/api";
 import { TitlesAction, TitlesActionTypes } from "../../types/titles";
 import { Dispatch } from "redux";
 
-const apiClient = new Client('https://localhost:5001');
+// const apiClient = new Client('https://localhost:5001');
+const apiClient = new Client('');
 
 export const getTitles = (page: number = 1, size: number = 10) => {
     return async (dispatch: Dispatch<TitlesAction>) => {
