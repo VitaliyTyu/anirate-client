@@ -1,6 +1,7 @@
 
 import { FC, useState, useMemo, useEffect } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
 import { Client, BriefTitleVM } from '../../../../api/api';
 import { useActions } from '../../../../hooks/useActions';
 import { useTypedSelector } from '../../../../hooks/useTypedSelector';
@@ -16,18 +17,23 @@ interface AddAnimesToCollectionModalProps {
 
 const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) => {
     const [show, setShow] = useState(false)
-    const handleShow = () => setShow(true)
     const titlesState = useTypedSelector(state => state.titles)
-    const { getTitles, setTitlesPage, getCollectionDetails, authCheck, getCollections } = useActions()
+    const { getTitles, setTitlesPage, getCollectionDetails, authCheck, getCollections, searchTitles } = useActions()
     const [animesIds, setAnimesIds] = useState<string[]>([])
-    const makePages = useMemo(() => makePagesArr(), [titlesState?.paginatedList?.totalPages])
+    const [searchString, setSearchString] = useState("")
+
+    const handleShow = () => {
+        setAnimesIds([])
+        setSearchString("")
+        setShow(true)
+    }
 
 
     const handleClose = () => {
         setShow(false)
         setAnimesIds([])
+        setSearchString("")
     }
-
 
     const functionOnClick = (item: BriefTitleVM) => {
         if (item.id !== undefined) {
@@ -35,39 +41,58 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
         }
     }
 
-    function makePagesArr() {
-        let arr: number[] = []
-        let len = titlesState?.paginatedList?.totalPages ?? 1
-        for (let i = 0; i < len; i++) {
-            arr.push(i + 1)
-        }
-
-        return arr;
-    }
-
     useEffect(() => {
-        getTitles(1, 25)
+        getTitles(1, 10)
         setTitlesPage(1)
     }, [])
 
 
     useEffect(() => {
-        getTitles(titlesState.page, 25)
+        getTitles(titlesState.page, 10)
     }, [titlesState.page]);
 
 
     const addTitles = async () => {
         authCheck()
         await apiClient.titles({ collectionsIds: [props.collectionId ?? ""], animeTitlesIds: animesIds });
-        getCollectionDetails(props.collectionId, 1, 25)
-        getCollections(1, 20)
+        getCollectionDetails(props.collectionId, 1, 20)
+        getCollections(1, 10)
     }
 
+    const handleValidation = () => {
+        let searchStringIsValid = true;
+
+        if (searchString.length < 1) {
+            searchStringIsValid = false;
+        }
+
+        return searchStringIsValid;
+    };
+
+    const handlePageClick = (selectedItem: { selected: number; }) => {
+        setTitlesPage(selectedItem.selected + 1)
+    }
+
+    const search = () => {
+        if (handleValidation()) {
+            searchTitles(searchString ?? "", 1, 20)
+        }
+    }
+
+    const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.keyCode == 13 && handleValidation()) {
+            e.preventDefault();
+            searchTitles(searchString ?? "", 1, 20)
+        }
+    }
+
+    const secondHandle = (e: { stopPropagation: () => void; }) => {
+        e.stopPropagation();
+    }
 
     if (titlesState.error) {
         return <h1>{titlesState.error}</h1>
     }
-
 
     return (
         <div >
@@ -80,24 +105,48 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
                     <Modal.Title>Добавление аниме</Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
+                    <form className="d-flex">
+                        <input className="form-control ms-5"
+                            placeholder="Поиск"
+                            aria-label="Search"
+                            onChange={(event) => setSearchString(event.target.value)}
+                            onKeyDown={(event) => onEnterPress(event)}
+                        />
+                        <Button
+                            variant="outline-dark"
+                            className="ms-1"
+                            onClick={search}
+                        >
+                            Поиск
+                        </Button>
+                    </form>
+
                     <div className="App">
                         <div className="container">
                             <div>
-                                <div style={{ display: "flex" }}>
-                                    {makePages.map(p =>
-                                        <div
-                                            onClick={() => setTitlesPage(p)}
-                                            style={{
-                                                border: p === titlesState.page ? "2px solid green" : "1px solid gray",
-                                                padding: 10,
-                                                margin: 10,
-                                            }}
-                                        >
-                                            {p}
-                                        </div>
-                                    )}
+                                <div className="row m-2">
+                                    <AnimeList paginatedList={titlesState?.paginatedList} clickFunction={functionOnClick} />
                                 </div>
-                                <AnimeList paginatedList={titlesState?.paginatedList} clickFunction={functionOnClick} />
+
+                                <ReactPaginate
+                                    previousLabel={"<<"}
+                                    nextLabel={">>"}
+                                    breakLabel={"..."}
+                                    pageCount={titlesState?.paginatedList?.totalPages ?? 0}
+                                    marginPagesDisplayed={2}
+                                    pageRangeDisplayed={3}
+                                    onPageChange={handlePageClick}
+                                    containerClassName={"pagination justify-content-center"}
+                                    pageClassName={"page-item"}
+                                    pageLinkClassName={"page-link"}
+                                    previousClassName={"page-item"}
+                                    previousLinkClassName={"page-link"}
+                                    nextClassName={"page-item"}
+                                    nextLinkClassName={"page-link"}
+                                    breakClassName={"page-item"}
+                                    breakLinkClassName={"page-link"}
+                                    activeClassName={"active"}
+                                />
                             </div>
 
                             <div style={{ display: "flex", marginTop: 20 }}>

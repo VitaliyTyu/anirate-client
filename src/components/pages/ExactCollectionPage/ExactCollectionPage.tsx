@@ -1,48 +1,52 @@
 
 import { useMemo, useEffect, ReactElement, FC } from 'react';
+import { Button, Dropdown } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
 import { useParams, useNavigate } from 'react-router-dom';
-import { BriefCollectionVM } from '../../../api/api';
+import { BriefCollectionVM, Client, DeleteCollectionsDto } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import AnimeInCollectionList from '../../UI/Anime/AnimeInCollectionList/AnimeInCollectionList';
 import AnimeList from '../../UI/Anime/AnimeList/AnimeList';
 import AddAnimesToCollectionModal from '../../UI/Modal/AddAnimesToCollectionModal/AddAnimesToCollectionModal';
+import InsideChangeCollectionModal from '../../UI/Modal/InsideChangeCollectionModal/InsideChangeCollectionModal';
+
+
 import css from './ExactCollectionPage.module.css'
+
+const apiClient = new Client('https://localhost:5001');
 
 const ExactCollectionPage: FC = (): ReactElement => {
     const collectionState = useTypedSelector(state => state.collectionDetails)
-    const titlesState = useTypedSelector(state => state.titles)
     const { getCollectionDetails, setTitlesInCollectionPage, authCheck } = useActions()
     const params = useParams()
     const navigate = useNavigate()
-    const makePages = useMemo(() => makePagesArr(), [collectionState.collectionDetails?.animeTitles?.totalPages])
-
-
 
     const functionOnClick = (item: BriefCollectionVM) => {
         navigate(`/animes/${item?.id}`)
     }
 
-    function makePagesArr() {
-        let arr: number[] = []
-        let totalPages = collectionState.collectionDetails?.animeTitles?.totalPages ?? 1
-        for (let i = 0; i < totalPages; i++) {
-            arr.push(i + 1)
-        }
+    const handlePageClick = (selectedItem: { selected: number; }) => {
+        setTitlesInCollectionPage(selectedItem.selected + 1)
+    }
 
-        return arr;
+    const deleteCollection = async () => {
+        let deleteCollectionsDto: DeleteCollectionsDto = {
+            animeCollectionsIds: [collectionState.collectionDetails?.id ?? ""],
+        }
+        await apiClient.deleteCollections(deleteCollectionsDto)
+        navigate("/collections")
     }
 
     useEffect(() => {
         authCheck()
-        getCollectionDetails(params.id, 1, 25)
+        getCollectionDetails(params.id, 1, 20)
         setTitlesInCollectionPage(1);
     }, [])
 
 
     useEffect(() => {
-        console.log(collectionState.page);
-        getCollectionDetails(params.id, collectionState.page, 25)
+        getCollectionDetails(params.id, collectionState.page, 20)
     }, [collectionState.page]);
 
 
@@ -53,47 +57,73 @@ const ExactCollectionPage: FC = (): ReactElement => {
 
     return (
         <div className={css.exactCollectionPage}>
-            <div className={css.exactCollection}>
-                <div className={css.collection}>
-                    <div className={css.collectionPart}>
-                        <div className={css.collectionInfo}>
-                            <h1>{collectionState.collectionDetails?.name}</h1>
-                            <div>Аниме в коллекции: {collectionState.collectionDetails?.animeTitles?.items?.length}</div>
-                            <div className={css.description}>
-                                <div>Описание: <br />
-                                    {collectionState.collectionDetails?.userComment}
-                                </div>
+            <div className={css.collection}>
+                <div className={css.collectionPart}>
+                    <div className={css.collectionInfo}>
+                        <h1>{collectionState.collectionDetails?.name}</h1>
+                        {/* <div>Аниме в коллекции: {collectionState.collectionDetails?.animeTitles?.items?.length}</div> */}
+                        <div className={css.description}>
+                            <div>Описание: <br />
+                                {collectionState.collectionDetails?.userComment}
                             </div>
                         </div>
                     </div>
-                    <div className={css.collectionModal}>
-                        <AddAnimesToCollectionModal collectionId={collectionState.collectionDetails?.id} />
-                    </div>
                 </div>
-            </div>
-            <div className={css.animes}>
-                <h1>Аниме в этой коллекции:</h1>
-                <div style={{ display: "flex" }}>
-                    {makePages.map(p =>
-                        <div
-                            onClick={() => setTitlesInCollectionPage(p)}
-                            style={{
-                                border: p === collectionState.page ? "2px solid green" : "1px solid gray",
-                                padding: 10,
-                                margin: 10,
-                            }}
-                        >
-                            {p}
-                        </div>
-                    )}
-                </div>
+                <div className={css.collectionModal}>
 
-                <AnimeInCollectionList
-                    clickFunction={functionOnClick}
-                    paginatedList={collectionState.collectionDetails?.animeTitles}
-                    collectionId={collectionState.collectionDetails?.id ?? ""}
-                />
+                    <Dropdown>
+                        <Dropdown.Toggle variant="outline" id="dropdown-basic">
+                            Действия
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu variant='light'>
+                            <Dropdown.Item>
+                                <AddAnimesToCollectionModal collectionId={collectionState.collectionDetails?.id} />
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                <InsideChangeCollectionModal
+                                    collection={collectionState.collectionDetails}
+                                    page={collectionState.page}
+                                    size={20}
+                                />
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                <Button className={css.button}
+                                    variant="outline-dark" size="lg"
+                                    onClick={() => deleteCollection()}>
+                                    Удалить коллекцию
+                                </Button>
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+
+                    <AnimeInCollectionList
+                        clickFunction={functionOnClick}
+                        paginatedList={collectionState.collectionDetails?.animeTitles}
+                        collectionId={collectionState.collectionDetails?.id ?? ""}
+                    />
+                </div>
             </div>
+
+            <ReactPaginate
+                previousLabel={"<<"}
+                nextLabel={">>"}
+                breakLabel={"..."}
+                pageCount={collectionState.collectionDetails?.animeTitles?.totalPages ?? 0}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={3}
+                onPageChange={handlePageClick}
+                containerClassName={"pagination justify-content-center"}
+                pageClassName={"page-item"}
+                pageLinkClassName={"page-link"}
+                previousClassName={"page-item"}
+                previousLinkClassName={"page-link"}
+                nextClassName={"page-item"}
+                nextLinkClassName={"page-link"}
+                breakClassName={"page-item"}
+                breakLinkClassName={"page-link"}
+                activeClassName={"active"}
+            />
         </div>
     );
 };

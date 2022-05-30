@@ -1,9 +1,13 @@
-.header_inner{
+.header_inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+}
 
-.authButton{
-  margin-right: 0;
+.authButton {
+    margin-right: 0;
+}
+
+.header {
+    background: linear-gradient(to top right, #ffffff 1%, #ffcccc 100%);
 }

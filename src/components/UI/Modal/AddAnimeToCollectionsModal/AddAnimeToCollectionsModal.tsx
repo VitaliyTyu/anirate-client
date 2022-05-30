@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
 import { AddTitlesInCollectionsDto, BriefCollectionVM, BriefTitleVM, Client } from '../../../../api/api';
 import { useActions } from '../../../../hooks/useActions';
 import { useTypedSelector } from '../../../../hooks/useTypedSelector';
@@ -21,14 +22,11 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
     const collectionsState = useTypedSelector(state => state.collections)
     const { getCollections, setCollectionsPage, authCheck } = useActions()
     const [collectionsIds, setCollectionsIds] = useState<string[]>([])
-    const makePages = useMemo(() => makePagesArr(), [collectionsState?.paginatedList?.totalPages])
-
 
     const handleClose = () => {
         setShow(false)
         setCollectionsIds([])
     }
-
 
     const functionOnClick = (item: BriefCollectionVM) => {
         if (item.id !== undefined) {
@@ -36,26 +34,15 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
         }
     }
 
-    function makePagesArr() {
-        let arr: number[] = []
-        let len = collectionsState?.paginatedList?.totalPages ?? 1
-        for (let i = 0; i < len; i++) {
-            arr.push(i + 1)
-        }
-
-        return arr;
-    }
-
     useEffect(() => {
-        getCollections(1, 20)
+        getCollections(1, 10)
         setCollectionsPage(1)
     }, [])
 
 
     useEffect(() => {
-        getCollections(collectionsState.page, 20)
+        getCollections(collectionsState.page, 10)
     }, [collectionsState.page]);
-
 
     const addCollections = async () => {
         authCheck()
@@ -66,11 +53,14 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
         await apiClient.titles(addTitlesInCollectionsDto);
     }
 
+    const handlePageClick = (selectedItem: { selected: number; }) => {
+        setCollectionsPage(selectedItem.selected + 1)
+    }
+
 
     if (collectionsState.error) {
         return <h1>{collectionsState.error?.message}</h1>
     }
-
 
     return (
         <div >
@@ -86,21 +76,29 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
                     <div className="App">
                         <div className="container">
                             <div>
-                                <div style={{ display: "flex" }}>
-                                    {makePages.map(p =>
-                                        <div
-                                            onClick={() => setCollectionsPage(p)}
-                                            style={{
-                                                border: p === collectionsState.page ? "2px solid green" : "1px solid gray",
-                                                padding: 10,
-                                                margin: 10,
-                                            }}
-                                        >
-                                            {p}
-                                        </div>
-                                    )}
+                                <div className="row m-2">
+                                    <SimpleCollectionList paginatedList={collectionsState?.paginatedList} clickFunction={functionOnClick} />
                                 </div>
-                                <SimpleCollectionList paginatedList={collectionsState?.paginatedList} clickFunction={functionOnClick} />
+
+                                <ReactPaginate
+                                    previousLabel={"<<"}
+                                    nextLabel={">>"}
+                                    breakLabel={"..."}
+                                    pageCount={collectionsState?.paginatedList?.totalPages ?? 0}
+                                    marginPagesDisplayed={2}
+                                    pageRangeDisplayed={3}
+                                    onPageChange={handlePageClick}
+                                    containerClassName={"pagination justify-content-center"}
+                                    pageClassName={"page-item"}
+                                    pageLinkClassName={"page-link"}
+                                    previousClassName={"page-item"}
+                                    previousLinkClassName={"page-link"}
+                                    nextClassName={"page-item"}
+                                    nextLinkClassName={"page-link"}
+                                    breakClassName={"page-item"}
+                                    breakLinkClassName={"page-link"}
+                                    activeClassName={"active"}
+                                />
                             </div>
 
                             <div style={{ display: "flex", marginTop: 20 }}>

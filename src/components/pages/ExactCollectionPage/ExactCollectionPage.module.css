@@ -1,78 +1,96 @@
-.exactCollectionPage{
+.exactCollectionPage {
     display: flex;
     flex-direction: column;
-    
- }
 
-.exactCollection{
+}
+
+.exactCollection {
     display: flex;
     margin: 25px;
     justify-content: flex-start;
     flex-direction: row;
 }
-.exactCollection img{   
-    
+
+.exactCollection img {
+
     width: 200px;
     height: 300px;
     border: 10px solid #333
-}  
+}
 
-.collectionPart{
+.collectionPart {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     margin: 25px;
 }
-.collection{
+
+.collection {
     display: flex;
     flex-direction: row;
 }
 
-.collectionInfo{
+.collectionInfo {
     display: flex;
     flex-direction: column;
 }
-.collectionInfo h1{
+
+.collectionInfo h1 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 500px;
 }
-@media screen and (max-width: 480px){
-    .collectionPart{
+
+.button {
+    height: 60px;
+    min-width: 15px;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    object-fit: cover;
+    font-size: calc((100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
+    /* font-size: calc(40px + 30 * (100vw / 1280)); */
+}
+
+@media screen and (max-width: 480px) {
+    .collectionPart {
         display: flex;
         flex-direction: column;
         margin: 25px;
     }
 }
-@media screen and (max-width: 745px){
-    .exactCollection img{   
-    
+
+@media screen and (max-width: 745px) {
+    .exactCollection img {
+
         width: 170px;
         height: 255px;
         border: 10px solid #333
     }
 }
 
-@media screen and (max-width: 400px){
-    .exactCollection img{   
-    
+@media screen and (max-width: 400px) {
+    .exactCollection img {
+
         display: none;
     }
 }
 
-@media screen and (max-width: 580px){
-    .collection{
+@media screen and (max-width: 580px) {
+    .collection {
         display: flex;
         flex-direction: column;
     }
 }
-.collectionModal{
+
+.collectionModal {
     flex-grow: 1;
     margin: 25px;
- }
+}
 
-.animes{
+.animes {
     display: flex;
     flex-direction: column;
     margin: 15px;

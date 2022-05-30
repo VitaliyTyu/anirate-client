@@ -23,7 +23,7 @@ const AnimeInCollectionList: FC<AnimeInCollectionListProps> = (props): ReactElem
                             title={title}
                             clickFunction={() => props.clickFunction(title)}
                             page={props.paginatedList?.pageNumber ?? 1}
-                            size={25}
+                            size={20}
                             collectionId={props.collectionId}
                         />
                     ))}

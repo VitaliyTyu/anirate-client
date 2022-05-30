@@ -10,6 +10,7 @@ import css from "./AnimeList.module.css"
 interface AnimeListProps {
     clickFunction: (item: BriefTitleVM) => void;
     paginatedList: BriefTitleVMPaginatedList | undefined;
+    // items: BriefTitleVM[];
     children?: React.ReactChild | React.ReactNode;
 }
 

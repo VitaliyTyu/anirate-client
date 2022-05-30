@@ -8,7 +8,7 @@ const Footer = () => {
         <footer className={css.footer} >
             <div className={css.container}>
                 <div className={css.copyright}>
-                    © 2022 AniRate  by <span>HSE</span>
+                    © 2022 AniRate
                 </div>
             </div>
         </footer>

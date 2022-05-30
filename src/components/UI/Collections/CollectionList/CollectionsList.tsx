@@ -21,7 +21,7 @@ const CollectionsList: FC<CollectionsListProps> = (props): ReactElement => {
                     key={collection?.id}
                     clickFunction={() => props.clickFunction(collection)}
                     page={props.paginatedList?.pageNumber ?? 1}
-                    size={20}
+                    size={10}
                     collection={collection}
                 />
             )))}

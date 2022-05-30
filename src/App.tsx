@@ -34,7 +34,7 @@ const App = () => {
                 // isLoading,
             }}>
                 <BrowserRouter>
-                    <ScrollToTop/>
+                    {/* <ScrollToTop/> */}
                     <div className={css.mainBody}>
                         <div className={css.header}>
                             <Header />

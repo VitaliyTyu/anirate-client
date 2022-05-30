@@ -4,6 +4,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useActions } from "../../../hooks/useActions";
 import { LoginViewModel } from "../../../api/api";
 import css from "./LoginPage.module.css"
+import { Link } from "react-router-dom";
 
 const LoginPage: FC = (): ReactElement => {
     const { error } = useTypedSelector(state => state.auth)
@@ -20,7 +21,7 @@ const LoginPage: FC = (): ReactElement => {
         setEmailError("");
         setPasswordError("");
 
-        if (!email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+        if (!email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{1,7}$/)) {
             nameIsValid = false;
             setEmailError("Адрес введен неверно");
         } else {
@@ -101,12 +102,17 @@ const LoginPage: FC = (): ReactElement => {
                                 </small>
                             </div>
 
-                            <button
-                                style={{ marginTop: 10 }}
-                                type="submit"
-                                className="btn btn-primary">
-                                Войти
-                            </button>
+                            <div className="form-group">
+                                <button
+                                    style={{ marginTop: 5 }}
+                                    type="submit"
+                                    className="btn btn-primary">
+                                    Войти
+                                </button>
+                                <Link to={"/register"}>
+                                    <label style={{ marginLeft: 35, marginTop: 5 }}>создать аккаунт</label>
+                                </Link>
+                            </div>
                         </form>
                     </div>
                 </div>

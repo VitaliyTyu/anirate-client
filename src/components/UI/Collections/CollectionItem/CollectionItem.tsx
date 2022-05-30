@@ -53,7 +53,10 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
                             Действия
                         </Dropdown.Toggle>
 
-                        <Dropdown.Menu variant='dark'>
+                        <Dropdown.Menu variant='light'>
+                            <Dropdown.Item>
+                                <AddAnimesToCollectionModal collectionId={props.collection?.id} />
+                            </Dropdown.Item>
                             <Dropdown.Item>
                                 <ChangeCollectionModal
                                     collection={props.collection}
@@ -62,12 +65,12 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
                                 />
                             </Dropdown.Item>
                             <Dropdown.Item>
-                                <Button onClick={() => deleteCollection()}>
+                                <Button
+                                    className={css.button}
+                                    variant="outline-dark" size="lg"
+                                    onClick={() => deleteCollection()}>
                                     Удалить коллекцию
                                 </Button>
-                            </Dropdown.Item>
-                            <Dropdown.Item>
-                                <AddAnimesToCollectionModal collectionId={props.collection?.id} />
                             </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>

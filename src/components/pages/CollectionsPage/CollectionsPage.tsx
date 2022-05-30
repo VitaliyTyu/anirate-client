@@ -1,4 +1,5 @@
 import React, { FC, ReactElement, useEffect, useMemo } from 'react';
+import ReactPaginate from 'react-paginate';
 import { useNavigate } from 'react-router-dom';
 import { ApiException, BriefCollectionVM, Client, DeleteCollectionsDto } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
@@ -13,32 +14,26 @@ const CollectionsPage: FC = (): ReactElement => {
     const { paginatedList, error, page } = useTypedSelector(state => state.collections)
     const { getCollections, setCollectionsPage, logout, authCheck } = useActions()
     const pages: number[] = [];
-    const makePages = useMemo(() => makePagesArr(), [paginatedList?.totalPages])
     const navigate = useNavigate()
 
     const functionOnClick = (item: BriefCollectionVM) => {
         navigate(`/collections/${item?.id}`)
     }
 
-    function makePagesArr() {
-        let arr: number[] = []
-        let len = paginatedList?.totalPages ?? 0
-        for (let i = 0; i < len; i++) {
-            arr.push(i + 1)
-        }
-
-        return arr;
+    const handlePageClick = (selectedItem: { selected: number; }) => {
+        setCollectionsPage(selectedItem.selected + 1)
     }
+
 
     useEffect(() => {
         authCheck()
         setCollectionsPage(1)
-        getCollections(1, 20)
+        getCollections(1, 10)
     }, []);
 
 
     useEffect(() => {
-        getCollections(page, 20)
+        getCollections(page, 10)
     }, [page]);
 
 
@@ -48,23 +43,50 @@ const CollectionsPage: FC = (): ReactElement => {
 
 
     return (
-        <div className={css.collectionsPage}>
-            <CreateCollectionModal page={page} size={20} />
-            <div style={{ display: "flex" }}>
-                {makePages.map(p =>
-                    <div
-                        onClick={() => setCollectionsPage(p)}
-                        style={{
-                            border: p === page ? "2px solid green" : "1px solid gray",
-                            padding: 10,
-                            margin: 10,
-                        }}
-                    >
-                        {p}
-                    </div>
-                )}
+        // <div className={css.collectionsPage}>
+        //     <CreateCollectionModal page={page} size={20} />
+        //     <div style={{ display: "flex" }}>
+        //         {makePages.map(p =>
+        //             <div
+        //                 onClick={() => setCollectionsPage(p)}
+        //                 style={{
+        //                     border: p === page ? "2px solid green" : "1px solid gray",
+        //                     padding: 10,
+        //                     margin: 10,
+        //                 }}
+        //             >
+        //                 {p}
+        //             </div>
+        //         )}
+        //     </div>
+        //     <CollectionsList paginatedList={paginatedList} clickFunction={functionOnClick} />
+        // </div>
+
+        <div>
+            <div className="row m-2">
+                <CreateCollectionModal page={page} size={10} />
+                <CollectionsList paginatedList={paginatedList} clickFunction={functionOnClick} />
             </div>
-            <CollectionsList paginatedList={paginatedList} clickFunction={functionOnClick} />
+
+            <ReactPaginate
+                previousLabel={"<<"}
+                nextLabel={">>"}
+                breakLabel={"..."}
+                pageCount={paginatedList?.totalPages ?? 0}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={3}
+                onPageChange={handlePageClick}
+                containerClassName={"pagination justify-content-center"}
+                pageClassName={"page-item"}
+                pageLinkClassName={"page-link"}
+                previousClassName={"page-item"}
+                previousLinkClassName={"page-link"}
+                nextClassName={"page-item"}
+                nextLinkClassName={"page-link"}
+                breakClassName={"page-item"}
+                breakLinkClassName={"page-link"}
+                activeClassName={"active"}
+            />
         </div>
     );
 };

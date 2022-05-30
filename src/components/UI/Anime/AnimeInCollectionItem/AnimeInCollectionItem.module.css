@@ -1,15 +1,17 @@
-
-.title{
+.title {
     display: flex;
     flex-direction: column;
-    justify-content: center; 
-    width: 202px;
-    height: 450px;
+    justify-content: center;
+    /* width: 202px;
+    height: 450px; */
+    width: 152px;
+    height: 320px;
     flex-grow: 1;
-    margin: 20px 10px ; 
+    margin: 10px 10px;
     user-select: none;
     cursor: pointer;
 }
+
 .title:hover {
     border: 2px solid #000000;
     color: #000000;
@@ -20,24 +22,24 @@
 }
 
 .title img {
-    width: 200px; 
-    height: 270px;   
-  }
-
-.titleName{
-    width: 156; 
-    height: 40;   
+    /* width: 200px;
+    height: 270px; */
+    width: 150px;
+    height: 180px;
 }
 
-.titleNameTitle{
+.titleName {
+    width: 156;
+    height: 30;
+}
+
+.titleNameTitle {
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-.titleScore{
-    margin-bottom: 40;
+.titleScore {
+    /* margin-bottom: 40; */
 }
-
-

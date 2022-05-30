@@ -5,6 +5,7 @@ import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { register } from '../../../store/actions-creators/auth';
 import css from "./RegisterPage.module.css"
 import { Button } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 const RegisterPage: FC = (): ReactElement => {
     const { register } = useActions()
@@ -39,7 +40,7 @@ const RegisterPage: FC = (): ReactElement => {
             nameIsValid = true;
         }
 
-        if (!emailAddress.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+        if (!emailAddress.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{1,7}$/)) {
             emailIsValid = false;
             setEmailError("Адрес введен неверно");
         } else {
@@ -158,13 +159,21 @@ const RegisterPage: FC = (): ReactElement => {
                                 </small>
                             </div>
 
-                            <button
-                                style={{ marginTop: 10 }}
-                                type="submit"
-                                className="btn btn-primary"
-                            >
-                                Создать аккаунт
-                            </button>
+
+
+                            <div className="form-group">
+                                <button
+                                    style={{ marginTop: 5 }}
+                                    type="submit"
+                                    className="btn btn-primary"
+                                >
+                                    Создать аккаунт
+                                </button>
+
+                                <Link to={"/login"}>
+                                    <label style={{ marginLeft: 20, marginTop: 5 }}>войти</label>
+                                </Link>
+                            </div>
                         </form>
                     </div>
                 </div>
