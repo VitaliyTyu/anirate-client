@@ -43,25 +43,6 @@ const CollectionsPage: FC = (): ReactElement => {
 
 
     return (
-        // <div className={css.collectionsPage}>
-        //     <CreateCollectionModal page={page} size={20} />
-        //     <div style={{ display: "flex" }}>
-        //         {makePages.map(p =>
-        //             <div
-        //                 onClick={() => setCollectionsPage(p)}
-        //                 style={{
-        //                     border: p === page ? "2px solid green" : "1px solid gray",
-        //                     padding: 10,
-        //                     margin: 10,
-        //                 }}
-        //             >
-        //                 {p}
-        //             </div>
-        //         )}
-        //     </div>
-        //     <CollectionsList paginatedList={paginatedList} clickFunction={functionOnClick} />
-        // </div>
-
         <div>
             <div className="row m-2">
                 <CreateCollectionModal page={page} size={10} />

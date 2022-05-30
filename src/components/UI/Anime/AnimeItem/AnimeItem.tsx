@@ -31,14 +31,12 @@ const AnimeItem: FC<AnimeItemProps> = (props): ReactElement => {
         } else {
             setIsSelected(false)
         }
-        console.log(isSelected);
 
     }, [props.animesIds])
 
     return (
         <div>
             <Card border="dark" className={isSelected ? css.titleSelected : css.title} onClick={() => props.clickFunction()}>
-
                 <Card.Img variant="top" src={"https://shikimori.one/" + props.title?.image?.original} />
                 <Card.Body className={css.titleName} >
                     <Card.Title className={css.titleNameTitle}>{props.title?.russian}</Card.Title>

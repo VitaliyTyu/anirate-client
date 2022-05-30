@@ -18,31 +18,46 @@ interface AddAnimeToCollectionsModalProps {
 
 const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) => {
     const [show, setShow] = useState(false)
-    const handleShow = () => setShow(true)
     const collectionsState = useTypedSelector(state => state.collections)
-    const { getCollections, setCollectionsPage, authCheck } = useActions()
+    const { getCollections, setCollectionsPage, authCheck, searchCollections } = useActions()
     const [collectionsIds, setCollectionsIds] = useState<string[]>([])
+    const [searchString, setSearchString] = useState("")
+    const [isSearch, setIsSearch] = useState<boolean>(false)
 
     const handleClose = () => {
         setShow(false)
+        setIsSearch(false)
         setCollectionsIds([])
+        setSearchString("")
+    }
+
+    const handleShow = () => {
+        getCollections(1, 10)
+        setCollectionsPage(1)
+        setCollectionsIds([])
+        setSearchString("")
+        setIsSearch(false)
+        setShow(true)
     }
 
     const functionOnClick = (item: BriefCollectionVM) => {
-        if (item.id !== undefined) {
+        if (item.id === undefined) return
+        if (collectionsIds?.indexOf(item?.id) !== -1) {
+            setCollectionsIds(collectionsIds.filter(collectionsId => collectionsId !== item?.id))
+        } else {
             setCollectionsIds([...collectionsIds, item.id])
         }
     }
 
-    useEffect(() => {
-        getCollections(1, 10)
-        setCollectionsPage(1)
-    }, [])
-
 
     useEffect(() => {
-        getCollections(collectionsState.page, 10)
+        if (isSearch) {
+            searchCollections(searchString ?? "", collectionsState.page, 10)
+        } else {
+            getCollections(collectionsState.page, 10)
+        }
     }, [collectionsState.page]);
+
 
     const addCollections = async () => {
         authCheck()
@@ -53,10 +68,43 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
         await apiClient.titles(addTitlesInCollectionsDto);
     }
 
+    const handleValidation = () => {
+        let searchStringIsValid = true;
+
+        if (searchString.length < 1) {
+            searchStringIsValid = false;
+        }
+
+        return searchStringIsValid;
+    };
+
     const handlePageClick = (selectedItem: { selected: number; }) => {
         setCollectionsPage(selectedItem.selected + 1)
     }
 
+    const search = () => {
+        if (handleValidation()) {
+            searchCollections(searchString ?? "", 1, 10)
+            setIsSearch(true)
+        }
+    }
+
+    const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.keyCode == 13 && handleValidation()) {
+            e.preventDefault();
+            searchCollections(searchString ?? "", 1, 10)
+            setIsSearch(true)
+        }
+    }
+
+    const addAction = () => {
+        if (collectionsIds.length === 0) {
+            handleClose();
+        } else {
+            addCollections();
+            handleClose();
+        }
+    }
 
     if (collectionsState.error) {
         return <h1>{collectionsState.error?.message}</h1>
@@ -73,11 +121,30 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
                     <Modal.Title>Добавление аниме</Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
+                    <form className="d-flex">
+                        <input className="form-control ms-5"
+                            placeholder="Поиск"
+                            aria-label="Search"
+                            onChange={(event) => setSearchString(event.target.value)}
+                            onKeyDown={(event) => onEnterPress(event)}
+                        />
+                        <Button
+                            variant="outline-dark"
+                            className="ms-1"
+                            onClick={search}
+                        >
+                            Поиск
+                        </Button>
+                    </form>
+
                     <div className="App">
                         <div className="container">
                             <div>
                                 <div className="row m-2">
-                                    <SimpleCollectionList paginatedList={collectionsState?.paginatedList} clickFunction={functionOnClick} />
+                                    <SimpleCollectionList
+                                        collectionsIds={collectionsIds}
+                                        paginatedList={collectionsState?.paginatedList} clickFunction={functionOnClick}
+                                    />
                                 </div>
 
                                 <ReactPaginate
@@ -108,10 +175,7 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
                                 <Button
                                     type="submit"
                                     variant="primary"
-                                    onClick={() => {
-                                        addCollections();
-                                        handleClose();
-                                    }}>
+                                    onClick={addAction}>
                                     Добавить
                                 </Button>
                             </div>

@@ -1,8 +1,8 @@
-.collectionList{
+.collectionList {
     display: flex;
     flex-wrap: wrap;
-    align-content: space-between;
-    justify-content: flex-start;
+    align-content: center;
+    justify-content: center;
     flex-direction: row;
     margin-left: 15px;
     margin-right: 15px;

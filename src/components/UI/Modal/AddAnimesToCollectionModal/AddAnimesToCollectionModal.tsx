@@ -100,7 +100,6 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
             addTitles();
             handleClose();
         }
-
     }
 
     if (titlesState.error) {
