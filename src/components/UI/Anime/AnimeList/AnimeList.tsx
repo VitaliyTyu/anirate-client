@@ -11,6 +11,7 @@ interface AnimeListProps {
     clickFunction: (item: BriefTitleVM) => void;
     paginatedList: BriefTitleVMPaginatedList | undefined;
     // items: BriefTitleVM[];
+    animesIds?: string[];
     children?: React.ReactChild | React.ReactNode;
 }
 
@@ -22,6 +23,7 @@ const AnimeList: FC<AnimeListProps> = (props): ReactElement => {
                 <CardGroup className={css.animeList}>
                     {props.paginatedList?.items?.map((title) => (
                         <AnimeItem
+                            animesIds={props.animesIds}
                             key={title.id}
                             title={title}
                             clickFunction={() => props.clickFunction(title)}

@@ -21,34 +21,39 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
     const { getTitles, setTitlesPage, getCollectionDetails, authCheck, getCollections, searchTitles } = useActions()
     const [animesIds, setAnimesIds] = useState<string[]>([])
     const [searchString, setSearchString] = useState("")
+    const [isSearch, setIsSearch] = useState<boolean>(false)
 
     const handleShow = () => {
+        getTitles(1, 10)
+        setTitlesPage(1)
         setAnimesIds([])
         setSearchString("")
+        setIsSearch(false)
         setShow(true)
     }
 
-
     const handleClose = () => {
         setShow(false)
+        setIsSearch(false)
         setAnimesIds([])
         setSearchString("")
     }
 
     const functionOnClick = (item: BriefTitleVM) => {
-        if (item.id !== undefined) {
+        if (item.id === undefined) return
+        if (animesIds?.indexOf(item?.id) !== -1) {
+            setAnimesIds(animesIds.filter(animeId => animeId !== item?.id))
+        } else {
             setAnimesIds([...animesIds, item.id])
         }
     }
 
     useEffect(() => {
-        getTitles(1, 10)
-        setTitlesPage(1)
-    }, [])
-
-
-    useEffect(() => {
-        getTitles(titlesState.page, 10)
+        if (isSearch) {
+            searchTitles(searchString ?? "", titlesState.page, 10)
+        } else {
+            getTitles(titlesState.page, 10)
+        }
     }, [titlesState.page]);
 
 
@@ -75,19 +80,27 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
 
     const search = () => {
         if (handleValidation()) {
-            searchTitles(searchString ?? "", 1, 20)
+            searchTitles(searchString ?? "", 1, 10)
+            setIsSearch(true)
         }
     }
 
     const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.keyCode == 13 && handleValidation()) {
             e.preventDefault();
-            searchTitles(searchString ?? "", 1, 20)
+            searchTitles(searchString ?? "", 1, 10)
+            setIsSearch(true)
         }
     }
 
-    const secondHandle = (e: { stopPropagation: () => void; }) => {
-        e.stopPropagation();
+    const addAction = () => {
+        if (animesIds.length === 0) {
+            handleClose();
+        } else {
+            addTitles();
+            handleClose();
+        }
+
     }
 
     if (titlesState.error) {
@@ -125,7 +138,10 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
                         <div className="container">
                             <div>
                                 <div className="row m-2">
-                                    <AnimeList paginatedList={titlesState?.paginatedList} clickFunction={functionOnClick} />
+                                    <AnimeList
+                                        animesIds={animesIds}
+                                        paginatedList={titlesState?.paginatedList} clickFunction={functionOnClick}
+                                    />
                                 </div>
 
                                 <ReactPaginate
@@ -156,10 +172,7 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
                                 <Button
                                     type="submit"
                                     variant="primary"
-                                    onClick={() => {
-                                        addTitles();
-                                        handleClose();
-                                    }}>
+                                    onClick={addAction}>
                                     Добавить
                                 </Button>
                             </div>
