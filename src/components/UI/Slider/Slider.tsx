@@ -44,12 +44,12 @@ const Slider: FC = (): ReactElement => {
                             spaceBetween: 10
                         },
 
-                        580: {
+                        500: {
                             slidesPerView: 2,
                             spaceBetween: 20
                         },
 
-                        880: {
+                        800: {
                             slidesPerView: 3,
                             spaceBetween: 30
                         },
@@ -82,7 +82,10 @@ const Slider: FC = (): ReactElement => {
                             </SwiperSlide>
                         ))}
                     </div>
+                    <SlideNextButton/>
+                    <SlidePrevButton/>
                 </Swiper >
+                
             </div>
         </div >
     );
