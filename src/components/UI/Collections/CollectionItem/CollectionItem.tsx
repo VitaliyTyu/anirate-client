@@ -61,12 +61,15 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
                         <Dropdown.Menu variant='light'>
                             <Dropdown.Item className={css.item}>
                                 <AddAnimesToCollectionModal
+                                    page={props.page}
+                                    size={props.size}
                                     searchString={props.searchString}
                                     collectionId={props.collection?.id}
                                 />
                             </Dropdown.Item>
                             <Dropdown.Item className={css.item}>
                                 <ChangeCollectionModal
+                                    searchString={props.searchString}
                                     collection={props.collection}
                                     page={props.page}
                                     size={props.size}

@@ -68,36 +68,40 @@ const ExactCollectionPage: FC = (): ReactElement => {
                         </div>
                     </div>
                 </div>
-                <div className={css.buttonPlace}>     
-                    
-                    <AddAnimesToCollectionModal collectionId={collectionState.collectionDetails?.id} />
-                
+                <div className={css.buttonPlace}>
+
+                    <AddAnimesToCollectionModal
+                        page={collectionState.page}
+                        size={10}
+                        collectionId={collectionState.collectionDetails?.id}
+                    />
+
                     <InsideChangeCollectionModal
                         collection={collectionState.collectionDetails}
                         page={collectionState.page}
                         size={20}
                     />
-                
+
                     <Button className={css.button}
                         variant="outline-dark" size="lg"
                         onClick={() => deleteCollection()}>
                         Удалить коллекцию
                     </Button>
-                           
+
                 </div>
-                
+
             </div>
             <div>
-            <div className={css.animes}>  
-                    <h1>Аниме в этой коллекции:</h1> 
+                <div className={css.animes}>
+                    <h1>Аниме в этой коллекции:</h1>
                     <AnimeInCollectionList
                         clickFunction={functionOnClick}
                         paginatedList={collectionState.collectionDetails?.animeTitles}
                         collectionId={collectionState.collectionDetails?.id ?? ""}
                     />
                 </div>
-            
-            
+
+
                 <ReactPaginate
                     previousLabel={"<<"}
                     nextLabel={">>"}
@@ -117,7 +121,7 @@ const ExactCollectionPage: FC = (): ReactElement => {
                     breakLinkClassName={"page-link"}
                     activeClassName={"active"}
                 />
-                </div>
+            </div>
         </div>
     );
 };

@@ -10,6 +10,7 @@ const apiClient = new Client('https://localhost:5001');
 interface CreateCollectionModalProps {
     page: number;
     size: number;
+    searchString?: string;
     children?: React.ReactChild | React.ReactNode;
 }
 
@@ -20,7 +21,7 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
     const [nameError, setNameError] = useState("");
     const [description, setDescription] = useState("");
     const [descriptionError, setDescriptionError] = useState("");
-    const { getCollections, authCheck } = useActions()
+    const { getCollections, authCheck, searchCollections } = useActions()
 
     const createCollection = async () => {
         authCheck()
@@ -30,7 +31,12 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
                 userComment: description
             }
             let collectionId = await apiClient.collection(createCollectionDto);
-            getCollections(props.page, props.size)
+            if (props.searchString === undefined || props.searchString === "") {
+                getCollections(props.page, props.size)
+            } else {
+                console.log(props.searchString);
+                searchCollections(props.searchString, props.page, props.size)
+            }
             handleClose()
         }
     }

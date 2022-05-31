@@ -2,7 +2,7 @@
 import { FC, useState, useMemo, useEffect } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
-import { Client, BriefTitleVM } from '../../../../api/api';
+import { Client, BriefTitleVM, BriefCollectionVM } from '../../../../api/api';
 import { useActions } from '../../../../hooks/useActions';
 import { useTypedSelector } from '../../../../hooks/useTypedSelector';
 import AnimeList from '../../Anime/AnimeList/AnimeList';
@@ -12,6 +12,8 @@ const apiClient = new Client('https://localhost:5001');
 
 interface AddAnimesToCollectionModalProps {
     collectionId: string | undefined;
+    page: number;
+    size: number;
     searchString?: string;
     children?: React.ReactChild | React.ReactNode;
 }
@@ -63,9 +65,9 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
         await apiClient.titles({ collectionsIds: [props.collectionId ?? ""], animeTitlesIds: animesIds });
         getCollectionDetails(props.collectionId, 1, 20)
         if (props.searchString === undefined || props.searchString === "") {
-            getCollections(1, 10)
+            getCollections(props.page, props.size)
         } else {
-            searchCollections(props.searchString, 1, 10)
+            searchCollections(props.searchString, props.page, props.size)
         }
 
     }
@@ -140,47 +142,47 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
                     </form>
 
                     <div className={css.App}>
-                        
-                                    <AnimeList
-                                        animesIds={animesIds}
-                                        paginatedList={titlesState?.paginatedList} clickFunction={functionOnClick}
-                                    />
-                                
 
-                                <ReactPaginate
-                                    previousLabel={"<<"}
-                                    nextLabel={">>"}
-                                    breakLabel={"..."}
-                                    pageCount={titlesState?.paginatedList?.totalPages ?? 0}
-                                    marginPagesDisplayed={2}
-                                    pageRangeDisplayed={3}
-                                    onPageChange={handlePageClick}
-                                    containerClassName={"pagination justify-content-center"}
-                                    pageClassName={"page-item"}
-                                    pageLinkClassName={"page-link"}
-                                    previousClassName={"page-item"}
-                                    previousLinkClassName={"page-link"}
-                                    nextClassName={"page-item"}
-                                    nextLinkClassName={"page-link"}
-                                    breakClassName={"page-item"}
-                                    breakLinkClassName={"page-link"}
-                                    activeClassName={"active"}
-                                />
-                            </div>
+                        <AnimeList
+                            animesIds={animesIds}
+                            paginatedList={titlesState?.paginatedList} clickFunction={functionOnClick}
+                        />
 
-                            <div className={css.buttonPlace}>
-                                <Button variant="secondary" onClick={handleClose} className={css.button}>
-                                    Закрыть
-                                </Button>
-                                <Button
-                                    className={css.button}
-                                    type="submit"
-                                    variant="primary"
-                                    onClick={addAction}>
-                                    Добавить
-                                </Button>
-                            </div>
-                      
+
+                        <ReactPaginate
+                            previousLabel={"<<"}
+                            nextLabel={">>"}
+                            breakLabel={"..."}
+                            pageCount={titlesState?.paginatedList?.totalPages ?? 0}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={3}
+                            onPageChange={handlePageClick}
+                            containerClassName={"pagination justify-content-center"}
+                            pageClassName={"page-item"}
+                            pageLinkClassName={"page-link"}
+                            previousClassName={"page-item"}
+                            previousLinkClassName={"page-link"}
+                            nextClassName={"page-item"}
+                            nextLinkClassName={"page-link"}
+                            breakClassName={"page-item"}
+                            breakLinkClassName={"page-link"}
+                            activeClassName={"active"}
+                        />
+                    </div>
+
+                    <div className={css.buttonPlace}>
+                        <Button variant="secondary" onClick={handleClose} className={css.button}>
+                            Закрыть
+                        </Button>
+                        <Button
+                            className={css.button}
+                            type="submit"
+                            variant="primary"
+                            onClick={addAction}>
+                            Добавить
+                        </Button>
+                    </div>
+
                 </Modal.Body>
                 <Modal.Footer>
 
