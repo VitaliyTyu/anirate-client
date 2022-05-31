@@ -7,7 +7,7 @@ import { useTypedSelector } from '../../../../hooks/useTypedSelector';
 import AnimeList from '../../Anime/AnimeList/AnimeList';
 import CollectionsList from '../../Collections/CollectionList/CollectionsList';
 import SimpleCollectionList from '../../Collections/SimpleCollectionList/SimpleCollectionList';
-import css from './AddAnimesToCollectionModal.module.css'
+import css from './AddAnimeToCollectionModal.module.css'
 
 const apiClient = new Client('https://localhost:5001');
 
@@ -112,11 +112,11 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
 
     return (
         <div >
-            <Button variant="outline-dark" size="lg" onClick={handleShow} className={css.button}>
+            <Button variant="outline-dark" size="lg" onClick={handleShow} className={css.buttonAdd}>
                 Добавить в коллекции
             </Button>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} size='xl'>
                 <Modal.Header closeButton>
                     <Modal.Title>Добавление аниме</Modal.Title>
                 </Modal.Header>
@@ -137,15 +137,13 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
                         </Button>
                     </form>
 
-                    <div className="App">
-                        <div className="container">
-                            <div>
-                                <div className="row m-2">
+                    <div className={css.App}>
+                        
                                     <SimpleCollectionList
                                         collectionsIds={collectionsIds}
                                         paginatedList={collectionsState?.paginatedList} clickFunction={functionOnClick}
                                     />
-                                </div>
+                                
 
                                 <ReactPaginate
                                     previousLabel={"<<"}
@@ -168,19 +166,19 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
                                 />
                             </div>
 
-                            <div style={{ display: "flex", marginTop: 20 }}>
-                                <Button variant="secondary" onClick={handleClose}>
+                            <div className={css.buttonPlace}>
+                                <Button variant="secondary" onClick={handleClose} className={css.button}>
                                     Закрыть
                                 </Button>
                                 <Button
                                     type="submit"
                                     variant="primary"
-                                    onClick={addAction}>
+                                    onClick={addAction}
+                                    className={css.button}>
                                     Добавить
                                 </Button>
                             </div>
-                        </div>
-                    </div>
+                        
                 </Modal.Body>
                 <Modal.Footer>
 

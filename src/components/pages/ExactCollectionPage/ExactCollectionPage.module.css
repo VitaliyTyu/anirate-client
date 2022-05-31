@@ -1,21 +1,12 @@
 .exactCollectionPage {
     display: flex;
     flex-direction: column;
-
 }
 
-.exactCollection {
+.collection {
     display: flex;
-    margin: 25px;
-    justify-content: flex-start;
     flex-direction: row;
-}
-
-.exactCollection img {
-
-    width: 200px;
-    height: 300px;
-    border: 10px solid #333
+    justify-content: space-around;
 }
 
 .collectionPart {
@@ -25,10 +16,7 @@
     margin: 25px;
 }
 
-.collection {
-    display: flex;
-    flex-direction: row;
-}
+
 
 .collectionInfo {
     display: flex;
@@ -40,6 +28,26 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 500px;
+}
+
+.discription{
+    margin-bottom: 15px;
+}
+
+
+.animes{
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+}
+
+.buttonPlace{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 15px;
+    text-align: right;
+
 }
 
 .button {
@@ -83,6 +91,13 @@
         display: flex;
         flex-direction: column;
     }
+    .buttonPlace{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-right: 15px;
+        text-align: center;  
+    }
 }
 
 .collectionModal {
@@ -90,8 +105,3 @@
     margin: 25px;
 }
 
-.animes {
-    display: flex;
-    flex-direction: column;
-    margin: 15px;
-}

@@ -59,20 +59,20 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu variant='light'>
-                            <Dropdown.Item>
+                            <Dropdown.Item className={css.item}>
                                 <AddAnimesToCollectionModal
                                     searchString={props.searchString}
                                     collectionId={props.collection?.id}
                                 />
                             </Dropdown.Item>
-                            <Dropdown.Item>
+                            <Dropdown.Item className={css.item}>
                                 <ChangeCollectionModal
                                     collection={props.collection}
                                     page={props.page}
                                     size={props.size}
                                 />
                             </Dropdown.Item>
-                            <Dropdown.Item>
+                            <Dropdown.Item className={css.item}>
                                 <Button
                                     className={css.button}
                                     variant="outline-dark" size="lg"
