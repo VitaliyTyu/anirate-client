@@ -14,6 +14,7 @@ interface ChangeCollectionModalProps {
     size: number;
     collection: BriefCollectionVM | undefined;
     children?: React.ReactChild | React.ReactNode;
+    searchString?: string;
 }
 
 const ChangeCollectionModal: FC<ChangeCollectionModalProps> = (props): ReactElement => {
@@ -23,9 +24,9 @@ const ChangeCollectionModal: FC<ChangeCollectionModalProps> = (props): ReactElem
     const [nameError, setNameError] = useState("");
     const [description, setDescription] = useState(props.collection?.userComment ?? "");
     const [descriptionError, setDescriptionError] = useState("");
-    const { getCollections, authCheck } = useActions()
+    const { getCollections, authCheck, searchCollections } = useActions()
 
-    const createCollection = async () => {
+    const changeCollection = async () => {
         authCheck()
         if (handleValidation()) {
             let updateCollectionDetailsDto: UpdateCollectionDetailsDto = {
@@ -34,7 +35,11 @@ const ChangeCollectionModal: FC<ChangeCollectionModalProps> = (props): ReactElem
                 userComment: description,
             }
             await apiClient.changeDetails(updateCollectionDetailsDto);
-            getCollections(props.page, props.size)
+            if (props.searchString === undefined || props.searchString === "") {
+                getCollections(props.page, props.size)
+            } else {
+                searchCollections(props.searchString, props.page, props.size)
+            }
             handleClose()
         }
     }
@@ -133,7 +138,7 @@ const ChangeCollectionModal: FC<ChangeCollectionModalProps> = (props): ReactElem
                         <Button variant="secondary" onClick={handleClose} className={css.button}>
                             Закрыть
                         </Button>
-                        <Button type="submit" variant="primary" onClick={() => createCollection()} className={css.button}>
+                        <Button type="submit" variant="primary" onClick={() => changeCollection()} className={css.button}>
                             Изменить
                         </Button>
                     </div>

@@ -1,18 +1,17 @@
-import React, { FC, ReactElement, useEffect, useMemo, useState } from 'react';
+import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
-import { useNavigate } from 'react-router-dom';
-import { ApiException, BriefCollectionVM, Client, DeleteCollectionsDto } from '../../../api/api';
+import { useNavigate, useParams } from 'react-router-dom';
+import { BriefCollectionVM } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import CollectionsList from '../../UI/Collections/CollectionList/CollectionsList';
 import CreateCollectionModal from '../../UI/Modal/CreateCollectionModal/CreateCollectionModal';
-import css from "./CollectionsPage.module.css"
 
-
-const CollectionsPage: FC = (): ReactElement => {
+const CollectionsSearchPage: FC = (): ReactElement => {
+    const params = useParams()
     const { paginatedList, error, page } = useTypedSelector(state => state.collections)
-    const { getCollections, setCollectionsPage, authCheck, searchCollections } = useActions()
+    const { setCollectionsPage, authCheck, searchCollections } = useActions()
     const navigate = useNavigate()
     const [searchString, setSearchString] = useState("")
 
@@ -26,33 +25,36 @@ const CollectionsPage: FC = (): ReactElement => {
 
     useEffect(() => {
         authCheck()
-        setSearchString("")
+        setSearchString(params.searchString ?? "")
         setCollectionsPage(1)
-        getCollections(1, 10)
+        searchCollections(params.searchString ?? "", 1, 10)
     }, []);
 
     useEffect(() => {
-        getCollections(page, 10)
+        if (searchString === "") return
+        searchCollections(searchString, page, 10)
     }, [page]);
 
     const handleValidation = () => {
         let searchStringIsValid = true;
+
         if (searchString.length < 1) {
             searchStringIsValid = false;
         }
+
         return searchStringIsValid;
     };
 
     const search = () => {
         if (handleValidation()) {
-            navigate(`/collectionsSearch/${searchString}`)
+            searchCollections(searchString, 1, 10)
         }
     }
 
     const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.keyCode == 13 && handleValidation()) {
             e.preventDefault();
-            navigate(`/collectionsSearch/${searchString}`)
+            searchCollections(searchString, 1, 10)
         }
     }
 
@@ -80,8 +82,12 @@ const CollectionsPage: FC = (): ReactElement => {
 
             </form>
             <div className="row m-2">
-                <CreateCollectionModal page={page} size={10} />
+                <CreateCollectionModal
+                    searchString={searchString}
+                    page={page}
+                    size={10} />
                 <CollectionsList
+                    searchString={searchString}
                     paginatedList={paginatedList}
                     clickFunction={functionOnClick}
                 />
@@ -110,4 +116,4 @@ const CollectionsPage: FC = (): ReactElement => {
     );
 };
 
-export default CollectionsPage;
+export default CollectionsSearchPage;

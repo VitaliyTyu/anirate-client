@@ -1,0 +1,4 @@
+.collectionsPage {
+    display: flex;
+    flex-direction: column;
+}
