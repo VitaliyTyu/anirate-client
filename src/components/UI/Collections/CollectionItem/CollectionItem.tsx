@@ -12,13 +12,14 @@ const apiClient = new Client('https://localhost:5001');
 interface CollectionItemProps {
     clickFunction: () => void;
     collection: BriefCollectionVM | undefined;
+    searchString?: string;
     children?: React.ReactChild | React.ReactNode;
     page: number;
     size: number;
 }
 
 const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
-    const { getCollections } = useActions()
+    const { getCollections, searchCollections } = useActions()
 
     const secondHandle = (e: { stopPropagation: () => void; }) => {
         e.stopPropagation();
@@ -29,7 +30,11 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
             animeCollectionsIds: [props.collection?.id ?? ""],
         }
         await apiClient.deleteCollections(deleteCollectionsDto)
-        getCollections(props.page, props.size)
+        if (props.searchString === undefined || props.searchString === "") {
+            getCollections(props.page, props.size)
+        } else {
+            searchCollections(props.searchString, props.page, props.size)
+        }
     }
 
     return (
@@ -55,7 +60,10 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
 
                         <Dropdown.Menu variant='light'>
                             <Dropdown.Item className={css.item}>
-                                <AddAnimesToCollectionModal collectionId={props.collection?.id} />
+                                <AddAnimesToCollectionModal
+                                    searchString={props.searchString}
+                                    collectionId={props.collection?.id}
+                                />
                             </Dropdown.Item>
                             <Dropdown.Item className={css.item}>
                                 <ChangeCollectionModal
