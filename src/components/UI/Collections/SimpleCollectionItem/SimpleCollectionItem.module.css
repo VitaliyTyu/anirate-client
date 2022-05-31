@@ -50,6 +50,9 @@
 
 .detailsCol {
     margin: 15px;
+
+    
+    width: 100%;
 }
 
 .collectionTitle {
@@ -63,13 +66,12 @@
     margin: 15px;
 }
 
-.detailsAnim {
-    margin: 15px;
-}
+
 
 .userComment {
+    margin-right: 15px;
     display: -webkit-box;
-    -webkit-line-clamp: 6;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

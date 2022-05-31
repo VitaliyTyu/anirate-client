@@ -1,5 +1,5 @@
 import { FC, ReactElement } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, CloseButton } from "react-bootstrap";
 import { BriefTitleVM, Client, DeleteManyTitlesFromCollectionDto } from "../../../../api/api";
 import React from 'react';
 import css from "./AnimeInCollectionItem.module.css"
@@ -41,10 +41,7 @@ const AnimeInCollectionItem: FC<AnimeInCollectionItemProps> = (props): ReactElem
                     </Card.Text>
                 </Card.Body>
             </Card>
-            <Button onClick={() => deleteAnimeFromCollection()} className={css.button}>
-                Удалить аниме
-            </Button>
-
+            <CloseButton onClick={() => deleteAnimeFromCollection()} className={css.button}/>
         </div>
     );
 };

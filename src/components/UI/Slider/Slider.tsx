@@ -37,7 +37,7 @@ const Slider: FC = (): ReactElement => {
                     modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                     spaceBetween={40}
 
-                    slidesPerView={5}
+                    slidesPerView={6}
                     breakpoints={{
                         0: {
                             slidesPerView: 1,

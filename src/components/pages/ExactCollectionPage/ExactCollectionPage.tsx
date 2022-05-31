@@ -63,9 +63,8 @@ const ExactCollectionPage: FC = (): ReactElement => {
                         <h1>{collectionState.collectionDetails?.name}</h1>
                         {/* <div>Аниме в коллекции: {collectionState.collectionDetails?.animeTitles?.items?.length}</div> */}
                         <div className={css.description}>
-                            <div>Описание: <br />
-                                {collectionState.collectionDetails?.userComment}
-                            </div>
+                            <div className={css.descriptionText}>Описание: </div>
+                            <div className={css.descriptionText}> {collectionState.collectionDetails?.userComment}</div>
                         </div>
                     </div>
                 </div>
@@ -99,26 +98,26 @@ const ExactCollectionPage: FC = (): ReactElement => {
                 </div>
             
             
-            <ReactPaginate
-                previousLabel={"<<"}
-                nextLabel={">>"}
-                breakLabel={"..."}
-                pageCount={collectionState.collectionDetails?.animeTitles?.totalPages ?? 0}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={3}
-                onPageChange={handlePageClick}
-                containerClassName={"pagination justify-content-center"}
-                pageClassName={"page-item"}
-                pageLinkClassName={"page-link"}
-                previousClassName={"page-item"}
-                previousLinkClassName={"page-link"}
-                nextClassName={"page-item"}
-                nextLinkClassName={"page-link"}
-                breakClassName={"page-item"}
-                breakLinkClassName={"page-link"}
-                activeClassName={"active"}
-            />
-            </div>
+                <ReactPaginate
+                    previousLabel={"<<"}
+                    nextLabel={">>"}
+                    breakLabel={"..."}
+                    pageCount={collectionState.collectionDetails?.animeTitles?.totalPages ?? 0}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={3}
+                    onPageChange={handlePageClick}
+                    containerClassName={"pagination justify-content-center"}
+                    pageClassName={"page-item"}
+                    pageLinkClassName={"page-link"}
+                    previousClassName={"page-item"}
+                    previousLinkClassName={"page-link"}
+                    nextClassName={"page-item"}
+                    nextLinkClassName={"page-link"}
+                    breakClassName={"page-item"}
+                    breakLinkClassName={"page-link"}
+                    activeClassName={"active"}
+                />
+                </div>
         </div>
     );
 };

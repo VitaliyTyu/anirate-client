@@ -32,7 +32,9 @@
     justify-content: center;
     
 }
-
+.buttonStartPlace{
+    text-align: center;
+}
 .button {
     width:40%;
     height: 40px;
@@ -43,4 +45,5 @@
     margin-bottom: 8px;
     object-fit: cover;
     font-size: calc( (100vw - 480px)/(1600 - 480) * (17 - 10) + 10px);
+    
 }

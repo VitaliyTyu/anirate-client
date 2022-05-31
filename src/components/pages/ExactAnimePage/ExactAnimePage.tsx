@@ -56,9 +56,11 @@ const ExactAnimePage: FC = (): ReactElement => {
                         <div className={css.details}>Эпизоды: {titleDetails?.episodes}</div>
                         <div className={css.genre}>
                             <div >Жанры: </div>
+                            <div className={css.genres}>
                             {titleDetails?.genres?.map((genre) => (
-                                <div style={{ marginLeft: '5px' }}>{genre.russian}</div>
+                                <div style={{marginLeft: '5px'}}>{genre.russian}</div>
                             ))}
+                            </div>
                         </div>
 
                         <div>Описание:</div>

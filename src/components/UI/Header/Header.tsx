@@ -6,6 +6,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { logout } from "../../../store/actions-creators/auth";
 import { useActions } from "../../../hooks/useActions";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import css from './Header.module.css'
 
 const Header = () => {
     const { isAuth, } = useTypedSelector(state => state.auth)
@@ -17,7 +18,7 @@ const Header = () => {
     }
 
     return (
-        <div style={{ backgroundColor: '#fcc0f2' }}>
+        <div className={css.header}>
             <Navbar expand="lg">
                 <Container>
 

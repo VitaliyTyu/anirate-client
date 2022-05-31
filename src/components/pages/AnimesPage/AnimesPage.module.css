@@ -1,3 +1,16 @@
+.first{
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.formSearch{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 50%;
+    margin: 0 auto;
+
+}
 .animesPage{
     display: flex;
     flex-direction: column;

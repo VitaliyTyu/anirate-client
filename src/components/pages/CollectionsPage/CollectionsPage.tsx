@@ -71,7 +71,8 @@ const CollectionsPage: FC = (): ReactElement => {
 
     return (
         <div>
-            <form className="d-flex" style={{ marginTop: 15 }}>
+            <h1 className={css.first}>Коллекции</h1>
+            <form className={css.formSearch}>
                 <input className="form-control ms-5"
                     placeholder="Поиск"
                     aria-label="Search"
