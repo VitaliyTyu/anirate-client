@@ -31,18 +31,17 @@ const AnimeInCollectionItem: FC<AnimeInCollectionItemProps> = (props): ReactElem
     }
 
     return (
-        <div >
+        <div className={css.item}>
             <Card border="dark" className={css.title} onClick={() => props.clickFunction()}>
                 <Card.Img variant="top" src={"https://shikimori.one/" + props.title?.image?.original} />
                 <Card.Body className={css.titleName} >
                     <Card.Title className={css.titleNameTitle}>{props.title?.russian}</Card.Title>
                     <Card.Text>
-                        {props.title?.score}
+                        Рейтинг: {props.title?.score}
                     </Card.Text>
                 </Card.Body>
-
             </Card>
-            <Button onClick={() => deleteAnimeFromCollection()}>
+            <Button onClick={() => deleteAnimeFromCollection()} className={css.button}>
                 Удалить аниме
             </Button>
 

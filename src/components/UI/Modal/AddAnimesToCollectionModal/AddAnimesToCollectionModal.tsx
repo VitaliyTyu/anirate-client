@@ -108,11 +108,11 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
 
     return (
         <div >
-            <Button variant="outline-dark" size="lg" onClick={handleShow} className={css.button}>
+            <Button variant="outline-dark" size="lg" onClick={handleShow} className={css.buttonAdd}>
                 Добавить аниме
             </Button>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} size='xl'>
                 <Modal.Header closeButton>
                     <Modal.Title>Добавление аниме</Modal.Title>
                 </Modal.Header>
@@ -133,15 +133,13 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
                         </Button>
                     </form>
 
-                    <div className="App">
-                        <div className="container">
-                            <div>
-                                <div className="row m-2">
+                    <div className={css.App}>
+                        
                                     <AnimeList
                                         animesIds={animesIds}
                                         paginatedList={titlesState?.paginatedList} clickFunction={functionOnClick}
                                     />
-                                </div>
+                                
 
                                 <ReactPaginate
                                     previousLabel={"<<"}
@@ -164,19 +162,19 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
                                 />
                             </div>
 
-                            <div style={{ display: "flex", marginTop: 20 }}>
-                                <Button variant="secondary" onClick={handleClose}>
+                            <div className={css.buttonPlace}>
+                                <Button variant="secondary" onClick={handleClose} className={css.button}>
                                     Закрыть
                                 </Button>
                                 <Button
+                                    className={css.button}
                                     type="submit"
                                     variant="primary"
                                     onClick={addAction}>
                                     Добавить
                                 </Button>
                             </div>
-                        </div>
-                    </div>
+                      
                 </Modal.Body>
                 <Modal.Footer>
 

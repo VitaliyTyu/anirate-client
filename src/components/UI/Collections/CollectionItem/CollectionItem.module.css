@@ -6,17 +6,6 @@
     cursor: pointer;
 }
 
-.button {
-    height: 60px;
-    min-width: 15px;
-    margin-top: 15px;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 8px;
-    object-fit: cover;
-    font-size: calc((100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
-    /* font-size: calc(40px + 30 * (100vw / 1280)); */
-}
 
 .collectionView {
     display: flex;
@@ -81,7 +70,22 @@
     margin-top: 25px;
     margin-bottom: 15px;
 }
+.button {
 
+    height: 60px;
+    min-width: 15px;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    object-fit: cover;
+    font-size: calc( (100vw - 700px)/(1600 - 700) * (13 - 9) + 9px);
+    /* font-size: calc(40px + 30 * (100vw / 1280)); */
+}
+
+.item{
+    object-fit: fill;
+}
 @media screen and (max-width: 550px) {
     .collection {
         margin-bottom: 50px;

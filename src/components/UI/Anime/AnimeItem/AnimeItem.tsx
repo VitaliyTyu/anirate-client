@@ -41,7 +41,7 @@ const AnimeItem: FC<AnimeItemProps> = (props): ReactElement => {
                 <Card.Body className={css.titleName} >
                     <Card.Title className={css.titleNameTitle}>{props.title?.russian}</Card.Title>
                     <Card.Text>
-                        {props.title?.score}
+                        Рейтинг: {props.title?.score}
                     </Card.Text>
                 </Card.Body>
             </Card>
