@@ -7,6 +7,7 @@ import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import CollectionsList from '../../UI/Collections/CollectionList/CollectionsList';
 import CreateCollectionModal from '../../UI/Modal/CreateCollectionModal/CreateCollectionModal';
+import css from "./CollectionsSearchPage.module.css"
 
 const CollectionsSearchPage: FC = (): ReactElement => {
     const params = useParams()
@@ -64,7 +65,8 @@ const CollectionsSearchPage: FC = (): ReactElement => {
 
     return (
         <div>
-            <form className="d-flex" style={{ marginTop: 15 }}>
+            <h1 className={css.first}>Коллекции</h1>
+            <form className={css.formSearch}>
                 <input className="form-control ms-5"
                     placeholder="Поиск"
                     aria-label="Search"

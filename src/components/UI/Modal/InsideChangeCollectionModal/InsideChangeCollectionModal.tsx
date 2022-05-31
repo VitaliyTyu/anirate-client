@@ -128,10 +128,10 @@ const InsideChangeCollectionModal: FC<ChangeCollectionModalProps> = (props): Rea
                 </Modal.Body>
                 <Modal.Footer className={css.setBackground}>
                     <div className={css.buttonsPlace}>
-                        <Button variant="secondary" onClick={handleClose} className={css.button}>
+                        <Button variant="secondary" onClick={handleClose} className={css.buttons}>
                             Закрыть
                         </Button>
-                        <Button type="submit" variant="primary" onClick={() => createCollection()} className={css.button}>
+                        <Button type="submit" variant="primary" onClick={() => createCollection()} className={css.buttons}>
                             Изменить
                         </Button>
                     </div>

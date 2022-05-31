@@ -63,9 +63,8 @@ const ExactCollectionPage: FC = (): ReactElement => {
                         <h1>{collectionState.collectionDetails?.name}</h1>
                         {/* <div>Аниме в коллекции: {collectionState.collectionDetails?.animeTitles?.items?.length}</div> */}
                         <div className={css.description}>
-                            <div>Описание: <br />
-                                {collectionState.collectionDetails?.userComment}
-                            </div>
+                            <div className={css.descriptionText}>Описание: </div>
+                            <div className={css.descriptionText}> {collectionState.collectionDetails?.userComment}</div>
                         </div>
                     </div>
                 </div>

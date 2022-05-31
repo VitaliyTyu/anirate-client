@@ -83,12 +83,14 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
 
     return (
         <div>
-            <Button className={css.button}
-                onClick={handleShow}
-                variant="outline-dark" size="lg"
-            >
-                Создать коллекцию
-            </Button>
+            <div className={css.buttonStartPlace}>
+                <Button className={css.button}
+                    onClick={handleShow}
+                    variant="outline-dark" size="lg"
+                >
+                    Создать коллекцию
+                </Button>
+            </div>
             <Modal show={show} onHide={handleClose} >
                 <Modal.Header closeButton className={css.setBackground}>
                     <Modal.Title >Создание коллекции</Modal.Title>

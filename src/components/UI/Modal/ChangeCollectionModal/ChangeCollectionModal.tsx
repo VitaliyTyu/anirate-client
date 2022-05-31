@@ -86,7 +86,7 @@ const ChangeCollectionModal: FC<ChangeCollectionModalProps> = (props): ReactElem
 
     return (
         <div>
-            <Button className={css.button}
+            <Button className={css.buttonStart}
                 onClick={handleShow}
                 variant="outline-dark" size="lg"
             >
