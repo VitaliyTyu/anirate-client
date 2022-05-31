@@ -1,4 +1,5 @@
-import React, { FC, ReactElement, useEffect, useMemo } from 'react';
+import React, { FC, ReactElement, useEffect, useMemo, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { useNavigate } from 'react-router-dom';
 import { ApiException, BriefCollectionVM, Client, DeleteCollectionsDto } from '../../../api/api';
@@ -10,11 +11,11 @@ import css from "./CollectionsPage.module.css"
 
 
 const CollectionsPage: FC = (): ReactElement => {
-    const { isAuth } = useTypedSelector(state => state.auth)
     const { paginatedList, error, page } = useTypedSelector(state => state.collections)
-    const { getCollections, setCollectionsPage, logout, authCheck } = useActions()
-    const pages: number[] = [];
+    const { getCollections, setCollectionsPage, authCheck, searchCollections } = useActions()
     const navigate = useNavigate()
+    const [searchString, setSearchString] = useState("")
+    const [isSearch, setIsSearch] = useState<boolean>(false)
 
     const functionOnClick = (item: BriefCollectionVM) => {
         navigate(`/collections/${item?.id}`)
@@ -24,18 +25,44 @@ const CollectionsPage: FC = (): ReactElement => {
         setCollectionsPage(selectedItem.selected + 1)
     }
 
-
     useEffect(() => {
         authCheck()
         setCollectionsPage(1)
         getCollections(1, 10)
     }, []);
 
-
     useEffect(() => {
-        getCollections(page, 10)
+        if (isSearch) {
+            searchCollections(searchString ?? "", page, 10)
+        } else {
+            getCollections(page, 10)
+        }
     }, [page]);
 
+    const handleValidation = () => {
+        let searchStringIsValid = true;
+
+        if (searchString.length < 1) {
+            searchStringIsValid = false;
+        }
+
+        return searchStringIsValid;
+    };
+
+    const search = () => {
+        if (handleValidation()) {
+            searchCollections(searchString ?? "", 1, 10)
+            setIsSearch(true)
+        }
+    }
+
+    const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.keyCode == 13 && handleValidation()) {
+            e.preventDefault();
+            searchCollections(searchString ?? "", 1, 10)
+            setIsSearch(true)
+        }
+    }
 
     if (error) {
         return <h1>{error.message}</h1>
@@ -44,9 +71,30 @@ const CollectionsPage: FC = (): ReactElement => {
 
     return (
         <div>
+            <form className="d-flex" style={{ marginTop: 15 }}>
+                <input className="form-control ms-5"
+                    placeholder="Поиск"
+                    aria-label="Search"
+                    onChange={(event) => setSearchString(event.target.value)}
+                    onKeyDown={(event) => onEnterPress(event)}
+                />
+                <Button
+                    style={{ marginRight: 25 }}
+                    variant="outline-dark"
+                    className="ms-1"
+                    onClick={search}
+                >
+                    Поиск
+                </Button>
+
+            </form>
             <div className="row m-2">
                 <CreateCollectionModal page={page} size={10} />
-                <CollectionsList paginatedList={paginatedList} clickFunction={functionOnClick} />
+                <CollectionsList
+                    searchString={searchString}
+                    paginatedList={paginatedList}
+                    clickFunction={functionOnClick}
+                />
             </div>
 
             <ReactPaginate

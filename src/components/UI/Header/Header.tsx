@@ -11,30 +11,6 @@ const Header = () => {
     const { isAuth, } = useTypedSelector(state => state.auth)
     const navigate = useNavigate()
     const { logout } = useActions()
-    const [searchString, setSearchString] = useState("")
-
-    const handleValidation = () => {
-        let searchStringIsValid = true;
-
-        if (searchString.length < 1) {
-            searchStringIsValid = false;
-        }
-
-        return searchStringIsValid;
-    };
-
-    const search = () => {
-        if (handleValidation()) {
-            navigate(`search/${searchString}`)
-        }
-    }
-
-    const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.keyCode == 13 && handleValidation()) {
-            e.preventDefault();
-            navigate(`search/${searchString}`)
-        }
-    }
 
     const secondHandle = (e: { stopPropagation: () => void; }) => {
         e.stopPropagation();
@@ -52,24 +28,6 @@ const Header = () => {
                         </Navbar.Brand>
 
                     </Link>
-
-                    <Nav className="me-auto">
-                        <form className="d-flex">
-                            <input className="form-control ms-5"
-                                placeholder="Поиск"
-                                aria-label="Search"
-                                onChange={(event) => setSearchString(event.target.value)}
-                                onKeyDown={(event) => onEnterPress(event)}
-                            />
-                            <Button
-                                variant="outline-dark"
-                                className="ms-1"
-                                onClick={search}
-                            >
-                                Поиск
-                            </Button>
-                        </form>
-                    </Nav>
 
                     <div>
                         <Button onClick={() => navigate("/animes")} variant="outline-dark" >

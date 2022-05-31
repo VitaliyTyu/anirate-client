@@ -12,13 +12,14 @@ const apiClient = new Client('https://localhost:5001');
 
 interface AddAnimesToCollectionModalProps {
     collectionId: string | undefined;
+    searchString?: string;
     children?: React.ReactChild | React.ReactNode;
 }
 
 const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) => {
     const [show, setShow] = useState(false)
     const titlesState = useTypedSelector(state => state.titles)
-    const { getTitles, setTitlesPage, getCollectionDetails, authCheck, getCollections, searchTitles } = useActions()
+    const { getTitles, setTitlesPage, getCollectionDetails, authCheck, getCollections, searchTitles, searchCollections } = useActions()
     const [animesIds, setAnimesIds] = useState<string[]>([])
     const [searchString, setSearchString] = useState("")
     const [isSearch, setIsSearch] = useState<boolean>(false)
@@ -61,7 +62,12 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
         authCheck()
         await apiClient.titles({ collectionsIds: [props.collectionId ?? ""], animeTitlesIds: animesIds });
         getCollectionDetails(props.collectionId, 1, 20)
-        getCollections(1, 10)
+        if (props.searchString === undefined || props.searchString === "") {
+            getCollections(1, 10)
+        } else {
+            searchCollections(props.searchString, 1, 10)
+        }
+
     }
 
     const handleValidation = () => {
