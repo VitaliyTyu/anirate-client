@@ -1,13 +1,20 @@
-
 import { useMemo, useEffect, ReactElement, FC } from 'react';
+import { Button } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
-import { BriefCollectionVM } from '../../../api/api';
+import { BriefCollectionVM, Client, DeleteCollectionsDto } from '../../../api/api';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import AnimeInCollectionList from '../../UI/Anime/AnimeInCollectionList/AnimeInCollectionList';
 import AnimeList from '../../UI/Anime/AnimeList/AnimeList';
 import AddAnimesToCollectionModal from '../../UI/Modal/AddAnimesToCollectionModal/AddAnimesToCollectionModal';
 import css from './ExactCollectionPage.module.css'
+import ChangeCollectionModal from '../../UI/Modal/ChangeCollectionModal/ChangeCollectionModal';
+
+const apiClient = new Client('https://localhost:5001');
+
+
+
+
 
 const ExactCollectionPage: FC = (): ReactElement => {
     const collectionState = useTypedSelector(state => state.collectionDetails)
@@ -16,8 +23,14 @@ const ExactCollectionPage: FC = (): ReactElement => {
     const params = useParams()
     const navigate = useNavigate()
     const makePages = useMemo(() => makePagesArr(), [collectionState.collectionDetails?.animeTitles?.totalPages])
-
-
+    const { getCollections } = useActions()
+    const deleteCollection = async () => {
+        let deleteCollectionsDto: DeleteCollectionsDto = {
+            animeCollectionsIds: [collectionState.collectionDetails?.id ?? ""],
+        }
+        await apiClient.deleteCollections(deleteCollectionsDto)  
+        navigate(`/collections`)  
+    }
 
     const functionOnClick = (item: BriefCollectionVM) => {
         navigate(`/animes/${item?.id}`)
@@ -53,8 +66,7 @@ const ExactCollectionPage: FC = (): ReactElement => {
 
     return (
         <div className={css.exactCollectionPage}>
-            <div className={css.exactCollection}>
-                <div className={css.collection}>
+            <div className={css.exactCollection}>               
                     <div className={css.collectionPart}>
                         <div className={css.collectionInfo}>
                             <h1>{collectionState.collectionDetails?.name}</h1>
@@ -66,10 +78,17 @@ const ExactCollectionPage: FC = (): ReactElement => {
                             </div>
                         </div>
                     </div>
-                    <div className={css.collectionModal}>
-                        <AddAnimesToCollectionModal collectionId={collectionState.collectionDetails?.id} />
-                    </div>
-                </div>
+                   
+                    <div className={css.buttonPlace}>
+                        <div >
+                            <AddAnimesToCollectionModal collectionId={collectionState.collectionDetails?.id} />
+                        </div>
+
+                        <Button variant="outline-dark" size="lg" onClick={() => deleteCollection()} className={css.button}>
+                                        Удалить коллекцию
+                        </Button>
+                        
+                    </div>              
             </div>
             <div className={css.animes}>
                 <h1>Аниме в этой коллекции:</h1>

@@ -6,7 +6,7 @@ import { useTypedSelector } from '../../../../hooks/useTypedSelector';
 import AnimeList from '../../Anime/AnimeList/AnimeList';
 import CollectionsList from '../../Collections/CollectionList/CollectionsList';
 import SimpleCollectionList from '../../Collections/SimpleCollectionList/SimpleCollectionList';
-import css from './AddAnimesToCollectionModal.module.css'
+import css from './AddAnimeToCollectionModal.module.css'
 
 const apiClient = new Client('https://localhost:5001');
 
@@ -33,6 +33,7 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
     const functionOnClick = (item: BriefCollectionVM) => {
         if (item.id !== undefined) {
             setCollectionsIds([...collectionsIds, item.id])
+            
         }
     }
 
@@ -74,18 +75,16 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
 
     return (
         <div >
-            <Button variant="outline-dark" size="lg" onClick={handleShow} className={css.button}>
+            <Button variant="outline-dark" size="lg" onClick={handleShow} className={css.buttonAdd}>
                 Добавить в коллекции
             </Button>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} size='xl'>
                 <Modal.Header closeButton>
                     <Modal.Title>Добавление аниме</Modal.Title>
                 </Modal.Header>
-                <Modal.Body >
-                    <div className="App">
-                        <div className="container">
-                            <div>
+                <Modal.Body className={css.App}>
+                    
                                 <div style={{ display: "flex" }}>
                                     {makePages.map(p =>
                                         <div
@@ -101,13 +100,27 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
                                     )}
                                 </div>
                                 <SimpleCollectionList paginatedList={collectionsState?.paginatedList} clickFunction={functionOnClick} />
-                            </div>
+                                <div style={{ display: "flex" }}>
+                                    {makePages.map(p =>
+                                        <div
+                                            onClick={() => setCollectionsPage(p)}
+                                            style={{
+                                                border: p === collectionsState.page ? "2px solid green" : "1px solid gray",
+                                                padding: 10,
+                                                margin: 10,
+                                            }}
+                                        >
+                                            {p}
+                                        </div>
+                                    )}
+                                </div>
 
-                            <div style={{ display: "flex", marginTop: 20 }}>
-                                <Button variant="secondary" onClick={handleClose}>
+                            <div className={css.buttonPlace}>
+                                <Button variant="secondary" onClick={handleClose} className={css.button}>
                                     Закрыть
                                 </Button>
                                 <Button
+                                    className={css.button}
                                     type="submit"
                                     variant="primary"
                                     onClick={() => {
@@ -117,8 +130,7 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (props) 
                                     Добавить
                                 </Button>
                             </div>
-                        </div>
-                    </div>
+                        
                 </Modal.Body>
                 <Modal.Footer>
 

@@ -34,6 +34,7 @@ const Header = () => {
             e.preventDefault();
             navigate(`search/${searchString}`)
         }
+        
     }
 
     return (

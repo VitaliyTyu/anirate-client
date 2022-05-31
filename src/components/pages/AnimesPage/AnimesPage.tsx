@@ -7,6 +7,8 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import AnimeList from "../../UI/Anime/AnimeList/AnimeList";
 import css from "./AnimesPage.module.css"
 
+
+
 const AnimesPage: FC = (): ReactElement => {
     const { paginatedList, error, page, loading } = useTypedSelector(state => state.titles)
     const { getTitles, setTitlesPage } = useActions()
@@ -29,7 +31,6 @@ const AnimesPage: FC = (): ReactElement => {
 
         return arr;
     }
-
     // useObserver(lastElement, page < totalPages, isPostsLoading, () => {
     //     setPage(page + 1);
     // })
@@ -72,6 +73,20 @@ const AnimesPage: FC = (): ReactElement => {
             </div>
             <div className={css.animeList}>
                 <AnimeList paginatedList={paginatedList} clickFunction={functionOnClick} />
+            </div>
+            <div style={{ display: "flex" }}>
+                {makePages.map(p =>
+                    <div
+                        onClick={() => setTitlesPage(p)}
+                        style={{
+                            border: p === page ? "2px solid green" : "1px solid gray",
+                            padding: 10,
+                            margin: 10,
+                        }}
+                    >
+                        {p}
+                    </div>
+                )}
             </div>
             {/* <div ref={lastElement} style={{ height: 20, background: "red" }}></div> */}
         </div>

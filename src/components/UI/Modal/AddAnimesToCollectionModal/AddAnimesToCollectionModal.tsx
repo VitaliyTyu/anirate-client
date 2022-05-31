@@ -71,56 +71,70 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
 
     return (
         <div >
-            <Button variant="outline-dark" size="lg" onClick={handleShow} className={css.button}>
+            <Button variant="outline-dark" size="lg" onClick={handleShow} className={css.buttonAdd}>
                 Добавить аниме
             </Button>
-
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
+            
+            <Modal show={show} onHide={handleClose}  size='xl'>
+                
+                <Modal.Header closeButton >
                     <Modal.Title>Добавление аниме</Modal.Title>
                 </Modal.Header>
-                <Modal.Body >
-                    <div className="App">
-                        <div className="container">
-                            <div>
-                                <div style={{ display: "flex" }}>
-                                    {makePages.map(p =>
-                                        <div
-                                            onClick={() => setTitlesPage(p)}
-                                            style={{
-                                                border: p === titlesState.page ? "2px solid green" : "1px solid gray",
-                                                padding: 10,
-                                                margin: 10,
-                                            }}
-                                        >
-                                            {p}
-                                        </div>
-                                    )}
+                <Modal.Body className={css.App}>
+                    
+                        <div style={{ display: "flex" }}>
+                            {makePages.map(p =>
+                                <div
+                                    onClick={() => setTitlesPage(p)}
+                                    style={{
+                                        border: p === titlesState.page ? "2px solid green" : "1px solid gray",
+                                        padding: 10,
+                                        margin: 10,
+                                    }}
+                                >
+                                    {p}
                                 </div>
-                                <AnimeList paginatedList={titlesState?.paginatedList} clickFunction={functionOnClick} />
-                            </div>
-
-                            <div style={{ display: "flex", marginTop: 20 }}>
-                                <Button variant="secondary" onClick={handleClose}>
-                                    Закрыть
-                                </Button>
-                                <Button
-                                    type="submit"
-                                    variant="primary"
-                                    onClick={() => {
-                                        addTitles();
-                                        handleClose();
-                                    }}>
-                                    Добавить
-                                </Button>
-                            </div>
+                            )}
                         </div>
+                        <AnimeList paginatedList={titlesState?.paginatedList} clickFunction={functionOnClick} />
+                        <div style={{ display: "flex" }}>
+                            {makePages.map(p =>
+                                <div
+                                    onClick={() => setTitlesPage(p)}
+                                    style={{
+                                        border: p === titlesState.page ? "2px solid green" : "1px solid gray",
+                                        padding: 10,
+                                        margin: 10,
+                                    }}
+                                >
+                                    {p}
+                                </div>
+                            )}
+                        </div>
+                    
+
+                    <div className={css.buttonPlace}>
+                        <Button variant="secondary" onClick={handleClose} className={css.button}>
+                            Закрыть
+                        </Button>
+                        <Button
+                            className={css.button}
+                            type="submit"
+                            variant="primary"
+                            onClick={() => {
+                                addTitles();
+                                handleClose();
+                            }}>
+                            Добавить
+                        </Button>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
 
                 </Modal.Footer>
+                
             </Modal>
+            
         </div>
     );
 };
