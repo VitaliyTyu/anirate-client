@@ -90,7 +90,7 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
                     </Card.Text>
                 </Card.Body>
 
-                
+
             </Card>
         </div>
     );
