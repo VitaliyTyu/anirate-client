@@ -108,6 +108,7 @@
     margin-left: 5px; 
 }
 
+
 .button {
     width: 50%;
     height: 80px;
@@ -118,8 +119,14 @@
     margin-bottom: 40px;
     object-fit: cover;
     font-size: 20px;
+    background: rgb(251,251,251);
+    border: none;
+    box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
 }
-
+.button:hover{
+    color: #bcbedc;
+    background: #2b2d42
+}
   @media  screen and (max-width: 970px) {
 
       .info{    

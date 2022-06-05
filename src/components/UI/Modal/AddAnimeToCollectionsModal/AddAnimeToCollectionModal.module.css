@@ -9,11 +9,18 @@
     overflow: auto;
 
 }
-
+.textIfCollectionsIsEmpty{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-size: calc((100vw - 700px)/(1600 - 700) * (40 - 20) + 20px);
+}
 .buttonPlace{
     display: flex;
     justify-content: center;
 }
+
 
 
 .buttonAdd {
@@ -25,8 +32,15 @@
     margin-bottom: 8px;
     object-fit: cover;
     font-size: calc( (100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
-    /* font-size: calc(40px + 30 * (100vw / 1280)); */
+    background: rgb(251,251,251);
+    border: none;
+    box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
 }
+.buttonAdd:hover{
+    color: #bcbedc;
+    background: #2b2d42
+}
+
 .button {
     width: 30%;
     height: 60px;
@@ -37,5 +51,25 @@
     margin-bottom: 8px;
     object-fit: cover;
     font-size: calc( (100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
-    /* font-size: calc(40px + 30 * (100vw / 1280)); */
+    background: rgb(251,251,251);
+    border: none;
+    box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
+}
+.button:hover{
+    color: #bcbedc;
+    background: #2b2d42
+}
+.buttonSearch {      
+    min-width: 40px;
+    margin-left: 10px;
+    object-fit: cover;
+    text-align: center;
+    font-size: calc( (100vw - 480px)/(1280 - 480) * (11 - 7) + 7px);
+    background: rgb(251,251,251);
+    border: none;
+    box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
+}
+.buttonSearch:hover{
+    color: #bcbedc;
+    background: #2b2d42
 }

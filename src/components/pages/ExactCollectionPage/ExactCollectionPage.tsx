@@ -59,14 +59,14 @@ const ExactCollectionPage: FC = (): ReactElement => {
         <div className={css.exactCollectionPage}>
             <div className={css.collection}>
                 <div className={css.collectionPart}>
-                    <div className={css.collectionInfo}>
-                        <h1>{collectionState.collectionDetails?.name}</h1>
-                        {/* <div>Аниме в коллекции: {collectionState.collectionDetails?.animeTitles?.items?.length}</div> */}
-                        <div className={css.description}>
-                            <div className={css.descriptionText}>Описание: </div>
-                            <div className={css.descriptionText}> {collectionState.collectionDetails?.userComment}</div>
-                        </div>
+
+                    <h1>{collectionState.collectionDetails?.name}</h1>
+                    {/* <div>Аниме в коллекции: {collectionState.collectionDetails?.animeTitles?.items?.length}</div> */}
+                    <div className={css.description}>
+                        <div >Описание: </div>
+                        <div className={css.descriptionText}> {collectionState.collectionDetails?.userComment}</div>
                     </div>
+
                 </div>
                 <div className={css.buttonPlace}>
 
@@ -91,7 +91,7 @@ const ExactCollectionPage: FC = (): ReactElement => {
                 </div>
 
             </div>
-            <div>
+            <div className={css.animesPart}>
                 <div className={css.animes}>
                     <h1>Аниме в этой коллекции:</h1>
                     <AnimeInCollectionList
@@ -101,26 +101,33 @@ const ExactCollectionPage: FC = (): ReactElement => {
                     />
                 </div>
 
+                {
+                    collectionState.collectionDetails?.animeTitles?.totalCount == 0
+                        ?
+                        <div className={css.textIfAnimesIsEmpty}>Аниме в этой коллекции еще не добавлены</div>
+                        :
+                        <ReactPaginate
+                            previousLabel={"<<"}
+                            nextLabel={">>"}
+                            breakLabel={"..."}
+                            pageCount={collectionState.collectionDetails?.animeTitles?.totalPages ?? 0}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={3}
+                            onPageChange={handlePageClick}
+                            containerClassName={"pagination justify-content-center"}
+                            pageClassName={"page-item"}
+                            pageLinkClassName={"page-link"}
+                            previousClassName={"page-item"}
+                            previousLinkClassName={"page-link"}
+                            nextClassName={"page-item"}
+                            nextLinkClassName={"page-link"}
+                            breakClassName={"page-item"}
+                            breakLinkClassName={"page-link"}
+                            activeClassName={"active"}
+                        />
 
-                <ReactPaginate
-                    previousLabel={"<<"}
-                    nextLabel={">>"}
-                    breakLabel={"..."}
-                    pageCount={collectionState.collectionDetails?.animeTitles?.totalPages ?? 0}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={3}
-                    onPageChange={handlePageClick}
-                    containerClassName={"pagination justify-content-center"}
-                    pageClassName={"page-item"}
-                    pageLinkClassName={"page-link"}
-                    previousClassName={"page-item"}
-                    previousLinkClassName={"page-link"}
-                    nextClassName={"page-item"}
-                    nextLinkClassName={"page-link"}
-                    breakClassName={"page-item"}
-                    breakLinkClassName={"page-link"}
-                    activeClassName={"active"}
-                />
+                }
+
             </div>
         </div>
     );

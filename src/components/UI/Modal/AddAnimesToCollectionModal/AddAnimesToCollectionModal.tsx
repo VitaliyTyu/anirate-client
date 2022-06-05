@@ -134,8 +134,9 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
                         />
                         <Button
                             variant="outline-dark"
-                            className="ms-1"
+
                             onClick={search}
+                            className={css.buttonSearch}
                         >
                             Поиск
                         </Button>
@@ -171,13 +172,12 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
                     </div>
 
                     <div className={css.buttonPlace}>
-                        <Button variant="secondary" onClick={handleClose} className={css.button}>
+                        <Button variant="outline-danger" onClick={handleClose} className={css.button}>
                             Закрыть
                         </Button>
                         <Button
                             className={css.button}
-                            type="submit"
-                            variant="primary"
+                            variant="outline-dark"
                             onClick={addAction}>
                             Добавить
                         </Button>

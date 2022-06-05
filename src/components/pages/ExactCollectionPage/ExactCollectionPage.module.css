@@ -7,59 +7,67 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    height: 500px;
+    height: auto;
 }
 
 .collectionPart {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
     margin: 25px;
 }
 
 
-
-.collectionInfo {
-    display: flex;
-    flex-direction: column;
-    
-}
-
-.collectionInfo h1 {
+.collectionPart h1 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 500px;
+    width: auto;
 }
 
 .description{
-    width: 500px;
+    width: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-direction: column;
+    max-width: 80vh;
+    min-height: 50px;
 }
 
 .descriptionText{ 
-    font-size: 18px;
+    /* font-size: 18px;
     display: -webkit-box;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    overflow: hidden;
+    overflow: hidden; */
+    overflow-wrap: normal;  /* не поддерживает IE, Firefox; является копией word-wrap */ 
+    word-wrap: normal;
+    word-break: break-all;  /* не поддерживает Opera12.14, значение keep-all не поддерживается IE, Chrome */ 
+    line-break: auto;  /* нет поддержки для русского языка */ 
+    hyphens: manual;  /* значение auto не поддерживается Chrome */ 
+    width: auto;
 }
-
+.animesPart{
+    /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 0 0 auto;
+ }
 .animes{
     display: flex;
     flex-direction: column;
     margin: 15px;
+    margin-top: 100px;
+}
+.animes h1{
+    margin-left: 50px;
 }
 
 .buttonPlace{
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
     margin-right: 15px;
     text-align: right;
-
 }
 
 .button {
@@ -73,12 +81,40 @@
     font-size: calc((100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
     /* font-size: calc(40px + 30 * (100vw / 1280)); */
 }
+.button {
+    height: 60px;
+    min-width: 15px;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    object-fit: cover;
+    font-size: calc((100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
+    background: rgb(251,251,251);
+    border: none;
+    box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
+}
+.button:hover{
+    color: #bcbedc;
+    background: #2b2d42
+}
+.textIfAnimesIsEmpty{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-size: calc((100vw - 700px)/(1600 - 700) * (40 - 20) + 20px);
+}
 
 @media screen and (max-width: 480px) {
     .collectionPart {
         display: flex;
         flex-direction: column;
         margin: 25px;
+    }
+    
+    .animes h1{
+        margin-left: 0;
     }
 }
 
@@ -103,14 +139,46 @@
         display: flex;
         flex-direction: column;
     }
+    .animes{
+        display: flex;
+        flex-direction: column;
+        margin: 15px;
+        margin-top: 15px;
+    }
+    .button {
+        height: 60px;
+        width: 170px;
+        margin-top: 15px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 8px;
+        object-fit: cover;
+        font-size: calc((100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
+        /* font-size: calc(40px + 30 * (100vw / 1280)); */
+    }
+}
+@media screen and (max-width: 1000px){
     .buttonPlace{
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        margin-right: 15px;
-        text-align: center;  
+        justify-content: center;
+        align-items: center;
+        text-align: right;
     }
+    .button {
+        height: 60px;
+        width: 170px;
+        margin-top: 15px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 8px;
+        object-fit: cover;
+        font-size: calc((100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
+        /* font-size: calc(40px + 30 * (100vw / 1280)); */
+    }
+    
 }
+
 
 .collectionModal {
     flex-grow: 1;

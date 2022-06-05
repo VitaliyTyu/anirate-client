@@ -37,17 +37,24 @@
 
 .detailsCol {
     margin: 15px;
+    width: 90%;
+}
+.detailsItems{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 75px;
 }
 
+.collectionItem{
+    display: flex;
+    flex-direction: column;
+}
 .collectionTitle {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 250px;
-}
-
-.detailsAnim {
-    margin: 15px;
 }
 
 .detailsAnim {

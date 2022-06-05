@@ -1,6 +1,5 @@
 .setBackground{
-    background: rgb(255,241,255);
-    background: radial-gradient(circle, rgba(255,241,255,1) 43%, rgba(255,255,255,1) 100%);
+    background: #EDF1F5;
     background-repeat: no-repeat;
     background-attachment: center;    
     -moz-background-size: 100%; /* Firefox 3.6+ */
@@ -35,6 +34,7 @@
 .buttonStartPlace{
     text-align: center;
 }
+
 .button {
     height: 60px;
     min-width: 15px;
@@ -44,7 +44,13 @@
     margin-bottom: 8px;
     object-fit: cover;
     font-size: calc( (100vw - 480px)/(1600 - 480) * (17 - 10) + 10px);
-    
+    background: rgb(251,251,251);
+    border: none;
+    box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
+}
+.button:hover{
+    color: #bcbedc;
+    background: #2b2d42
 }
 
 .buttons {
@@ -58,5 +64,38 @@
     margin-bottom: 8px;
     object-fit: cover;
     font-size: calc( (100vw - 480px)/(1600 - 480) * (17 - 10) + 10px);
+    background: rgb(251,251,251);
+    border: none;
+    box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
+}
+.buttons:hover{
+    color: #bcbedc;
+    background: #2b2d42
+}
+@media screen and (max-width: 1000px){
+    .button {
+        height: 60px;
+        width: 170px;
+        margin-top: 15px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 8px;
+        object-fit: cover;
+        font-size: calc((100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
+        /* font-size: calc(40px + 30 * (100vw / 1280)); */
+    }
     
+}
+@media screen and (max-width: 580px) {
+    .button {
+        height: 60px;
+        width: 170px;
+        margin-top: 15px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 8px;
+        object-fit: cover;
+        font-size: calc((100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
+        /* font-size: calc(40px + 30 * (100vw / 1280)); */
+    }
 }
