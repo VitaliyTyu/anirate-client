@@ -1,30 +1,27 @@
 .container{
-    width: 100%;
-    max-width: 1230px;
-    padding: 0 15px;
-    margin: 0 auto; /*расположение по центру*/
-    
-  }
+  width: 100%;
+  max-width: 1230px;
+  padding: 0 15px;
+  margin: 0 auto; /*расположение по центру*/
+  
+}
 
 .footer {
-    padding-top: 65px;  
-    background: rgb(255,241,255);
-    background: radial-gradient(circle, rgba(255,241,255,1) 43%, rgba(255,255,255,1) 100%);
-    background-repeat: no-repeat;
-    background-attachment: center;   
-    display: flex;
-    align-self: flex-end;
-    border-top: 1px solid black;
+     
+  background: #2b2d42;
+  background-repeat: no-repeat;
+  background-attachment: center;   
+  display: flex;
+  align-self: flex-end;
+    
   }
 
   .copyright {
     padding: 20px 0;  
-    border-top: 1px solid #e5e5e5; 
+     
     font-size: 14px;
     color: #333;
     text-align: center;
   }
   
-  .copyright span {
-    color: #f38181;
-  }
+  

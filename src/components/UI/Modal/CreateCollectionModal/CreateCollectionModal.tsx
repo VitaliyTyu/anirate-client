@@ -132,10 +132,10 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
                 </Modal.Body>
                 <Modal.Footer className={css.setBackground}>
                     <div className={css.buttonsPlace}>
-                        <Button variant="secondary" onClick={handleClose} className={css.button}>
+                        <Button variant="outline-danger" onClick={handleClose} className={css.button}>
                             Закрыть
                         </Button>
-                        <Button type="submit" variant="primary" onClick={() => createCollection()} className={css.button}>
+                        <Button variant="outline-dark" onClick={() => createCollection()} className={css.button}>
                             Создать
                         </Button>
                     </div>

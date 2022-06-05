@@ -31,8 +31,8 @@ const AnimeInCollectionItem: FC<AnimeInCollectionItemProps> = (props): ReactElem
     }
 
     return (
-        <div className={css.item}>
-            <Card border="dark" className={css.title} onClick={() => props.clickFunction()}>
+        <div className={css.item} onClick={() => props.clickFunction()}>
+            <Card border="dark" className={css.title} >
                 <Card.Img variant="top" src={"https://shikimori.one/" + props.title?.image?.original} />
                 <Card.Body className={css.titleName} >
                     <Card.Title className={css.titleNameTitle}>{props.title?.russian}</Card.Title>
@@ -40,8 +40,9 @@ const AnimeInCollectionItem: FC<AnimeInCollectionItemProps> = (props): ReactElem
                         Рейтинг: {props.title?.score}
                     </Card.Text>
                 </Card.Body>
+
             </Card>
-            <CloseButton onClick={() => deleteAnimeFromCollection()} className={css.button}/>
+            <CloseButton onClick={() => deleteAnimeFromCollection()} className={css.button} />
         </div>
     );
 };

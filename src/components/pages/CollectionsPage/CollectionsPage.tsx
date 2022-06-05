@@ -73,7 +73,7 @@ const CollectionsPage: FC = (): ReactElement => {
                 <Button
                     style={{ marginRight: 25 }}
                     variant="outline-dark"
-                    className="ms-1"
+                    className={css.buttonSearch}
                     onClick={search}
                 >
                     Поиск
@@ -87,26 +87,32 @@ const CollectionsPage: FC = (): ReactElement => {
                     clickFunction={functionOnClick}
                 />
             </div>
+            {
+                paginatedList?.totalCount == 0
+                    ?
+                    <div className={css.textIfCollectionsIsEmpty}>Коллекции еще не добавлены</div>
+                    :
 
-            <ReactPaginate
-                previousLabel={"<<"}
-                nextLabel={">>"}
-                breakLabel={"..."}
-                pageCount={paginatedList?.totalPages ?? 0}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={3}
-                onPageChange={handlePageClick}
-                containerClassName={"pagination justify-content-center"}
-                pageClassName={"page-item"}
-                pageLinkClassName={"page-link"}
-                previousClassName={"page-item"}
-                previousLinkClassName={"page-link"}
-                nextClassName={"page-item"}
-                nextLinkClassName={"page-link"}
-                breakClassName={"page-item"}
-                breakLinkClassName={"page-link"}
-                activeClassName={"active"}
-            />
+                    <ReactPaginate
+                        previousLabel={"<<"}
+                        nextLabel={">>"}
+                        breakLabel={"..."}
+                        pageCount={paginatedList?.totalPages ?? 0}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={3}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination justify-content-center"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        previousClassName={"page-item"}
+                        previousLinkClassName={"page-link"}
+                        nextClassName={"page-item"}
+                        nextLinkClassName={"page-link"}
+                        breakClassName={"page-item"}
+                        breakLinkClassName={"page-link"}
+                        activeClassName={"active"}
+                    />
+            }
         </div>
     );
 };

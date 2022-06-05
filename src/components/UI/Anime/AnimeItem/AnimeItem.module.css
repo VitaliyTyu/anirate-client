@@ -61,8 +61,8 @@
 }
 
 .titleName {
-    width: 156;
-    height: 30;
+    /* width: 156;
+    height: 30; */
     display: flex;
     justify-content: space-between;
     flex-direction: column;

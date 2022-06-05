@@ -1,6 +1,5 @@
 .setBackground{
-    background: rgb(255,241,255);
-    background: radial-gradient(circle, rgba(255,241,255,1) 43%, rgba(255,255,255,1) 100%);
+    background: #EDF1F5;
     background-repeat: no-repeat;
     background-attachment: center;    
     -moz-background-size: 100%; /* Firefox 3.6+ */
@@ -35,6 +34,7 @@
 .buttonStartPlace{
     text-align: center;
 }
+
 .button {
     width:40%;
     height: 40px;
@@ -45,5 +45,11 @@
     margin-bottom: 8px;
     object-fit: cover;
     font-size: calc( (100vw - 480px)/(1600 - 480) * (17 - 10) + 10px);
-    
+    background: rgb(251,251,251);
+    border: none;
+    box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
+}
+.button:hover{
+    color: #bcbedc;
+    background: #2b2d42
 }

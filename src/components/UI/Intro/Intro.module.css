@@ -39,6 +39,7 @@
     text-transform: uppercase;
     margin: 50px auto;
     line-height: 1;
+    
 
 }
 
@@ -58,4 +59,11 @@
     margin-right: 15px;
     object-fit: cover;
     font-size: calc( (100vw - 480px)/(1280 - 480) * (24 - 14) + 14px);
+    background: rgb(251,251,251);
+    border: none;
+    box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
+}
+.button:hover{
+    color: #bcbedc;
+    background: #2b2d42
 }

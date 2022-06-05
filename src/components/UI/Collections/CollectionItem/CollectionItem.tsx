@@ -42,50 +42,55 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
             <Card border="dark" className={css.collectionView} key={props.collection?.id} >
 
                 <Card.Body className={css.detailsCol} >
-                    <Card.Title className={css.collectionTitle}>{props.collection?.name}</Card.Title>
-                    <Card.Text>
-                        Аниме в коллекции: {props.collection?.animesCount}
-                    </Card.Text>
+                    <div className={css.detailsItems}>
+                        <div className={css.collectionItem}>
+                            <Card.Title className={css.collectionTitle}>{props.collection?.name}</Card.Title>
+                            <Card.Text>
+                                Аниме в коллекции: {props.collection?.animesCount}
+                            </Card.Text>
+                        </div>
+                        <div onClick={secondHandle} className={css.actionItem}>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="outline" id="dropdown-basic">
+                                    Действия
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu variant='light'>
+                                    <Dropdown.Item className={css.item}>
+                                        <AddAnimesToCollectionModal
+                                            page={props.page}
+                                            size={props.size}
+                                            searchString={props.searchString}
+                                            collectionId={props.collection?.id}
+                                        />
+                                    </Dropdown.Item>
+                                    <Dropdown.Item className={css.item}>
+                                        <ChangeCollectionModal
+                                            searchString={props.searchString}
+                                            collection={props.collection}
+                                            page={props.page}
+                                            size={props.size}
+                                        />
+                                    </Dropdown.Item>
+                                    <Dropdown.Item className={css.item}>
+                                        <Button
+                                            className={css.button}
+                                            variant="outline-dark" size="lg"
+                                            onClick={() => deleteCollection()}>
+                                            Удалить коллекцию
+                                        </Button>
+                                    </Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </div>
+                    </div>
                     <Card.Text className={css.userComment}>
                         Описание: <br />
                         {props.collection?.userComment ? props.collection?.userComment : ""}
                     </Card.Text>
                 </Card.Body>
 
-                <div onClick={secondHandle} >
-                    <Dropdown>
-                        <Dropdown.Toggle variant="outline" id="dropdown-basic">
-                            Действия
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu variant='light'>
-                            <Dropdown.Item className={css.item}>
-                                <AddAnimesToCollectionModal
-                                    page={props.page}
-                                    size={props.size}
-                                    searchString={props.searchString}
-                                    collectionId={props.collection?.id}
-                                />
-                            </Dropdown.Item>
-                            <Dropdown.Item className={css.item}>
-                                <ChangeCollectionModal
-                                    searchString={props.searchString}
-                                    collection={props.collection}
-                                    page={props.page}
-                                    size={props.size}
-                                />
-                            </Dropdown.Item>
-                            <Dropdown.Item className={css.item}>
-                                <Button
-                                    className={css.button}
-                                    variant="outline-dark" size="lg"
-                                    onClick={() => deleteCollection()}>
-                                    Удалить коллекцию
-                                </Button>
-                            </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </div>
+                
             </Card>
         </div>
     );
