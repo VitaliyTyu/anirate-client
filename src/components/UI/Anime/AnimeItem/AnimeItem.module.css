@@ -10,6 +10,10 @@
     margin: 10px 10px;
     user-select: none;
     cursor: pointer;
+    border: none;
+    background: rgb(251,251,251);
+    border: none;
+    box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
 }
 
 .titleSelected {
@@ -49,7 +53,7 @@
 .title img {
     /* width: 200px;
     height: 270px; */
-    width: 150px;
+    width: 152px;
     height: 200px;
 }
 

@@ -76,7 +76,8 @@ const CollectionsSearchPage: FC = (): ReactElement => {
                 <Button
                     style={{ marginRight: 25 }}
                     variant="outline-dark"
-                    className="ms-1"
+
+                    className={css.buttonSearch}
                     onClick={search}
                 >
                     Поиск

@@ -135,10 +135,10 @@ const ChangeCollectionModal: FC<ChangeCollectionModalProps> = (props): ReactElem
                 </Modal.Body>
                 <Modal.Footer className={css.setBackground}>
                     <div className={css.buttonsPlace}>
-                        <Button variant="secondary" onClick={handleClose} className={css.button}>
+                        <Button variant="outline-danger" onClick={handleClose} className={css.button}>
                             Закрыть
                         </Button>
-                        <Button type="submit" variant="primary" onClick={() => changeCollection()} className={css.button}>
+                        <Button variant="outline-dark" onClick={() => changeCollection()} className={css.button}>
                             Изменить
                         </Button>
                     </div>

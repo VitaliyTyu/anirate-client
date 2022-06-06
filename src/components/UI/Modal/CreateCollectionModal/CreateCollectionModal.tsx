@@ -84,7 +84,7 @@ const CreateCollectionModal: FC<CreateCollectionModalProps> = (props) => {
     return (
         <div>
             <div className={css.buttonStartPlace}>
-                <Button className={css.button}
+                <Button className={css.buttonStart}
                     onClick={handleShow}
                     variant="outline-dark" size="lg"
                 >

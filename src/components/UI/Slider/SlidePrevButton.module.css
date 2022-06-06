@@ -1,0 +1,79 @@
+  
+  .gradient_button {   
+    /* text-decoration: none;
+    display: inline-block;
+    color: white;
+    padding: 20px 30px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-image: linear-gradient(to right, #f7adeb 0%, #f53dd6 51%, #f7adeb 100%);
+    background-size: 200% auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+    transition: .5s;
+    -webkit-user-select: none;
+	  -khtml-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none; */
+  }
+  
+  .gradient_button:hover {
+    background-position: center;
+  }
+  .arrow2 {
+    cursor: pointer;
+    height: 120px;
+    width: 80px;
+    position: relative;
+    margin: 20px;
+}
+.arrow2Top, 
+.arrow2Bottom {
+    background: #337AB7;
+    height: 10px;
+    left: -30px;
+    position: absolute;
+    top: 40px;
+    width: 100px;
+}
+.arrow2Top {
+    top: 64px;
+}
+.arrow2Top {
+    transform: rotate(135deg);
+    transform-origin: top right;
+}
+.arrow2Bottom {
+    transform: rotate(-135deg);
+    transform-origin: bottom right;
+}
+.arrow2Top::after, 
+.arrow2Bottom::after {
+    background: #000;
+    content: '';
+    height: 100%;
+    position: absolute;
+    top: 0;
+    transition: all 0.15s;
+}
+.arrow2Top::after {
+    left: 100%;
+    right: 0;
+    transition-delay: 0s;
+}
+.arrow2Bottom::after {
+    left: 0;
+    right: 100%;
+    transition-delay: 0.15s;
+}
+.arrow2:hover .arrow2Top::after {
+    left: 0;
+    transition-delay: 0.15s;
+}
+.arrow2:hover .arrow2Bottom::after {
+    right: 0;
+    transition-delay: 0s;
+}

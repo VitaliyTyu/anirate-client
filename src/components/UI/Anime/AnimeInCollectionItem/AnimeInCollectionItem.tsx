@@ -31,9 +31,9 @@ const AnimeInCollectionItem: FC<AnimeInCollectionItemProps> = (props): ReactElem
     }
 
     return (
-        <div className={css.item} >
+        <div className={css.item}  >
             <Card border="dark" className={css.title}>
-                <div onClick={() => props.clickFunction()}>
+                <div className={css.title1} onClick={() => props.clickFunction()}>
                     <Card.Img variant="top" src={"https://shikimori.one/" + props.title?.image?.original} />
                     <Card.Body className={css.titleName} >
                         <Card.Title className={css.titleNameTitle}>{props.title?.russian}</Card.Title>

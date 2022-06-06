@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay, Controller, Thumbs } from 'swiper';
 import { useActions } from '../../../hooks/useActions';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import React, { FC, ReactElement, useEffect, useState } from 'react';
@@ -11,6 +11,10 @@ import SlidePrevButton from './SlidePrevButton';
 import 'swiper/css';
 import { Link, useNavigate } from 'react-router-dom';
 import AnimeItem from '../Anime/AnimeItem/AnimeItem';
+
+
+SwiperCore.use([Navigation, Pagination, Controller, Thumbs]);
+
 
 const Slider: FC = (): ReactElement => {
     const { paginatedList, loading, error } = useTypedSelector(state => state.titles)
@@ -36,7 +40,9 @@ const Slider: FC = (): ReactElement => {
                 <Swiper
                     modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
                     spaceBetween={40}
-
+                    navigation
+                    pagination
+                    scrollbar={{ draggable: true }}
                     slidesPerView={6}
                     breakpoints={{
                         0: {
@@ -59,10 +65,11 @@ const Slider: FC = (): ReactElement => {
                             spaceBetween: 40
                         },
 
-                        1800: {
+                        1600: {
                             slidesPerView: 5,
                             spaceBetween: 50
                         }
+
                     }}
                     loop={true}
                     autoplay={{ delay: 2000, disableOnInteraction: false }}
@@ -70,22 +77,19 @@ const Slider: FC = (): ReactElement => {
                     <div className={css.swiper}>
                         {paginatedList?.items?.map((title) => (
                             <SwiperSlide>
-                                <div
+
+                                <AnimeItem
                                     key={title.id}
-                                    onClick={() => navigate(`/animes/${title?.id}`)}
-                                >
-                                    <AnimeItem
-                                        key={title.id}
-                                        title={title}
-                                        clickFunction={() => navigate(`/animes/${title?.id}`)} />
-                                </div>
+                                    title={title}
+                                    clickFunction={() => navigate(`/animes/${title?.id}`)} />
+
                             </SwiperSlide>
                         ))}
                     </div>
-                    <SlideNextButton/>
-                    <SlidePrevButton/>
+                    <SlideNextButton />
+                    <SlidePrevButton />
                 </Swiper >
-                
+
             </div>
         </div >
     );

@@ -61,7 +61,7 @@ const CollectionsPage: FC = (): ReactElement => {
     }
 
     return (
-        <div>
+        <div className={css.all}>
             <h1 className={css.first}>Коллекции</h1>
             <form className={css.formSearch}>
                 <input className="form-control ms-5"
@@ -92,26 +92,27 @@ const CollectionsPage: FC = (): ReactElement => {
                     ?
                     <div className={css.textIfCollectionsIsEmpty}>Коллекции еще не добавлены</div>
                     :
-
-                    <ReactPaginate
-                        previousLabel={"<<"}
-                        nextLabel={">>"}
-                        breakLabel={"..."}
-                        pageCount={paginatedList?.totalPages ?? 0}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={3}
-                        onPageChange={handlePageClick}
-                        containerClassName={"pagination justify-content-center"}
-                        pageClassName={"page-item"}
-                        pageLinkClassName={"page-link"}
-                        previousClassName={"page-item"}
-                        previousLinkClassName={"page-link"}
-                        nextClassName={"page-item"}
-                        nextLinkClassName={"page-link"}
-                        breakClassName={"page-item"}
-                        breakLinkClassName={"page-link"}
-                        activeClassName={"active"}
-                    />
+                    <div className={css.paginate}>
+                        <ReactPaginate
+                            previousLabel={"<<"}
+                            nextLabel={">>"}
+                            breakLabel={"..."}
+                            pageCount={paginatedList?.totalPages ?? 0}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={3}
+                            onPageChange={handlePageClick}
+                            containerClassName={"pagination justify-content-center"}
+                            pageClassName={"page-item"}
+                            pageLinkClassName={"page-link"}
+                            previousClassName={"page-item"}
+                            previousLinkClassName={"page-link"}
+                            nextClassName={"page-item"}
+                            nextLinkClassName={"page-link"}
+                            breakClassName={"page-item"}
+                            breakLinkClassName={"page-link"}
+                            activeClassName={"active"}
+                        />
+                    </div>
             }
         </div>
     );

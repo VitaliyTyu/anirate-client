@@ -1,5 +1,6 @@
 .all{
    height: 100%;
+   overflow:hidden;
 }
 .mainBody{
    min-height: 100vh;

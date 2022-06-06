@@ -13,7 +13,9 @@
     align-items: flex-start;
     flex-direction: row;
     height: 30%;
-    border: 1px solid black;
+    background: rgb(251,251,251);
+    border: none;
+    box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
     height: 20%;
     min-height: 270px;
 }
@@ -78,8 +80,8 @@
     margin-top: 25px;
     margin-bottom: 15px;
 }
-.button {
 
+.button {
     height: 60px;
     min-width: 15px;
     margin-top: 15px;
@@ -88,9 +90,14 @@
     margin-bottom: 8px;
     object-fit: cover;
     font-size: calc( (100vw - 700px)/(1600 - 700) * (13 - 9) + 9px);
-    /* font-size: calc(40px + 30 * (100vw / 1280)); */
+    background: rgb(251,251,251);
+    border: none;
+    box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
 }
-
+.button:hover{
+    color: #bcbedc;
+    background: #2b2d42
+}
 .item{
     object-fit: fill;
 }
