@@ -116,22 +116,8 @@
         flex-direction: column;
         margin-right: 15px;
         height: 30%;
-        border: 1px solid black;
+        
         height: 20%;
         min-height: 270px;
-    }
-
-    .collectionTitle {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 140px;
-    }
-
-    .userComment {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
     }
 }

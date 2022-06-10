@@ -51,12 +51,15 @@
 .collectionItem{
     display: flex;
     flex-direction: column;
+    width: auto;
 }
 .collectionTitle {
-    white-space: nowrap;
-    overflow: hidden;
+    white-space: pre-wrap;
     text-overflow: ellipsis;
-    max-width: 250px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .detailsAnim {
@@ -101,6 +104,30 @@
 .item{
     object-fit: fill;
 }
+@media screen and ( max-width: 500px){
+    .detailsItems{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 75px;
+    }
+      
+   
+    .userComment {
+       display: none;
+    }
+}
+  
+
+@media screen and (max-width: 335px){
+    .collectionTitle {
+        
+        width: 120px;
+    }
+}
+
+
+
 @media screen and (max-width: 550px) {
     .collection {
         margin-bottom: 50px;
@@ -113,22 +140,13 @@
         flex-direction: column;
         margin-right: 15px;
         height: 30%;
-        border: 1px solid black;
+        
         height: 20%;
         min-height: 270px;
     }
 
-    .collectionTitle {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 140px;
-    }
+   
 
-    .userComment {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
+   
+    
 }

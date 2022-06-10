@@ -74,7 +74,7 @@ const AnimesPage: FC = (): ReactElement => {
     return (
         <div>
             <h1 className={css.first}>Аниме</h1>
-            <form className={css.formSearch}>
+            <form className="d-flex">
                 <input className="form-control ms-5"
                     placeholder="Поиск"
                     aria-label="Search"

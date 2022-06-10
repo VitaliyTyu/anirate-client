@@ -1,6 +1,6 @@
 .header_inner {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -38,9 +38,58 @@
   background: none;
 }
 
+.buttonAuth {
+    
+    
+  }
 .dropDiv{
-    background: none;
+    text-decoration: none;
+} 
+
+@media screen and (max-width: 300px) {
+    .button {
+        border: none;
+        margin-left: 0px;
+        margin-right: 15px;
+        background-color: transparent;
+        color: #bcbedc;
+        text-decoration: none;
+        background: none;
+        font-size: 12px;
+      } 
+    .dropDiv{
+        font-size: 12px;
+    }
 }
-.dropDiv:hover{
-    background: none;
+@media screen and (max-width: 325px) {
+  
+    .buttonAuth {
+        font-size: 12px;
+        padding-left: 0px;
+    }
+   
+}
+@media screen and (max-width: 422px) {
+  
+    .buttonAuth {
+        font-size: 12px;
+        padding-left: 150px;
+    }
+   
+}
+
+@media screen and (max-width: 648px) {
+    .button {
+        border: none;
+        margin-left: 0px;
+        margin-right: 15px;
+        background-color: transparent;
+        color: #bcbedc;
+        text-decoration: none;
+        background: none;
+        font-size: 15px;
+      } 
+      .dropDiv{
+        font-size: 15px;
+    }
 }

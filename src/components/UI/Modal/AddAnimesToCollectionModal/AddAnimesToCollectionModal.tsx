@@ -131,6 +131,7 @@ const AddAnimesToCollectionModal: FC<AddAnimesToCollectionModalProps> = (props) 
                             aria-label="Search"
                             onChange={(event) => setSearchString(event.target.value)}
                             onKeyDown={(event) => onEnterPress(event)}
+
                         />
                         <Button
                             variant="outline-dark"

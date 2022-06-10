@@ -5,3 +5,17 @@
     align-items: center;
     
 }
+.form{
+    display: flex;
+    flex-direction: row;
+}
+.button {
+ 
+    background: rgb(251,251,251);
+    border: none;
+    box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
+}
+.button:hover{
+    color: #bcbedc;
+    background: #2b2d42
+}

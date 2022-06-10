@@ -45,7 +45,7 @@ const CollectionItem: FC<CollectionItemProps> = (props): ReactElement => {
                     <div className={css.detailsItems}>
                         <div className={css.collectionItem}>
                             <Card.Title className={css.collectionTitle}>{props.collection?.name}</Card.Title>
-                            <Card.Text>
+                            <Card.Text className={css.collectionTitle}>
                                 Аниме в коллекции: {props.collection?.animesCount}
                             </Card.Text>
                         </div>

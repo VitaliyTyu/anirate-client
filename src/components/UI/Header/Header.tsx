@@ -27,7 +27,7 @@ const Header = () => {
     return (
         <div className={css.header}>
             <Navbar expand="lg">
-                <Container>
+                <Container className={css.header_inner}>
                     <Link style={{ textDecoration: "none" }} to="/">
                         <Navbar.Brand style={{ color: "#bcbedc" }}>AniRate</Navbar.Brand>
                     </Link>
@@ -41,15 +41,16 @@ const Header = () => {
                         </Link>
                     </div>
 
-                    <div onClick={secondHandle}>
+                    <div onClick={secondHandle} className={css.buttonAuth}>
                         <Dropdown>
-                            <Dropdown.Toggle className={css.button}>Аккаунт</Dropdown.Toggle>
+                            <Dropdown.Toggle className={css.button} >Аккаунт</Dropdown.Toggle>
 
                             <Dropdown.Menu variant="dark">
                                 <Dropdown.Item>
                                     {isAuth ? (
-                                        <Dropdown.Item>
+                                        <Dropdown.Item >
                                             <div
+                                                className={css.dropDiv}
                                                 onClick={() => {
                                                     logout();
                                                     navigate("/");
@@ -59,17 +60,17 @@ const Header = () => {
                                             </div>
                                         </Dropdown.Item>
                                     ) : (
-                                        <div className={css.dropDiv}>
-                                            <Dropdown.Item>
+                                        <div >
+                                            <Dropdown.Item >
                                                 <div
                                                     onClick={() => navigate("/login")}
-                                                    style={{ marginRight: 10 }}
+                                                    className={css.dropDiv}
                                                 >
                                                     Войти
                                                 </div>
                                             </Dropdown.Item>
-                                            <Dropdown.Item>
-                                                <div onClick={() => navigate("/register")}>
+                                            <Dropdown.Item >
+                                                <div onClick={() => navigate("/register")} className={css.dropDiv}>
                                                     Регистрация
                                                 </div>
                                             </Dropdown.Item>

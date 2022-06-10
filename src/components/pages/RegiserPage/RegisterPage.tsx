@@ -162,13 +162,13 @@ const RegisterPage: FC = (): ReactElement => {
 
 
                             <div className="form-group">
-                                <button
+                                <Button
                                     style={{ marginTop: 5 }}
-                                    type="submit"
-                                    className="btn btn-primary"
-                                >
+                                    variant="outline-dark"
+                                    className={css.button}
+                                    type='submit'>
                                     Создать аккаунт
-                                </button>
+                                </Button>
 
                                 <Link to={"/login"}>
                                     <label style={{ marginLeft: 20, marginTop: 5 }}>войти</label>

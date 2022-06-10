@@ -39,7 +39,6 @@ const Slider: FC = (): ReactElement => {
             <div>
                 <Swiper
                     modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-                    spaceBetween={40}
                     navigation
                     pagination
                     scrollbar={{ draggable: true }}
@@ -47,27 +46,30 @@ const Slider: FC = (): ReactElement => {
                     breakpoints={{
                         0: {
                             slidesPerView: 1,
-                            spaceBetween: 10
+
                         },
 
-                        500: {
+                        420: {
                             slidesPerView: 2,
-                            spaceBetween: 20
+
                         },
 
-                        800: {
+                        675: {
                             slidesPerView: 3,
-                            spaceBetween: 30
+
                         },
 
-                        1150: {
+                        970: {
                             slidesPerView: 4,
-                            spaceBetween: 40
+
                         },
 
-                        1600: {
+                        1185: {
                             slidesPerView: 5,
-                            spaceBetween: 50
+
+                        },
+                        1515: {
+                            slidesPerView: 6,
                         }
 
                     }}
@@ -86,8 +88,8 @@ const Slider: FC = (): ReactElement => {
                             </SwiperSlide>
                         ))}
                     </div>
-                    <SlideNextButton />
-                    <SlidePrevButton />
+                    {/* <SlideNextButton />
+                    <SlidePrevButton /> */}
                 </Swiper >
 
             </div>

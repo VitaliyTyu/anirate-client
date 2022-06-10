@@ -56,17 +56,20 @@
 
 
 .title:hover .title1{
-    width: 150px;
+    width: 152px;
     height: 295px;
     z-index: inherit;
 }
 
-
+.title:hover img{
+    width: 148px;
+    height: 220px;
+}
 
 .title img {
     /* width: 200px;
     height: 270px; */
-    width: 150px;
+    width: 152px;
     height: 220px;
     z-index: inherit;
 }

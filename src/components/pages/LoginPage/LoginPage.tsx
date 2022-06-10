@@ -5,6 +5,7 @@ import { useActions } from "../../../hooks/useActions";
 import { LoginViewModel } from "../../../api/api";
 import css from "./LoginPage.module.css"
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const LoginPage: FC = (): ReactElement => {
     const { error } = useTypedSelector(state => state.auth)
@@ -102,13 +103,14 @@ const LoginPage: FC = (): ReactElement => {
                                 </small>
                             </div>
 
-                            <div className="form-group">
-                                <button
+                            <div className={css.form}>
+                                <Button
                                     style={{ marginTop: 5 }}
-                                    type="submit"
-                                    className="btn btn-primary">
+                                    variant="outline-dark"
+                                    className={css.button}
+                                    type='submit'>
                                     Войти
-                                </button>
+                                </Button>
                                 <Link to={"/register"}>
                                     <label style={{ marginLeft: 35, marginTop: 5 }}>создать аккаунт</label>
                                 </Link>

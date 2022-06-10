@@ -7,7 +7,7 @@
 .App{
     height: 75vh;
     overflow: auto;
-
+    margin-top: 10px;
 }
 
 .buttonPlace{
@@ -19,15 +19,13 @@
 
 
 .button {
-    width: 30%;
-    height: 60px;
-    min-width: 15px;
+    padding: 10px 15px;
     margin-top: 15px;
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 8px;
     object-fit: cover;
-    font-size: calc( (100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
+    font-size: calc( (100vw - 700px)/(1600 - 700) * (17 - 12) + 12px);
     background: rgb(251,251,251);
     border: none;
     box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
@@ -54,11 +52,11 @@
     background: #2b2d42
 }
 .buttonSearch {      
-    min-width: 40px;
-    margin-left: 10px;
+    padding: 5px 10px;
     object-fit: cover;
     text-align: center;
-    font-size: calc( (100vw - 480px)/(1280 - 480) * (11 - 7) + 7px);
+    margin-left: 10px;
+    font-size: calc( (100vw - 480px)/(1280 - 480) * (13 - 9) + 9px);
     background: rgb(251,251,251);
     border: none;
     box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
