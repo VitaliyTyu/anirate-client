@@ -72,24 +72,9 @@
         margin-top: 15px;
         margin-left: 15px;
         margin-right: 15px;
-        margin-bottom: 8px;
+        margin-bottom: 8px;        
         object-fit: cover;
-        font-size: calc((100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
-        /* font-size: calc(40px + 30 * (100vw / 1280)); */
+        font-size: calc( (100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
     }
     
-}
-
-@media screen and (max-width: 580px) {
-    .buttonAdd {
-        height: 60px;
-        width: 170px;
-        margin-top: 15px;
-        margin-left: 15px;
-        margin-right: 15px;
-        margin-bottom: 8px;
-        object-fit: cover;
-        font-size: calc((100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
-        /* font-size: calc(40px + 30 * (100vw / 1280)); */
-    }
 }

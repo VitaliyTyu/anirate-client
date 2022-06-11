@@ -131,7 +131,7 @@ const AddAnimeToCollectionsModal: FC<AddAnimeToCollectionsModalProps> = (
 
             <Modal show={show} onHide={handleClose} size="xl">
                 <Modal.Header closeButton>
-                    <Modal.Title>Добавление аниме</Modal.Title>
+                    <Modal.Title>Добавление в коллекции</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form className="d-flex">

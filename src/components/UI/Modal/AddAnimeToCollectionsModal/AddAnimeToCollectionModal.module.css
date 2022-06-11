@@ -7,7 +7,7 @@
 .App{
     height: 75vh;
     overflow: auto;
-
+    margin-top: 10px;
 }
 .textIfCollectionsIsEmpty{
     display: flex;
