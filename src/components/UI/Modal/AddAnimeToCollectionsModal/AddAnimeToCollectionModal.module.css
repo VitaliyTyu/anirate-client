@@ -9,6 +9,7 @@
     overflow: auto;
     margin-top: 10px;
 }
+
 .textIfCollectionsIsEmpty{
     display: flex;
     justify-content: center;

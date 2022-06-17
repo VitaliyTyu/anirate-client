@@ -12,7 +12,7 @@
     cursor: pointer;
     border: none;
     background: rgb(251,251,251);
-    border: none;
+
     box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
 }
 
@@ -28,15 +28,16 @@
     margin: 10px 10px;
     user-select: none;
     cursor: pointer;
-
-    border: 2px solid #000000;
     color: #000000;
-    background: rgba(0, 0, 0, 0);
-    -webkit-box-shadow: 0px 0px 5px 7px rgba(34, 60, 80, 0.6);
-    -moz-box-shadow: 0px 0px 5px 7px rgba(34, 60, 80, 0.6);
-    box-shadow: 0px 0px 5px 7px rgba(34, 60, 80, 0.6);
+    background: rgb(251,251,251);
+    -webkit-box-shadow: 0px 0px 5px 7px rgba(201, 197, 238);
+    -moz-box-shadow: 0px 0px 5px 7px rgba(201, 197, 238);
+    box-shadow: 0px 0px 5px 7px rgba(201, 197, 238);
 }
-
+.titleSelected img{
+    width: 152px;
+    height: 200px;
+}
 .title:hover {
     border: 2px solid #000000;
     color: #000000;
@@ -60,7 +61,7 @@
 .titleSelected img {
     /* width: 200px;
     height: 270px; */
-    width: 148px;
+    width: 150px;
     height: 200px;
 }
 
@@ -82,4 +83,22 @@
 
 .titleScore {
     /* margin-bottom: 40; */
+}
+@media (hover: none) {
+    
+    .title:hover {
+        border: none;
+        color: none;
+      
+        background: rgb(251,251,251);
+       
+
+        box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
+      
+    }
+    .title:hover img {
+        width: 152px;
+        height: 200px;
+    }
+        
 }

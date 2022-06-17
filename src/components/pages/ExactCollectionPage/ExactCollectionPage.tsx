@@ -60,7 +60,7 @@ const ExactCollectionPage: FC = (): ReactElement => {
             <div className={css.collection}>
                 <div className={css.collectionPart}>
 
-                    <h1>{collectionState.collectionDetails?.name}</h1>
+                    <h1 >{collectionState.collectionDetails?.name}</h1>
                     {/* <div>Аниме в коллекции: {collectionState.collectionDetails?.animeTitles?.items?.length}</div> */}
                     <div className={css.description}>
                         <div >Описание: </div>

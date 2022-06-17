@@ -15,6 +15,8 @@
     flex-direction: column;
     justify-content: flex-start;
     margin: 25px;
+    max-width: 65vh;
+    min-height: 50px;
 }
 
 
@@ -30,8 +32,7 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    max-width: 80vh;
-    min-height: 50px;
+    
 }
 
 .descriptionText{ 
@@ -106,38 +107,13 @@
     font-size: calc((100vw - 700px)/(1600 - 700) * (40 - 20) + 20px);
 }
 
-@media screen and (max-width: 480px) {
-    .collectionPart {
-        display: flex;
-        flex-direction: column;
-        margin: 25px;
-    }
-    
-    .animes h1{
-        margin-left: 0;
-    }
-}
-
-@media screen and (max-width: 745px) {
-    .exactCollection img {
-
-        width: 170px;
-        height: 255px;
-        border: 10px solid #333
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .exactCollection img {
-
-        display: none;
-    }
-}
 
 @media screen and (max-width: 580px) {
     .collection {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     .animes{
         display: flex;
@@ -153,9 +129,21 @@
         margin-right: 15px;
         margin-bottom: 8px;
         object-fit: cover;
-        font-size: calc((100vw - 700px)/(1600 - 700) * (17 - 14) + 14px);
+        font-size: calc((100vw - 700px)/(1600 - 700) * (17 - 17) + 17px);
         /* font-size: calc(40px + 30 * (100vw / 1280)); */
     }
+  
+}
+@media screen and (max-width: 834px){
+    .collectionPart {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin: 25px;
+        max-width: 35vh;
+        
+    }
+    
 }
 @media screen and (max-width: 1000px){
     .buttonPlace{
