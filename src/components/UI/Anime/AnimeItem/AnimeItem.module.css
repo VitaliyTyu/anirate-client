@@ -89,10 +89,7 @@
     .title:hover {
         border: none;
         color: none;
-      
         background: rgb(251,251,251);
-       
-
         box-shadow: 0 4px 20px rgba(103,132,187,0.1),0 4px 10px rgba(103,132,187,0.4);
       
     }
