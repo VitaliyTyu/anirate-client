@@ -10,6 +10,7 @@ export class Client extends ClientBase {
         super();
         this.http = http ? http : window as any;
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        // this.baseUrl = "";
     }
 
     /**
